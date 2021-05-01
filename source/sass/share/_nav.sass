@@ -1,10 +1,166 @@
 #nav
-  background-color: $c-nav
+	background-color: $c-nav
+	display: flex
+	align-items: center
+	width: 100%
+	position: fixed
+
+// ----------------------------
+#logo
+	display: inline-flex
+	align-items: center
+	height: 100%
+	padding: 0 10px
+
+.logo-img
+	width: 30px
+	margin-right: 5px
+
+.logo-title
+	color: #fff
+	font-size: 16px
+
+//----------------------------
+#location
+	display: inline-flex
+	align-items: center
+	height: 100%
+	color: #fff
+	font:
+		size: 16px
+		weight: bold
+
+// ----------------------------
+#mbbox
+	display: flex
+
+// ----------------------------
+#navlabel
+	align-items: center
+
+.navlabel-item
+	user-select: none
+	cursor: pointer
+	display: flex
+	align-items: center
+	border-radius: 10px 10px 0 0
+	padding: 0 10px
+	background-color: rgba(255,255,255,.3)
+	color: rgba(255,255,255,.6)
+	&.active
+		cursor: default
+		background-color: $c-bg1
+		color: #000
+
+// ----------------------------
+#statusbox
+
+.status-box
+	display: flex
+
+.status-item
+	display: flex
+	align-items: center
+	margin-right: 20px
+	
+.status-color
+	width: 10px
+	height: 10px
+	margin-right: 5px
+	font-size: 12px
+
+.status-chill .status-item[data-status='0'] .status-color
+	position: relative
+	&::after
+		content: 'x'
+		position: absolute
+		color: #fff
+		top: -2px
+		left: .5px
+		line-height: 10px
+		font-size: 20px
+		font-weight: lighter
+
+// ----------------------------
+#log
+	display: flex
+	align-items: center
+	color: #fff
+
+.log-msg
+	display: flex
+	margin-right: 8px
+
+.log-acc
+	max-width: 110px
+	@extend %row1
+
+.log-in
+	
+.log-outbox
+	// display: none
+
+.log-btn
+	background-color: #fff
+	color: #333
+	padding: 0 8px
+	height: 20px
+	border-radius: 10px
+	cursor: pointer
+	display: inline-flex
+	align-items: center
 
 @media screen and (max-width: $bp-narrow)
-  #nav
-    height: $h-nav-mb
-    
-@meida screen and (min-width: $bp-narrow)
-  #nav
-    height: $h-nav-pc
+	#nav
+		height: $h-nav-mb
+
+	// ----------------------------
+	#mbbox
+		flex-direction: column
+
+
+
+	#mbbox
+		position: fixed
+		top: $h-nav-mb
+		width: 100%
+		background-color: #fff
+		
+@media screen and (min-width: $bp-narrow)
+	#nav
+		height: $h-nav-pc
+
+	// ----------------------------
+	#mbbox
+		height: 100%
+	
+	// ----------------------------
+	#log
+		display: flex
+		align-items: center
+		position: fixed
+		right: 0
+
+	// ----------------------------
+	$dis: 4px
+	#navlabel
+		height: calc( 100% - #{$dis} )
+		margin:
+			top: $dis
+			left: 10px
+		display: inline-flex
+
+	.navlabel-item
+		height: 100%
+
+	// ----------------------------
+	#statusbox
+		position: fixed
+		top: $h-nav-pc + 10px
+		left: 50%
+		transform: translateX(-50%)
+
+	// ----------------------------
+	// ----------------------------
+	#log
+		padding: 0 10px

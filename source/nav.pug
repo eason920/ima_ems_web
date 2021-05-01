@@ -1,32 +1,64 @@
 #nav
-	#nav-logo
-	#nav-title
-	#navlabel
-		.navlabel-item 冰機狀態
-		.navlabel-item 冷卻水系統狀態
-	#navice
-		.navmain-item(data-status='0') 0
-		.navmain-item(data-status='1') 1
-		.navmain-item(data-status='2') 2
-		.navmain-item(data-status='3') 3
-		.navmain-item(data-status='4') 4
-		.navmain-item(data-status='5') 5
-	#navicem
-		.navmain-item(data-status='0') 1
-		.navmain-item(data-status='1') 2
-	#nav-water
-		.navmain-item(data-status='1') 1
-		.navmain-item(data-status='2') 2
-		.navmain-item(data-status='3') 3
-		.navmain-item(data-status='4') 4
-		.navmain-item(data-status='5') 5
-	#log
-		#log-msg
-			#log-title 使用者
-			#log-acc 訪客
-		#log-btnbox
-			#log-in 登入
-			#log-outbox
-				#log-out 登入
-				#log-color 調整用色
-				#log-area 調整變頻器區間
+	#logo
+		img.logo-img(src='./images/logo.png')
+		.logo-title 今時科技股份有限公司
+	#location
+		|案場：
+		span 中國信托大樓
+	#mbbox
+		#navlabel
+			.navlabel-item.active 冰機狀態
+			.navlabel-item 冷卻水系統狀態
+		#statusbox
+			.status-chill.status-box
+				.status-item(data-status='0')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 0
+				.status-item(data-status='1')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 1
+				.status-item(data-status='2')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 2
+				.status-item(data-status='3')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 3
+				.status-item(data-status='4')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 4
+				.status-item(data-status='5')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 5
+			.status-chillm.status-box
+				.status-item(data-status='0')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 1
+				.status-item(data-status='1')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 2
+			.status-water.status-box
+				.status-item(data-status='1')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 1
+				.status-item(data-status='2')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 2
+				.status-item(data-status='3')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 3
+				.status-item(data-status='4')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 4
+				.status-item(data-status='5')
+					.status-color(style='background-color: greenyellow')
+					.status-txt 5
+		#log
+			.log-msg
+				.log-title 使用者：
+				.log-acc 訪客訪客訪客訪客
+			.log-btnbox
+				.log-in.log-btn 登入
+				.log-outbox
+					.log-color.log-btn 調整用色
+					.log-area.log-btn 調整變頻器區間
+					.log-out.log-btn 登出
