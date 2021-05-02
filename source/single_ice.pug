@@ -8,3 +8,55 @@ html(lang='en')
 		link(href='./css/single_ice.css' rel='stylesheet')
 	body 
 		include nav
+		#content
+			#wrapper-single
+				#left
+					img.rooftop(src='./images/rooftop.png')
+					#build
+						.build-row 
+							.build-floor
+							.build-house
+								.build-item A
+								.build-item B
+								.build-item C
+								.build-item D
+								.build-item E
+								.build-item F
+								.build-item G
+								.build-item H
+								.build-item I
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+				#right
+					.right-title 乾溼溫度：
+					.rbox
+						.rbox-top.is-psy
+							.rbox-psyitem 
+								|乾球
+								span 33.83
+							|/
+							.rbox-psyitem 
+								|濕球
+								span 25.5
+					.right-title 冰機狀態統計： 
+					.rbox
+						.rbox-top
+						.rbox-sum
+							|全部
+							span 90
+							|台
+					.right-title 異常冰機列表：
+					.rbox
+						.rbox-top
+						.rbox-sum
+							|總計異常
+							span 7 
+							|台

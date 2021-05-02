@@ -1,0 +1,149 @@
+#left
+	font-size: 0
+
+#build
+	background-color: #fff
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+
+// ----------------------------
+.build-row
+	display: flex
+	width: 100%
+	&:first-child
+		.build-item
+			background-color: transparent
+			cursor: default
+	
+.build-floor
+	display: flex
+	align-items: center
+	justify-content: center
+
+.build-house
+	display: flex
+	justify-content: space-between
+
+.build-item
+	display: flex
+	align-items: center
+	justify-content: center
+
+// ----------------------------
+#right
+
+.right-title
+	font-weight: bold
+	color: #000
+
+.rbox
+	background-color: #fff
+	overflow: hidden
+
+.rbox-top
+	&.is-psy
+		display: flex
+
+.rbox-psyitem
+	margin: 0 8px
+	&:first-child
+		margin-left: 0
+
+.rbox-sum
+	background-color: #f2f2f2
+	font-size: 16px
+	color: #000
+	display: flex
+	align-items: center
+	justify-content: flex-end
+
+
+@media screen and (max-width: $bp-narrow)
+	#left
+
+	.rooftop
+		width: 250px
+
+	#build
+		padding: 20px 4%
+
+	// ----------------------------
+	$w-floor: 22px
+	.build-row
+		& + .build-row
+			margin-top: 10px
+	.build-floor
+		width: $w-floor
+		font-size: 12px
+
+	.build-house
+		width: calc( 100% - #{$w-floor})
+
+	.build-item
+		font-size: 12px
+		width: 17px
+		height: 17px
+		border-radius: 50%
+		cursor: pointer
+		background-color: #aaa
+	// ----------------------------
+	#right
+
+	
+
+@media screen and (min-width: $bp-wide)
+	#content
+		overflow: auto
+	$m: 30px
+	#wrapper-single
+		display: flex
+
+	#left
+		width: $w-left-pc
+		margin-right: $m
+		min-height: 100%
+	
+	.rooftop
+		height: $h-roof-top-pc
+
+	#build
+		padding: 40px 6%
+		height: calc( 100% - #{$h-roof-top-pc})
+		min-height: 660px
+
+	// ----------------------------
+	$w-floor: 50px
+	.build-row
+
+	.build-floor
+		width: $w-floor
+		font-size: 14px
+
+	.build-house
+		width: calc( 100% - #{$w-floor})
+
+	.build-item
+		font-size: 14px
+		width: 30px
+		height: 30px
+		border-radius: 50%
+		cursor: pointer
+		background-color: #aaa
+	// ----------------------------
+	#right
+		width: calc( 100% - #{$w-left-pc} - #{$m} )
+
+	.right-title
+		font-size: 21px
+
+	.rbox
+		border-radius: 15px
+
+	.rbox-top
+		padding: 15px
+
+	.rbox-sum
+		height: 30px
+		padding-right: 15px
+		

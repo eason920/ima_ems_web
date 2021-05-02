@@ -1,0 +1,52 @@
+#navlabel
+	display: none
+
+#nav-mul
+	display: flex
+
+#mullabel
+	display: flex
+
+.mullabel-item
+	background-color: #fff
+	cursor: pointer
+	padding: 8px
+	border-right: solid 1px #ddd
+	&:last-child
+		border: none
+
+	&.active
+		background-color: $c-bg1
+		cursor: default
+
+	&.muted
+		color: #aaa
+		cursor: not-allowed
+
+
+@media screen and (max-width: $bp-narrow)
+	#location
+		width: calc( 100% - #{$w-logo-mb} - 66px) // 66= hamber
+		justify-content: center
+		
+	#nav-mul
+		position: fixed
+		bottom: 0
+		width: 100%
+		background-color: #f2f2f2
+		box-shadow: 0 0 8px rgba(0,0,0,.3)
+		justify-content: space-around
+		span
+			display: none
+
+@media screen and (min-width: $bp-wide)
+	#location
+		display: none
+		
+	#nav-mul
+		margin-top: 12px
+		align-items: center
+		span
+			color: #fff
+			font-size: 14px
+			margin-right: 5px
