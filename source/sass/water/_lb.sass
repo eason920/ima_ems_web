@@ -1,0 +1,164 @@
+#c-all
+	
+
+// ----------------------------
+.c-box
+
+// x2 = chill & water v
+.c-all-item
+
+.c-all-title
+
+// ----------------------------
+// x 3 = chill 3 & water 3 v
+.c-box
+
+.c-item
+
+
+// ----------------------------
+// part 1 v
+.c-c
+	background-color: #fff
+	
+
+.c-machine
+
+// ----------------------------
+//part 2 v
+.c-msg
+
+.c-msg-item
+
+	span
+
+
+@media screen and (max-width: $bp-narrow)
+
+	#c-all
+
+	#lb-subtitle
+		color: $c-nav-deep
+
+	// ----------------------------
+	// x2 = chill & water v
+	.c-all-item 
+		& + .c-all-item
+			margin-top: 30px
+
+	.c-all-title
+		font:
+			size: 18px
+			weight: bold
+		margin-bottom: 10px
+
+	// ----------------------------
+	// x 3 = chill 3 & water 3 v
+	.c-box
+		// width: 200px
+
+	.c-item
+		// height: 100px
+		display: flex
+		align-items: center
+		// width: 100%
+
+	$w: 110px
+	.c-mc
+		width: calc( 100% - #{$w} )
+
+	// ----------------------------
+	// part 1 v
+	.c-c
+		// width: 450px
+		// transform: scale(.3)
+		// transform-origin: 0 0
+
+	.c-machine
+		font-size: 14px
+		margin-bottom: 8px
+
+	// ----------------------------
+	//part 2 v
+	.c-msg
+		width: $w
+		font-size: 14px
+
+	.c-msg-item
+
+		span
+
+	// ----------------------------
+	// ----------------------------
+	.is-open
+		#content
+			position: absolute
+			height: 100vh
+			overflow: hidden
+
+		#lb
+			position: relative
+			top: auto
+			left: auto
+			right: auto
+			bottom: auto
+			width: calc( 100% - 24px )
+			margin: 10px auto
+
+@media screen and (min-width: $bp-wide)
+	#lb-content
+
+	#lb-lr
+		display: flex
+		width: calc( 330px + 900px )
+		margin: 0 auto
+
+	#lb-left
+		width: 275px
+
+	#lb-subtitle
+		color: yellow
+	// ----------------------------
+	#c-all
+		display: flex
+
+	// ----------------------------
+	// x2 = chill & water v
+	.c-all-item 
+
+	.c-all-title
+		margin-bottom: 5px
+		font-size: 20px!important
+
+	// ----------------------------
+	// x 3 = chill 3 & water 3 v
+	.c-box
+		margin-right: 15px
+
+	.c-item
+		margin-bottom: 15px
+		&:last-child
+			margin: 0
+
+	// ----------------------------
+	// part 1 v
+	.c-c
+		padding: 10px
+		border-radius: 10px
+		width: 120px
+		margin-bottom: 5px
+
+	.c-machine
+		margin-bottom: 5px
+	// ----------------------------
+	//part 2 v
+	.c-msg
+
+	.c-msg-item
+
+		span
+		
+	// ----------------------------
+	.c-machine, .c-all-title, .c-msg
+		color: #fff
+		font-size: 14px

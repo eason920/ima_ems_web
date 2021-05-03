@@ -9,101 +9,129 @@ html(lang='en')
 		//-----------------------------
 		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js')
 		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js')
-		//- script(src='./js/single_water.js')
-	body 
+		script(src='./js/single_water.js')
+	body.is-open
 		include nav
 		#content
 			#wrapper-single
-				.block
-					.title
-						.title-txt 
-						.title-switch 
-							.title-item 
-								.title-machine 30HP01
-								.title-status(data-stauts='man') MAN
-							.title-item 
-								.title-machine 30HP02
-								.title-status(data-stauts='auto') AUTO
-							.title-item 
-								.title-machine 30HP03
-								.title-status(data-stauts='off') OFF
-					.card
-						.card-item(data-type='chill')
-							.card-left
-								.left-img
-									img(src='./images/chill_nor.png')
-								.left-name 水泵浦
-							.card-right
-								.right-item
-									.right-name 30HP01：
-									.right-color(data-status='1' style='background-color: #9B9BEA') 33
-									include partials/right_btn
-								.right-item
-									.right-name 30HP02：
-									.right-color(data-status='2' style='background-color: #4B4BEA') 33
-									include partials/right_btn
-								.right-item
-									.right-name 30HP03：
-									.right-color(data-status='0' style='background-color: #999') 33
-									include partials/right_btn
-						.card-item(data-type='water')
-							.card-left
-								.left-img
-									img(src='./images/water_nor.png')
-								.left-name 水塔風扇
-							.card-right
-								.right-item
-									.right-name Tower01：
-									.right-color(data-status='3' style='background-color: #4B4BEA') 33
-									include partials/right_btn
-								.right-item
-									.right-name Tower02：
-									.right-color(data-status='4' style='background-color: #C1272D') 33
-									include partials/right_btn
-								.right-item
-									.right-name Tower03：
-									.right-color(data-status='5' style='background-color: #F7931E') 33
-									include partials/right_btn
-						.card-item(data-type='pipe')
-							.card-left
-								.left-img
-									img(src='./images/pipe.png')
-								.left-name 水溫/水壓
-							.pipe 
-								.pipe-box
-									.pipe-item
-										.pipe-name 出水溫：
-										.pipe-num 25.5
-									.pipe-item
-										.pipe-name 回水溫：
-										.pipe-num 35.34
-									.pipe-item
-										.pipe-name 水壓差：
-										.pipe-num 0.606
-								.pipe-board
-									.pipe-guide
+				#mb-btn 省電狀態
+				include partials/water_block
+				include partials/water_block
+				include partials/water_block
+				include partials/water_block
+				include partials/water_block
+				include partials/water_block
+				include partials/water_block
+				include partials/water_block
 
 
 
-		//-#lb-masker 
-		//-#lb
+		#lb-masker 
+		#lb
 			#lb-cbox
 				span ×
 				img#lb-close(src='./images/lb_close.png') 
 				img#lb-open(src='./images/lb_open.png') 
 			#lb-content
-				#lb-left
-					#lb-title 冰機運作時數統計
-					#lb-subtitle
-						|住戶：
-						span A-10
-				#lb-right
-					.lb-item
-						.lb-title 運轉總數(一週)：
+				#lb-lr
+					#lb-left
+						#lb-title 變頻器省電表
+						#lb-subtitle
+							|總省電數：
+							span 420 kWh
+						#lb-label
+							.lblabel-item.active 客梯側
+							.lblabel-item 貨梯側
+							.lblabel-item 第三側
+						#c-all
+							.c-all-item 
+								.c-all-title 水泵浦
+								.c-box
+									.c-item
+										.c-mc
+											.c-machine 30HP01
+											.c-c
+												canvas#c1
+										.c-msg
+											.c-msg-item 頻率 
+												span 30
+												|Hz    
+											.c-msg-item 節能 
+												span 11.25
+												|kWh
+									.c-item
+										.c-mc
+											.c-machine 30HP01
+											.c-c
+												canvas#c2
+										.c-msg
+											.c-msg-item 頻率 
+												span 30
+												|Hz    
+											.c-msg-item 節能 
+												span 11.25
+												|kWh
+									.c-item
+										.c-mc
+											.c-machine 30HP01
+											.c-c
+												canvas#c3
+										.c-msg
+											.c-msg-item 頻率 
+												span 30
+												|Hz    
+											.c-msg-item 節能 
+												span 11.25
+												|kWh
+							//-----------------------------
+							.c-all-item 
+								.c-all-title 水塔風扇
+								.c-box
+									.c-item
+										.c-mc
+											.c-machine Tower01
+											.c-c
+												canvas#w1
+										.c-msg
+											.c-msg-item 頻率 
+												span 30
+												|Hz    
+											.c-msg-item 節能 
+												span 11.25
+												|kWh
+									.c-item
+										.c-mc
+											.c-machine Tower01
+											.c-c
+												canvas#w2
+										.c-msg
+											.c-msg-item 頻率 
+												span 30
+												|Hz    
+											.c-msg-item 節能 
+												span 11.25
+												|kWh
+									.c-item
+										.c-mc
+											.c-machine Tower01
+											.c-c
+												canvas#w3
+										.c-msg
+											.c-msg-item 頻率 
+												span 30
+												|Hz    
+											.c-msg-item 節能 
+												span 11.25
+												|kWh
+							
+					#lb-right
+						.lb-title 機具：水泵浦 30HP-1 客梯側
+						.lb-subtitle 
+							|當前頻率：
+							span 30
+							|Hz 至目前為止節能度數：
+							span 11.25
+							|kWh
 						.canvas-box
-							canvas#cv-1
-					.lb-item
-						.lb-title 錯誤總數(一週)：
-						.canvas-box
-							canvas#cv-2
+							canvas#m
 

@@ -3,9 +3,6 @@
 // ----------------------------
 .card
 	background-color: #fff
-	display: flex
-	align-items: center
-	justify-content: space-between
 
 .card-item
 
@@ -19,7 +16,9 @@
 		width: 100%
 
 .left-name
-	font-size: 15px
+	font:
+		size: 17px
+		weight: bold
 
 // ----------------------------
 .card-right
@@ -40,35 +39,55 @@
 	margin: 0 5px
 
 .right-btn
-	display: flex
-	border: solid 1px #000
-	padding: 0 10px
-	font-size: 12px
-	height: 16px
-	border-radius: 8px
-
-
+	
+#mb-btn
 
 @media screen and (max-width: $bp-narrow)
 	.block
+		margin:
+			bottom: 25px
 
 	// ----------------------------
 	.card
+		padding: 25px 10%
+		border-radius: 20px
 
 	.card-item
+		margin-bottom: 20px
+		&:last-child
+			margin: 0
+		&[data-type='chill']
+			.left-img
+				width: 40px
 
+		&[data-type='water']
+			.left-img
+				width: 20px
+
+		&[data-type='pipe']
+			.left-img
+				width: 32px
 
 	// ----------------------------
 	.card-left
+		display: flex
+		align-items: center
+		margin-bottom: 8px
 
 	.left-img
+		margin-right: 3px
 
 	.left-name
 
 	// ----------------------------
 	.card-right
+		display: flex
+		flex-wrap: wrap
+		// margin-left: 10%
 
 	.right-item
+		width: 50%
+		margin-bottom: 5px
 
 	.right-name
 
@@ -77,13 +96,34 @@
 		height: 26px
 
 	.right-btn
+		display: none
+
+	#mb-btn
+		background-color: #fff
+		display: flex
+		align-items: center
+		padding: 0 20px
+		height: 30px
+		border-radius: 15px
+		border: solid 1px #000
+		margin: 0 auto 8px
+		width: 106px
+
 @media screen and (min-width: $bp-wide)
+	#wrapper-single
+		max-width: 1200px
+
+	// ----------------------------
 	.block
+		margin-bottom: 40px
 
 	// ----------------------------
 	.card
-		padding: 20px 4%
+		padding: 20px
 		border-radius: 20px
+		display: flex
+		align-items: center
+		justify-content: space-around
 
 	.card-item
 		display: flex
@@ -94,7 +134,7 @@
 
 		&[data-type='water']
 			.left-img
-				width: 58px
+				width: 55px
 
 		&[data-type='pipe']
 			.left-img
@@ -103,6 +143,9 @@
 	// ----------------------------
 	.card-left
 		margin-right: 10px
+		display: flex
+		flex-direction: column 
+		align-items: center
 	.left-img
 		// width: 110px
 
@@ -124,3 +167,13 @@
 		height: 26px
 
 	.right-btn
+		cursor: pointer
+		display: flex
+		border: solid 1px #000
+		padding: 0 10px
+		font-size: 12px
+		height: 16px
+		border-radius: 8px
+
+	#mb-btn
+		display: none

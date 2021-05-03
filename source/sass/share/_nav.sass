@@ -109,6 +109,8 @@
 	display: inline-flex
 	align-items: center
 
+#nav-masker
+
 @media screen and (max-width: $bp-narrow)
 	#nav
 		justify-content: space-between
@@ -227,6 +229,17 @@
 		background-color: #ccc
 		line-height: 30px
 		border-radius: 15px
+
+	#nav-masker
+		display: none
+		position: fixed
+		top: $h-nav
+		right: 0
+		bottom: 0
+		left: 0
+		margin: auto
+		background-color: rgba(0,0,0,.8)
+		z-index: 1
 		
 @media screen and (min-width: $bp-wide)
 	.logo-img
@@ -280,3 +293,5 @@
 		background-color: #fff
 		line-height: 20px
 		border-radius: 10px
+
+	#nav-masker

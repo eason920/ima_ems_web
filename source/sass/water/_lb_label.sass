@@ -1,0 +1,39 @@
+#lb-label
+	font-size: 14px
+	display: inline-flex
+	overflow: hidden
+	height: 30px
+	border-radius: 15px
+	background-color: #fff
+	margin: 8px 0 12px
+
+.lblabel-item
+	display: flex
+	align-items: center
+	padding: 0 6px
+	border-right: solid 1px #aaa
+	cursor: pointer
+	&.active
+		cursor: default
+		background-color: #ddd
+	&:first-child
+		padding-left: 12px
+	&:last-child
+		padding-right: 12px
+		border: none
+
+
+@media screen and (max-width: $bp-narrow)
+	#lb-label
+		width: 100%
+		background-color: #aaa
+
+	.lblabel-item
+		width: 33.3%
+		text-align: center
+		justify-content: center
+
+@media screen and (min-width: $bp-wide)
+	#lb-label
+
+	.lblabel-item

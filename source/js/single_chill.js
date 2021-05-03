@@ -94,4 +94,14 @@ $(()=>{
 			$('#lb').css({bottom});
 		}
 	});
+
+	// ----------------------------
+	// HAMBER v
+	// ----------------------------
+	if( /iphone | ipad | android/i.test(nua) ){
+		$('#hamber').click(function(){
+			$(this).toggleClass('is-open');
+			$('#mbbox, #nav-masker').toggle();
+		});
+	}
 })
