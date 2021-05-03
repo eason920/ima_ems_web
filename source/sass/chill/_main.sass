@@ -29,6 +29,15 @@
 	display: flex
 	align-items: center
 	justify-content: center
+	border-radius: 50%
+	cursor: pointer
+	&[data-status='0']
+		position: relative
+		&:after
+			content: '×'
+			position: absolute
+			color: #fff
+			font-weight: lighter
 
 // ----------------------------
 #right
@@ -36,6 +45,9 @@
 .right-title
 	font-weight: bold
 	color: #000
+	margin:
+		bottom: 5px
+		top: 18px
 
 .rbox
 	background-color: #fff
@@ -45,11 +57,71 @@
 	&.is-psy
 		display: flex
 
+// ----------------------------
 .rbox-psyitem
 	margin: 0 8px
 	&:first-child
 		margin-left: 0
 
+// ----------------------------
+.rbox-status
+	display: flex
+	flex-wrap: wrap
+	margin: 0 auto
+	&.is-total
+		width: 86%
+		transform: translateX(6%)
+
+.rbox-status-item
+	display: inline-flex
+	width: 33.3%
+	align-items: center
+	&:nth-child(4) ,&:nth-child(5) ,&:nth-child(6)
+		margin-top: 12px
+
+.rbox-status-color
+	border-radius: 50%
+	margin-right: 5px
+	&[data-status='0']
+		position: relative
+		&:after
+			content: '×'
+			position: absolute
+			color: #fff
+			font-weight: lighter
+
+
+.rbox-status-info
+	
+.rbox-status-num
+	color: #000
+	font-weight: bold
+
+.rbox-status-txt
+	color: #777
+
+// ----------------------------
+.rbox-error
+	display: flex
+	flex-wrap: wrap
+	margin-top: 5px
+
+.rbox-error-item
+	width: 33%
+	display: flex
+	align-items: center
+
+.rbox-error-txt
+	margin-right: 5px
+
+.rbox-error-btn
+	border: solid 1px #000
+	display: inline-flex
+	align-items: center
+	cursor: pointer
+	user-select: none
+
+// ----------------------------
 .rbox-sum
 	background-color: #f2f2f2
 	font-size: 16px
@@ -60,6 +132,10 @@
 
 
 @media screen and (max-width: $bp-narrow)
+	#wrapper-single
+		padding-bottom: 40px
+
+	// ----------------------------
 	#left
 
 	.rooftop
@@ -70,6 +146,7 @@
 
 	// ----------------------------
 	$w-floor: 22px
+	$w-ball: 20px
 	.build-row
 		& + .build-row
 			margin-top: 10px
@@ -84,13 +161,73 @@
 		font-size: 12px
 		width: 17px
 		height: 17px
-		border-radius: 50%
-		cursor: pointer
-		background-color: #aaa
+		&[data-status='0']
+			&:after
+				font-size: 30px
+				line-height: 0
+				top: 6px
+				left: -2px
 	// ----------------------------
 	#right
-
 	
+	.right-title
+		font-size: 18px
+
+	// ----------------------------
+	.rbox
+		border-radius: 12px
+
+	.rbox-top
+		padding: 15px
+
+	// ----------------------------
+	.rbox-status
+
+		&.is-total
+
+	.rbox-status-item
+
+		&:nth-child(4) ,&:nth-child(5) ,&:nth-child(6)
+
+	.rbox-status-color
+		width: $w-ball
+		height: $w-ball
+		&[data-status='0']
+			&:after
+				top: 2px
+				left: -3px
+				line-height: 10px
+				font-size: 36px
+
+	.rbox-status-info
+		
+	.rbox-status-num
+		font-size: 16px
+
+	.rbox-status-txt
+		font-size: 12px
+
+	// ----------------------------
+	.rbox-error
+		padding-left: 25px
+		& + .rbox-status
+			margin-top: 20px
+
+	.rbox-error-item
+		margin-bottom: 15px
+
+	.rbox-error-txt
+
+	.rbox-error-btn
+		font-size: 12px
+		line-height: 16px
+		border-radius: 8px
+		padding: 0 10px
+
+	// ----------------------------
+	.rbox-sum
+		padding: 8px
+		font-size: 14px
 
 @media screen and (min-width: $bp-wide)
 	#content
@@ -99,6 +236,7 @@
 	#wrapper-single
 		display: flex
 
+	// ----------------------------
 	#left
 		width: $w-left-pc
 		margin-right: $m
@@ -108,12 +246,13 @@
 		height: $h-roof-top-pc
 
 	#build
-		padding: 40px 6%
+		padding: 20px 6% 50px
 		height: calc( 100% - #{$h-roof-top-pc})
 		min-height: 660px
 
 	// ----------------------------
 	$w-floor: 50px
+	$w-ball: 30px
 	.build-row
 
 	.build-floor
@@ -125,11 +264,15 @@
 
 	.build-item
 		font-size: 14px
-		width: 30px
-		height: 30px
-		border-radius: 50%
-		cursor: pointer
-		background-color: #aaa
+		width: $w-ball
+		height: $w-ball
+		&[data-status='0']
+			&:after
+				font-size: 55px
+				line-height: 10px
+				top: 5px
+				left: -3px
+
 	// ----------------------------
 	#right
 		width: calc( 100% - #{$w-left-pc} - #{$m} )
@@ -141,8 +284,49 @@
 		border-radius: 15px
 
 	.rbox-top
-		padding: 15px
+		padding: 20px
 
+	// ----------------------------
+	.rbox-status
+
+	.rbox-status-item
+
+	.rbox-status-color
+		width: $w-ball - 8
+		height: $w-ball - 8
+		&[data-status='0']
+			&:after
+				top: 2px
+				left: -3px
+				line-height: 10px
+				font-size: 40px
+
+	.rbox-status-info
+
+	.rbox-status-num
+		font-size: 17px
+
+	.rbox-status-txt
+		font-size: 12px
+
+	// ----------------------------
+	.rbox-error
+		padding-left: 25px
+		& + .rbox-status
+			margin-top: 20px
+
+	.rbox-error-item
+		margin-bottom: 12px
+
+	.rbox-error-txt
+
+	.rbox-error-btn
+		font-size: 12px
+		padding: 0 15px
+		line-height: 18px
+		border-radius: 10px
+
+	// ----------------------------
 	.rbox-sum
 		height: 30px
 		padding-right: 15px

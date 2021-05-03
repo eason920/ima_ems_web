@@ -1,0 +1,154 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='UTF-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		title single chill
+		link(href='./css/single_chill.css' rel='stylesheet')
+		//-----------------------------
+		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js')
+		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js')
+		script(src='./js/single_chill.js')
+	body 
+		include nav
+		#content
+			#wrapper-single
+				#left
+					img.rooftop(src='./images/rooftop.png')
+					#build
+						.build-row 
+							.build-floor
+							.build-house
+								.build-item A
+								.build-item B
+								.build-item C
+								.build-item D
+								.build-item E
+								.build-item F
+								.build-item G
+								.build-item H
+								.build-item I
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+						include partials/build_row
+				#right
+					.right-title 乾溼溫度：
+					.rbox
+						.rbox-top.is-psy
+							.rbox-psyitem 
+								|乾球
+								span 33.83
+							|/
+							.rbox-psyitem 
+								|濕球
+								span 25.5
+					.right-title 冰機狀態統計： 
+					.rbox
+						.rbox-top
+							.rbox-status.is-total 
+								.rbox-status-item
+									.rbox-status-color(data-status='0' style='background-color: #999')
+									.rbox-status-info 
+										.rbox-status-num 2
+										.rbox-status-txt 空戶
+								.rbox-status-item
+									.rbox-status-color(data-status='1' style='background-color: #999')
+									.rbox-status-info 
+										.rbox-status-num 2
+										.rbox-status-txt 開機正常
+								.rbox-status-item
+									.rbox-status-color(data-status='2' style='background-color: #9AE2BE')
+									.rbox-status-info 
+										.rbox-status-num 2
+										.rbox-status-txt 關機正常
+								.rbox-status-item
+									.rbox-status-color(data-status='3' style='background-color: #FC81B4')
+									.rbox-status-info 
+										.rbox-status-num 2
+										.rbox-status-txt 開機異常
+								.rbox-status-item
+									.rbox-status-color(data-status='4' style='background-color: #C1272D')
+									.rbox-status-info 
+										.rbox-status-num 2
+										.rbox-status-txt 關機異常
+								.rbox-status-item
+									.rbox-status-color(data-status='5' style='background-color: #F7931E')
+									.rbox-status-info 
+										.rbox-status-num 2
+										.rbox-status-txt 斷訊
+						.rbox-sum
+							|全部
+							span 90
+							|台
+					.right-title 異常冰機列表：
+					.rbox
+						.rbox-top
+							.rbox-status 
+								.rbox-status-item
+									.rbox-status-color(data-status='4' style='background-color: #C1272D')
+									|關機異常
+							.rbox-error
+								.rbox-error-item 
+									.rbox-error-txt F-8
+									.rbox-error-btn 詳細
+							.rbox-status 
+								.rbox-status-item
+									.rbox-status-color(data-status='3' style='background-color: #FC81B4')
+									|開機異常
+							.rbox-error
+								.rbox-error-item 
+									.rbox-error-txt F-8
+									.rbox-error-btn 詳細
+								.rbox-error-item 
+									.rbox-error-txt F-8
+									.rbox-error-btn 詳細
+								.rbox-error-item 
+									.rbox-error-txt F-8
+									.rbox-error-btn 詳細
+								.rbox-error-item 
+									.rbox-error-txt F-8
+									.rbox-error-btn 詳細
+								.rbox-error-item 
+									.rbox-error-txt F-8
+									.rbox-error-btn 詳細
+								.rbox-error-item 
+									.rbox-error-txt F-8
+									.rbox-error-btn 詳細
+								.rbox-error-item 
+									.rbox-error-txt F-8
+									.rbox-error-btn 詳細
+						.rbox-sum
+							|總計異常
+							span 7 
+							|台
+		//-----------------------------
+		#lb-masker 
+		#lb
+			#lb-cbox
+				span ×
+				img#lb-close(src='./images/lb_close.png') 
+				img#lb-open(src='./images/lb_open.png') 
+			#lb-content
+				#lb-left
+					#lb-title 冰機運作時數統計
+					#lb-subtitle
+						|住戶：
+						span A-10
+				#lb-right
+					.lb-item
+						.lb-title 運轉總數(一週)：
+						.canvas-box
+							canvas#cv-1
+					.lb-item
+						.lb-title 錯誤總數(一週)：
+						.canvas-box
+							canvas#cv-2
+

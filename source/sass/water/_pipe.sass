@@ -1,0 +1,71 @@
+.pipe
+	display: flex
+	align-items: center
+
+.pipe-box
+	margin-right: 10px
+
+.pipe-item
+	display: flex
+	font-size: 14px
+	& + .pipe-item
+		margin-top: 8px
+
+.pipe-name
+
+.pipe-num
+
+// ----------------------------
+.pipe-board
+	width: 200px
+	height: 89px
+	background:
+		image: image-url('board.png')
+		size: image-width('board.png')/2 image-height('board.png')/2
+	position: relative
+
+.pipe-guide
+	position: absolute
+	width: 0
+	height: 0
+	border-style: solid
+	border-width: 0 2px 70px 2px
+	border-color: transparent transparent #565656
+	left: 98px
+	bottom: 0
+	transform-origin: 50% 100%
+	transform: rotate(-30deg)
+
+
+
+@media screen and (max-width: $bp-narrow)
+	.pipe
+
+	.pipe-box
+
+	.pipe-item
+
+	.pipe-name
+
+	.pipe-num
+
+	// ----------------------------
+	.pipe-board
+
+	.pipe-guide
+
+@media screen and (min-width: $bp-wide)
+	.pipe
+
+	.pipe-box
+
+	.pipe-item
+
+	.pipe-name
+
+	.pipe-num
+
+	// ----------------------------
+	.pipe-board
+
+	.pipe-guide

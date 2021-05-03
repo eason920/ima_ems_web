@@ -1,0 +1,61 @@
+#lb-left
+
+#lb-subtitle
+
+// ----------------------------
+#lb-right
+
+.lb-item
+
+.lb-title
+
+.canvas-box
+
+@media screen and (max-width: $bp-narrow)
+	#lb-left
+
+	#lb-subtitle
+
+	// ----------------------------
+	#lb-right
+
+	.lb-item
+		& + .lb-item
+			margin-top: 30px
+
+
+	.lb-title
+		margin-bottom: 10px
+
+	.canvas-box
+
+@media screen and (min-width: $bp-wide)
+	#lb-left
+		width: $w-lb-left
+
+	#lb-subtitle
+		padding-left: 15px
+
+	// ----------------------------
+	#lb-right
+		padding-top: 10px
+		width: calc( 100% - #{$w-lb-left})
+		display: flex
+		justify-content: space-between
+
+	.lb-title
+		margin-bottom: 12px
+
+	.lb-item
+		width: 48%
+
+	.canvas-box
+		background-color: #fff
+		padding: 15px
+		border-radius: 12px
+
+	.lb-title
+		color: #fff
+		font-size: 18px
+
+	.canvas-box

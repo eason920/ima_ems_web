@@ -1,0 +1,149 @@
+#lb
+	position: fixed
+	z-index: 6
+
+#lb-masker
+
+#lb-cbox
+	cursor: pointer
+
+#lb-close
+
+#lb-open
+
+// ----------------------------
+#lb-content
+	
+
+// ----------------------------
+#lb-left
+
+#lb-title
+	font:
+		size: 21px
+		weight: bold
+	line-height: 36px
+	border-radius: 18px
+	padding: 0 15px
+	color: #fff
+	display: inline-flex
+	align-items: center
+
+#lb-subtitle
+	font-weight: bold
+
+// ----------------------------
+#lb-right
+
+.lb-item
+
+.lb-title
+
+
+@media screen and (max-width: $bp-narrow)
+	#lb
+		margin: auto
+		top: 10px
+		left: 10px
+		right: 10px
+		background-color: #fff
+		border-radius: 24px
+		padding: 16px
+		z-index: 6
+	
+	#lb-masker
+		position: fixed
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		margin: auto
+		background-color: rgba(0,0,0,.8)
+		z-index: 6
+
+	#lb-cbox
+		position: fixed
+		font-size: 40px
+		width: 30px
+		height: 30px
+		top: 29px
+		right: 29px
+		border-radius: 50%
+		display: flex
+		align-items: center
+		justify-content: center
+		background-color: #fff
+
+		span
+			margin-top: -5px
+
+	#lb-close,	#lb-open
+		display: none
+
+	// ----------------------------
+	#lb-content
+
+	// ----------------------------
+	#lb-left
+
+	#lb-title
+		width: 100%
+		background-color: rgba(0,0,0,.5)
+
+	#lb-subtitle
+		color: #000
+		font-size: 21px
+		line-height: 40px
+		text-align: center
+
+	// ----------------------------
+	#lb-right
+
+	.lb-item
+
+	.lb-title
+
+@media screen and (min-width: $bp-wide)
+	#lb
+		bottom: 0
+		width: 100%
+		min-width: 1024px
+
+	#lb-masker
+		display: none
+
+	#lb-cbox
+		border-bottom: solid 3px $c-nav
+		width: 100%
+		font-size: 0
+		display: inline-block
+		text-align: center
+		
+	#lb-close
+		display: none
+
+	#lb-open
+
+	// ----------------------------
+	#lb-content
+		background-color: $c-nav
+		padding: 30px
+		display: flex
+
+	// ----------------------------
+	#lb-left
+
+	#lb-title
+		background-color: rgba(0,0,0,.25)
+
+	#lb-subtitle
+		color: #fff
+		font-size: 21px
+		line-height: 36px
+
+	// ----------------------------
+	#lb-right
+
+	.lb-item
+
+	.lb-title

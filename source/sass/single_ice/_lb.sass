@@ -1,0 +1,16 @@
+#lb-left
+
+#lb-right
+
+
+@media screen and (max-width: $bp-narrow)
+	#lb-left
+
+	#lb-right  
+
+@media screen and (min-width: $bp-wide)
+	#lb-left
+		width: $w-lb-left
+
+	#lb-right
+		width: calc( 100% - #{$w-lb-left})

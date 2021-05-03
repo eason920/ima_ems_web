@@ -1,0 +1,126 @@
+.block
+
+// ----------------------------
+.card
+	background-color: #fff
+	display: flex
+	align-items: center
+	justify-content: space-between
+
+.card-item
+
+
+// ----------------------------
+.card-left
+
+.left-img
+
+	img
+		width: 100%
+
+.left-name
+	font-size: 15px
+
+// ----------------------------
+.card-right
+
+.right-item
+	display: flex
+	align-items: center
+
+.right-name
+	font-size: 14px
+
+.right-color
+	border-radius: 50%
+	display: flex
+	font-size: 14px
+	align-items: center
+	justify-content: center
+	margin: 0 5px
+
+.right-btn
+	display: flex
+	border: solid 1px #000
+	padding: 0 10px
+	font-size: 12px
+	height: 16px
+	border-radius: 8px
+
+
+
+@media screen and (max-width: $bp-narrow)
+	.block
+
+	// ----------------------------
+	.card
+
+	.card-item
+
+
+	// ----------------------------
+	.card-left
+
+	.left-img
+
+	.left-name
+
+	// ----------------------------
+	.card-right
+
+	.right-item
+
+	.right-name
+
+	.right-color
+		width: 26px
+		height: 26px
+
+	.right-btn
+@media screen and (min-width: $bp-wide)
+	.block
+
+	// ----------------------------
+	.card
+		padding: 20px 4%
+		border-radius: 20px
+
+	.card-item
+		display: flex
+		align-items: center
+		&[data-type='chill']
+			.left-img
+				width: 82px
+
+		&[data-type='water']
+			.left-img
+				width: 58px
+
+		&[data-type='pipe']
+			.left-img
+				width: 70px
+
+	// ----------------------------
+	.card-left
+		margin-right: 10px
+	.left-img
+		// width: 110px
+
+	.left-name
+		text-align: center
+		margin-top: 5px
+
+	// ----------------------------
+	.card-right
+
+	.right-item
+		& + .right-item
+			margin-top: 8px
+
+	.right-name
+
+	.right-color
+		width: 26px
+		height: 26px
+
+	.right-btn
