@@ -1,0 +1,132 @@
+#wrapper-single
+
+.build
+	background-color: #fff
+	display: inline-flex
+	overflow: hidden
+	border-radius: 12px
+	font-size: 14px
+	margin-bottom: 15px
+
+// ----------------------------
+.build-title
+	display: flex
+	align-items: center
+	justify-content: center
+	color: #000
+	background-color: $c-bg
+	width: $w-btitle
+	text-align: center
+	padding: 5px
+	border-right: solid 1px $c-border
+	
+.build-body
+	width: calc( 100% - #{$w-btitle})
+	display: flex
+
+// ----------------------------
+.col
+	display: flex
+	border-right: solid 4px $c-border
+	&:last-child
+		border: none
+
+	&.col-psy
+		.col-item:last-child
+			.col-row
+				padding-right: 12px
+
+.col-item
+	&:last-child
+		.col-row
+			border-right: none
+
+.col-row
+	display: flex
+	padding: 5px
+	align-items: center
+	justify-content: center
+	border:
+		bottom: solid 1px $c-border
+		right: solid 1px $c-border
+	height: 25px
+	min-width: 55px
+	white-space: nowrap
+	&:first-child
+		background-color: $c-bg
+	&:last-child
+		border-bottom: none
+	&[data-status='man']
+		color: #006837
+	&[data-status='auto']
+		color: #b35906
+
+.col-color
+	width: 13px
+	height: 13px
+	border-radius: 50%
+	margin-right: 3px
+
+// ----------------------------
+#lb-build
+	font:
+		size: 21px
+	color: #fff
+	padding: 5px 0
+
+
+
+@media screen and (max-width: $bp-narrow)
+	#wrapper-single
+		// padding-right: 20px
+		overflow:
+			y: auto
+	.build
+		&:last-child
+			margin-bottom: 50px
+
+	// ----------------------------
+	.build-title
+		
+	.build-body
+
+	// ----------------------------
+	.col
+
+	.col-item
+
+	.col-row
+
+		
+
+	.col-color
+	
+	// ----------------------------
+	#lb-build
+		color: #000
+		text-align: center
+		padding: 10px 0 0
+
+@media screen and (min-width: $bp-wide)
+	#wrapper-single
+		padding: 65px 20px 0
+		text-align: center
+		min-height: calc( 100vh - #{$h-nav})
+		min-width: 100vw
+		overflow: auto
+
+	.build
+
+	// ----------------------------
+	.build-title
+		
+	.build-body
+
+	// ----------------------------
+	.col
+
+	.col-item
+
+	.col-row
+
+	.col-color

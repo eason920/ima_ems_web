@@ -1,0 +1,105 @@
+.build
+	.build-title 中國信托大樓
+	.build-body
+		//- col x 7
+		.col.col-group
+			//- 機械 or 數值量
+			.col-item
+				//- row 數同 group 數 + 1 title
+				.col-row 群組
+				.col-row 客梯側
+				.col-row 貨梯側
+		.col.col-chill
+			.col-item
+				.col-row 正常
+				.col-row 32
+				.col-row 28
+			.col-item
+				.col-row 錯誤
+				.col-row 
+					.col-color(data-status='' style='background-color:#39B54A')
+					|1
+				.col-row
+					.col-color(data-status='' style='background-color:#C1272D')
+					|6
+		.col.col-pump
+			.col-item
+				.col-row (水泵)30HP01
+				.col-row 
+					.col-color(data-status='1' style='background-color:#999')
+					|off
+				.col-row
+					.col-color(data-status='2' style='background-color:#9B9BEA')
+					|25.0
+			.col-item
+				.col-row 30HP02
+				.col-row 
+					.col-color(data-status='3' style='background-color:#4B4BEA')
+					|35.0
+				.col-row
+					.col-color(data-status='4' style='background-color:#C1272D')
+					|47.0
+			.col-item
+				.col-row 15HP
+				.col-row 
+					.col-color(data-status='5' style='background-color:#F7931E')
+					|-
+				.col-row
+					.col-color(data-status='1' style='background-color:#999')
+					|off
+		.col.col-water
+			.col-item
+				.col-row (風扇)Tower01
+				.col-row 
+					.col-color(data-status='1' style='background-color:#999')
+					|off
+				.col-row
+					.col-color(data-status='1' style='background-color:#999')
+					|off
+			.col-item
+				.col-row Tower02
+				.col-row 
+					.col-color(data-status='1' style='background-color:#999')
+					|off
+				.col-row
+					.col-color(data-status='2' style='background-color:#9B9BEA')
+					|25.0
+			.col-item
+				.col-row Tower03
+				.col-row 
+					.col-color(data-status='1' style='background-color:#999')
+					|off
+				.col-row
+					.col-color(data-status='2' style='background-color:#9B9BEA')
+					|25.0
+		.col.col-pipe
+			.col-item
+				.col-row (溫壓)出水溫
+				.col-row 23.02
+				.col-row 22.09
+			.col-item
+				.col-row 回水溫
+				.col-row 25.19
+				.col-row 23.22
+			.col-item
+				.col-row 水壓差
+				.col-row 0.21
+				.col-row 0.62
+		.col.col-switch
+			.col-item
+				.col-row (開關狀態)
+				.col-row -
+				.col-row(data-status='man') SW1:MAN
+			.col-item
+				.col-row -
+				.col-row -
+				.col-row(data-status='auto') SW2:AUTO
+		.col.col-psy
+			.col-item
+				.col-row 乾球 
+				.col-row 33.83
+				.col-row -
+			.col-item
+				.col-row 濕球
+				.col-row 25.1
+				.col-row -

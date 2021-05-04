@@ -10,6 +10,11 @@ html(lang='en')
 		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js')
 		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js')
 		script(src='./js/single_chill.js')
+		//-----------------------------
+		link(href='jquery.minicolors.css' rel='stylesheet' )
+		script(src='jquery.minicolors.js')
+		script(src='setting.js')
+		script(src='./js/sys.js')
 	body 
 		include nav
 		#content
@@ -133,7 +138,7 @@ html(lang='en')
 		#lb-masker 
 		#lb
 			#lb-cbox
-				span ×
+				span ╳
 				img#lb-close(src='./images/lb_close.png') 
 				img#lb-open(src='./images/lb_open.png') 
 			#lb-content
@@ -151,4 +156,6 @@ html(lang='en')
 						.lb-title 錯誤總數(一週)：
 						.canvas-box
 							canvas#cv-2
+
+		include sys
 

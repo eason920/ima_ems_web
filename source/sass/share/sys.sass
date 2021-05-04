@@ -1,0 +1,102 @@
+#sys-masker,.sys
+	display: none
+	
+#sys-masker
+	position: fixed
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	margin: auto
+	z-index: 7
+	background-color: rgba( 0,0,0,.8)
+
+.sys
+	position: fixed
+	top: 50%
+	transform: translateY(-50%)
+	right: 0
+	left: 0
+	margin: auto
+	z-index: 7
+	width: 300px
+	// border-radius: 12px
+	// overflow: hidden
+
+.sys-title
+	border-radius: 12px 12px 0 0
+	background-color: #999
+	height: 40px
+	display: flex
+	align-items: center
+	position: relative
+	padding-left: 15px
+	font:
+		size: 16px
+		weight: bold
+	color: #fff
+
+.sys-close
+	position: absolute
+	width: 30px
+	height: 30px
+	background-color: #fff
+	border-radius: 50%
+	right: 5px
+	top: 5px
+	display: flex
+	align-items: center
+	justify-content: center
+	font-size: 18px
+	color: #333
+	cursor: pointer
+	user-select: none
+
+.sys-box
+	border-radius: 0 0 12px 12px
+	padding: 20px
+	background-color: #fff
+	text-align: center
+
+.sys-item
+	display: inline-flex
+	align-items: center
+	margin-bottom: 10px
+
+.sys-txt
+	font-size: 15px
+	margin: 0 6px
+
+.sys-ipt
+	border: none
+	background-color: #eee
+	line-height: 30px
+	padding-left: 5px
+
+.sys-btn
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	font-size: 15px
+	height: 30px
+	border: solid 1px #333
+	border-radius: 15px
+	padding: 0 20px
+	cursor: pointer
+	user-select: none
+
+// ----------------------------
+// ----------------------------
+.sys-box.is-color
+	text-align: left
+// 	positon: relative
+// .minicolors
+// 	position: static!important
+.minicolors-position-bottom .minicolors-panel
+	top: 0!important
+	left: 94px
+
+.minicolors-theme-default .minicolors-input
+	// padding: 0
+	// width: 0!important
+	// border: none

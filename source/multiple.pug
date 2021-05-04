@@ -4,8 +4,8 @@ html(lang='en')
 		meta(charset='UTF-8')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
-		title single water
-		link(href='./css/single_water.css' rel='stylesheet')
+		title mutiple
+		link(href='./css/multiple.css' rel='stylesheet')
 		//-----------------------------
 		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js')
 		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js')
@@ -19,16 +19,14 @@ html(lang='en')
 		include nav
 		#content
 			#wrapper-single
-				#mb-btn 省電狀態
-				include partials/water_block
-				include partials/water_block
-				include partials/water_block
-				include partials/water_block
-				include partials/water_block
-				include partials/water_block
-				include partials/water_block
-				include partials/water_block
-
+				//- include partials/mul_row
+				include partials/mul_col
+				include partials/mul_col
+				include partials/mul_col
+				include partials/mul_col
+				include partials/mul_col
+				include partials/mul_col
+				include partials/mul_col
 
 		include sys
 		#lb-masker 
@@ -41,6 +39,10 @@ html(lang='en')
 				#lb-lr
 					#lb-left
 						#lb-title 變頻器省電表
+						// 與 single-water 的差別在 lb-build v
+						#lb-build
+							|案場：
+							span 中國信托大樓
 						#lb-subtitle
 							|總省電數：
 							span 420 kWh
