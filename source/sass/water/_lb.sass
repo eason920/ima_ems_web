@@ -66,6 +66,8 @@
 	$w: 110px
 	.c-mc
 		width: calc( 100% - #{$w} )
+		canvas
+			// height: 250px!important
 
 	// ----------------------------
 	// part 1 v
@@ -108,14 +110,15 @@
 
 @media screen and (min-width: $bp-wide)
 	#lb-content
+		padding: 15px
 
 	#lb-lr
 		display: flex
-		width: calc( 330px + 900px )
+		width: calc( 230px + 800px )
 		margin: 0 auto
 
 	#lb-left
-		width: 275px
+		width: 230px
 
 	#lb-subtitle
 		color: yellow
@@ -129,7 +132,7 @@
 
 	.c-all-title
 		margin-bottom: 5px
-		font-size: 20px!important
+		font-size: 16px!important
 
 	// ----------------------------
 	// x 3 = chill 3 & water 3 v
@@ -137,7 +140,7 @@
 		margin-right: 15px
 
 	.c-item
-		margin-bottom: 15px
+		margin-bottom: 8px
 		&:last-child
 			margin: 0
 
@@ -146,7 +149,7 @@
 	.c-c
 		padding: 10px
 		border-radius: 10px
-		width: 120px
+		width: 80px
 		margin-bottom: 5px
 
 	.c-machine
@@ -162,4 +165,4 @@
 	// ----------------------------
 	.c-machine, .c-all-title, .c-msg
 		color: #fff
-		font-size: 14px
+		font-size: 12px

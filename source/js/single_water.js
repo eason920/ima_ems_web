@@ -1,5 +1,43 @@
 const nua = navigator.userAgent;
 
+const scales_m = {
+	yAxes: [{
+		// display: false,
+		ticks: {
+			stepSize: 10,
+			min: 0
+		},
+		gridLines: {
+			// display: false
+		},
+	}],
+	xAxes: [{
+		// display: false,
+		ticks: {
+			maxTicksLimit: 6.1 // 0.1用以去除抓到非整點的時間
+		},
+		gridLines: {
+			display: false
+		},
+	}]
+};
+
+const scales = {
+	yAxes: [{
+		display: false,
+		ticks: {
+			stepSize: 10,
+			min: 0
+		}
+	}],
+	xAxes: [{
+		display: false,
+		ticks: {
+			maxTicksLimit: 6.1 // 0.1用以去除抓到非整點的時間
+		}
+	}]
+};
+
 const labels = [];
 const m = [0, 15, 30, 45];
 for( i=0;i<24;i++ ){
@@ -10,8 +48,12 @@ for( i=0;i<24;i++ ){
 	});
 };
 
-const fnRander = function(target) {
+const fnRander = function(target, scales) {
 	var ctx = document.getElementById(target);
+	if( /iphone | ipad | android/i.test(nua) ){
+		ctx.width = 20;  // w & h 兩值應一起看，結果實益是寬高比例 
+		ctx.height = 15; // w & h 兩值應一起看，結果實益是寬高比例
+	}
 	new Chart(ctx, {
 		type: 'line',
 		data: {
@@ -33,25 +75,13 @@ const fnRander = function(target) {
 				pointBackgroundColor: 'transparent',
 				pointBorderColor: 'transparent',
 				pointHoverBackgroundColor: 'transparent',
-				backgroundColor: 'rgba(54, 162, 235, 0.2)',
-				borderColor: 'rgba(54, 162, 235, 1)',
+				backgroundColor: 'rgba(16,44,64,.85)',
+				// borderColor: 'rgba(54, 162, 235, 1)',
 				borderWidth: 1
 			}],
 		},
 		options: {
-			scales: {
-				yAxes: [{
-					ticks: {
-						stepSize: 10,
-						min: 0
-					}
-				}],
-				xAxes: [{
-					ticks: {
-						maxTicksLimit: 6.1 // 0.1用以去除抓到非整點的時間
-					}
-				}]
-			},
+			scales,
 			legend: { // AREA : 上方導引色塊
 				display: false
 			},
@@ -65,11 +95,21 @@ const fnRander = function(target) {
 }
 
 $(()=>{
-	for(i=1;i<=3;i++){
-		fnRander('c'+i);
-		fnRander('w'+i);
-	};
-	fnRander('m');
+	if( /iphone | ipad | android/i.test(nua) ){
+		console.log('mb');
+		for(i=1;i<=3;i++){
+			fnRander('c'+i, scales_m);
+			fnRander('w'+i, scales_m);
+		};
+	}else{
+		console.log('pc');
+		for(i=1;i<=3;i++){
+			fnRander('c'+i, scales);
+			fnRander('w'+i, scales);
+		};
+	}
+	
+	fnRander('m', scales_m);
 	// ----------------------------
 	// ----------------------------
 	// ----------------------------

@@ -1,23 +1,28 @@
-
 const labels= ['5/1','5/2','5/3','5/4','5/5','5/6','5/7'];
+
+// const color_nor = '#102c40';
+const color_nor= 'rgba(16,44,64,.92)'
+// const color_err = '#5f363e';
+const color_err = 'rgba(147,26,49,.92)';
+
 const bg_nor = [
-	'rgba(54, 162, 235, 0.2)',
-	'rgba(54, 162, 235, 0.2)',
-	'rgba(54, 162, 235, 0.2)',
-	'rgba(54, 162, 235, 0.2)',
-	'rgba(54, 162, 235, 0.2)',
-	'rgba(54, 162, 235, 0.2)',
-	'rgba(54, 162, 235, 0.2)'
+	color_nor,
+	color_nor,
+	color_nor,
+	color_nor,
+	color_nor,
+	color_nor,
+	color_nor
 ];
-const data_nor = [600, 570, 600, 550, 600, 300, 50]
+const data_nor = [600, 570, 600, 550, 600, 300, 40]
 const bg_err = [
-	'rgba(255, 99, 132, 0.2)',
-	'rgba(255, 99, 132, 0.2)',
-	'rgba(255, 99, 132, 0.2)',
-	'rgba(255, 99, 132, 0.2)',
-	'rgba(255, 99, 132, 0.2)',
-	'rgba(255, 99, 132, 0.2)',
-	'rgba(255, 99, 132, 0.2)'
+	color_err,
+	color_err,
+	color_err,
+	color_err,
+	color_err,
+	color_err,
+	color_err
 ];
 const data_err = [10,30,5,50,2,30,5]
 
@@ -44,6 +49,11 @@ const fnCanvas = function(id, labels, data, backgroundColor ){
 					ticks: {
 						beginAtZero: true
 					}
+				}],
+				xAxes: [{
+					gridLines: {
+						display: false // 橫軸 hide
+					}
 				}]
 			}
 		}
@@ -59,13 +69,25 @@ $(()=>{
 		afterDatasetsDraw: function(chartInstance, easing) {
 			// To only draw at the end of animation, check for easing === 1
 			var ctx = chartInstance.chart.ctx;
+			// console.log(chartInstance.chart);
 			chartInstance.data.datasets.forEach(function(dataset, i) {
 				var meta = chartInstance.getDatasetMeta(i);
 				if (!meta.hidden ) {
 					meta.data.forEach(function(element, index) {
+						// console.log(element._chart);
 						// Draw the text in black, with the specified font
-						ctx.fillStyle = 'grey';
-						var fontSize = 16;
+						// nor > err
+						const area = meta.data[index]._chart.config.data.datasets[0].backgroundColor[0] == color_nor ? 40 : 4
+						// less > more
+						let padding = 5;
+						let color = '#000';
+						if( dataset.data[index].toString() > area ){
+							padding = -20;
+							color = '#fff';
+						}
+						// const padding =  ? -20 : 5;
+						ctx.fillStyle = color;
+						var fontSize = 13;
 						var fontStyle = 'normal';
 						var fontFamily = 'Helvetica Neue';
 						ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
@@ -74,11 +96,11 @@ $(()=>{
 						// Make sure alignment settings are correct
 						ctx.textAlign = 'center';
 						ctx.textBaseline = 'middle';
-						var padding = -15;
 						var position = element.tooltipPosition();
-						if( dataset.data[index].toString() != 0 ){
-							ctx.fillText(dataString + '分', position.x, position.y - (fontSize / 2) - padding);
-						}
+						// if( dataset.data[index].toString() != 0 ){
+							
+							ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+						// }
 					});
 				}
 			});

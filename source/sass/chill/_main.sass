@@ -1,11 +1,16 @@
 #left
 	font-size: 0
 
+.rooftop
+	position: relative
+	
+
 #build
 	background-color: #fff
 	display: flex
 	flex-direction: column
 	justify-content: space-between
+	
 
 // ----------------------------
 .build-row
@@ -56,8 +61,16 @@
 .rbox-top
 	&.is-psy
 		display: flex
+		position: relative
+		padding-left: 40px
 
 // ----------------------------
+.img-psy
+	height: 40px
+	position: absolute
+	top: 9px
+	left: 18px
+
 .rbox-psyitem
 	margin: 0 8px
 	&:first-child
@@ -140,9 +153,11 @@
 
 	.rooftop
 		width: 250px
+		top: 2px
 
 	#build
 		padding: 20px 4%
+		border: solid 2px #000
 
 	// ----------------------------
 	$w-floor: 22px
@@ -164,6 +179,7 @@
 		&[data-status='0']
 			&:after
 				font-size: 22px
+				top: -1
 				// line-height: 0
 				// top: 6px
 				// left: -2px
@@ -180,6 +196,9 @@
 	.rbox-top
 		padding: 15px
 
+	.img-psy
+		top: 3px
+
 	// ----------------------------
 	.rbox-status
 
@@ -194,8 +213,8 @@
 		height: $w-ball
 		&[data-status='0']
 			&:after
-				top: -2px
-				left: 3px
+				top: 0px
+				left: -1px
 				// line-height: 10px
 				font-size: 23px
 
@@ -245,11 +264,13 @@
 	
 	.rooftop
 		height: $h-roof-top-pc
+		top: 3px
 
 	#build
 		padding: 20px 6% 50px
 		height: calc( 100% - #{$h-roof-top-pc})
 		min-height: 660px
+		border: solid 3px #585858
 
 	// ----------------------------
 	$w-floor: 50px

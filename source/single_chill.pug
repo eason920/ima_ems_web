@@ -5,16 +5,16 @@ html(lang='en')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		title single chill
-		link(href='./css/single_chill.css' rel='stylesheet')
+		link(href='./css/single_chill.css?111' rel='stylesheet')
 		//-----------------------------
-		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js')
-		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js')
-		script(src='./js/single_chill.js')
+		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js?111')
+		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js?111')
+		script(src='./js/single_chill.js?111')
 		//-----------------------------
-		link(href='jquery.minicolors.css' rel='stylesheet' )
-		script(src='jquery.minicolors.js')
-		script(src='setting.js')
-		script(src='./js/sys.js')
+		link(href='jquery.minicolors.css?111' rel='stylesheet' )
+		script(src='jquery.minicolors.js?111')
+		script(src='setting.js?111')
+		script(src='./js/sys.js?111')
 	body 
 		include nav
 		#content
@@ -48,9 +48,10 @@ html(lang='en')
 					.right-title 乾溼溫度：
 					.rbox
 						.rbox-top.is-psy
+							img.img-psy(src='./images/hyg.png')
 							.rbox-psyitem 
 								|乾球
-								span 33.83
+								span 33.8
 							|/
 							.rbox-psyitem 
 								|濕球
@@ -90,7 +91,7 @@ html(lang='en')
 										.rbox-status-num 2
 										.rbox-status-txt 斷訊
 						.rbox-sum
-							|全部
+							|總計運轉
 							span 90
 							|台
 					.right-title 異常冰機列表：
@@ -153,7 +154,7 @@ html(lang='en')
 						.canvas-box
 							canvas#cv-1
 					.lb-item
-						.lb-title 錯誤總數(一週)：
+						.lb-title 異常總數(一週)：
 						.canvas-box
 							canvas#cv-2
 
