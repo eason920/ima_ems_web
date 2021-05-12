@@ -5,25 +5,9 @@ const color_nor= 'rgba(16,44,64,.92)'
 // const color_err = '#5f363e';
 const color_err = 'rgba(147,26,49,.92)';
 
-const bg_nor = [
-	color_nor,
-	color_nor,
-	color_nor,
-	color_nor,
-	color_nor,
-	color_nor,
-	color_nor
-];
+const bg_nor = [color_nor,color_nor,color_nor,color_nor,color_nor,color_nor,color_nor];
 const data_nor = [600, 570, 600, 550, 600, 300, 40]
-const bg_err = [
-	color_err,
-	color_err,
-	color_err,
-	color_err,
-	color_err,
-	color_err,
-	color_err
-];
+const bg_err = [color_err,color_err,color_err,color_err,color_err,color_err,color_err];
 const data_err = [10,30,5,50,2,30,5]
 
 const nua = navigator.userAgent;
@@ -58,10 +42,132 @@ const fnCanvas = function(id, labels, data, backgroundColor ){
 			}
 		}
 	});
+};
+
+// ----------------------------
+// NAV COLOR ITEM v
+// ----------------------------
+const buHtmStatusItem = function(data){
+	let nav = ''; // NAV 演示用色
+	let fix = ''; // 調整用色 SYS LB
+
+	data.forEach(function(item){
+		nav += '<div class="status-item" data-status="' + item.value + '">';
+		nav += '<div class="status-color" style="background-color:' + item.color + '"></div>';
+		nav += '<div class="status-txt">' + item.name + '</div>';
+		nav += '</div>'
+
+		// ----------------------------
+		fix += '<div class="sys-citem" data-value="' + item.value + '">';
+		fix += '<div class="sys-ctxt">' + item.name + '</div>';
+		fix += '<div class="sys-sbtn">修改</div>'
+		fix += '<input class="minicolors-item" type="text" data-control="wheel" value="' + item.color + '">'
+		fix += '</div>';
+	});
+
+	$('.status-chill').html(nav);
+	$('.sys-box.is-color').html(fix);
+}
+
+let colorObj;
+let total='';
+let statusBox={
+	
 }
 
 $(()=>{
-	
+	// ----------------------------
+	// NAV STATUS ITEM v
+	// ----------------------------
+	$.ajax({
+		type: 'GET',
+		url: './data/chill_color.json',
+		dataType: 'json',
+		success: function(res){
+			buHtmStatusItem(res.chiller);
+			colorObj = res;
+
+			// ----------------------------
+			// BUILD v
+			// ----------------------------
+			$.ajax({
+				type: 'GET',
+				url: './data/chill.json',
+				dataType: 'json',
+				success: function(res){
+					// BUILDING HTML v
+					$('#location span').text(res.build);
+					$('.rbox-psyitem.is-dry span').text(res.psy.dry);
+					$('.rbox-psyitem.is-wet span').text(res.psy.wet);
+					//
+					let html = '';
+					html += '<div class="build-row">';
+					html += '<div class="build-floor"></div>';
+					html += '<div class="build-house">';
+					res.house.show.forEach(function(item, i){
+						html += '<div class="build-item" title=門牌"' + res.house.number[i] + '">';
+						html += item;
+						html += '</div>';// .build-item
+					});
+					html += '</div>'// .build-house
+					html += '</div>'// .build-row
+					for( f in res.status ){
+						let wf = f;
+						if( /f/i.test(f) ){ wf= wf.replace('f', '') }
+						html += '<div class="build-row">';
+						html += '<div class="build-floor">' + wf + '</div>';
+						html += '<div class="build-house">';
+						res.status[f].forEach(function(v){
+							let code = '';
+							colorObj.chiller.forEach(function(jtem, j){
+								if( jtem.value == v ){
+									code = jtem.color
+								}
+							});
+							html += '<div class="build-item "';
+							html += 'data-status="' + v + '" ';
+							html += 'style="background-color:' + code + '">';
+							html += '</div>';// .build-item
+							total ++;
+						});
+						html += '</div>'// .build-house
+						html += '</div>'// .build-row
+					}
+					$('#build').html(html);
+					$('.is-chill-total').text(total);
+
+					// NAV HTML v
+
+					// MINICOLORS SETTINGS v
+					$('.minicolors-item').each( function() {
+						$(this).minicolors({
+							control: $(this).attr('data-control') || 'hue',
+							defaultValue: $(this).attr('data-defaultValue') || '',
+							format: $(this).attr('data-format') || 'hex',
+							keywords: $(this).attr('data-keywords') || '',
+							inline: $(this).attr('data-inline') === 'true',
+							letterCase: $(this).attr('data-letterCase') || 'lowercase',
+							opacity: $(this).attr('data-opacity'),
+							position: $(this).attr('data-position') || 'bottom',
+							swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+							change: function(value, opacity) {
+								if( !value ) return;
+								if( opacity ) value += ', ' + opacity;
+								if( typeof console === 'object' ) {
+									console.log(value);
+								}
+							}
+						});
+				
+					});
+				}
+			});
+		}
+	});
+
+	// ----------------------------
+	// CHART v
+	// ----------------------------
 	fnCanvas('cv-1', labels, data_nor, bg_nor);
 	fnCanvas('cv-2', labels, data_err, bg_err);
 
@@ -107,13 +213,36 @@ $(()=>{
 		}
 	});
 
-	$('#lb-cbox').click(function(){
-		console.log(nua);
+	// ----------------------------
+	// LB v
+	// ----------------------------
+	let bottom = 0;
+	if( !/iphone | ipad | android/i.test(nua) ){
+		bottom = $('#lb-content').outerHeight(true) * -1;
+		$('#lb').css({bottom});
+	}
+
+	const part = function(){
 		if( /iphone | ipad | android/i.test(nua) ){
 			$('#lb, #lb-masker').hide();
 		}else{
-			const bottom = $('#lb-content').outerHeight(true) * -1;
-			$('#lb').css({bottom});
+			const status = $('#lb').attr('data-status');
+			if( status == 0 ){
+				$('#lb').attr('data-status', 1).removeAttr('style');
+			}else{
+				$('#lb').attr('data-status', 0);
+				$('#lb').css({bottom});
+			}
+		};
+	}
+	$('#lb-cbox, .rbox-error-btn').click(function(){ part() });
+	$('#build').on('click', '.build-item', function(){ part() });
+
+	$('.build-house').click(function(){
+		if( /iphone | ipad | android/i.test(nua) ){
+			$('#lb, #lb-masker').hide();
+		}else{
+			$('#lb').attr('data-status', 1).removeAttr('style');
 		}
 	});
 

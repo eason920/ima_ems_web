@@ -36,31 +36,23 @@
 		|請選擇色彩
 		.sys-close ╳
 	.sys-box.is-color
-		input.demo(type='text' data-control='wheel' value='#ff99ee')
-		br
-		input.demo(type='text' data-control='wheel' value='#ff99ee')
-		br
-		input.demo(type='text' data-control='wheel' value='#ff99ee')
-		br
-		.sys-left
-			//- .sys-item 
-			//- 	.sys-color(data-status='' style='background-color:')
-			//- 	|status
-			//- 	.sys-sbtn 修改
-			//- .sys-item 
-			//- 	.sys-color(data-status='' style='background-color:')
-			//- 	|status
-			//- 	.sys-sbtn 修改
-			//- .sys-item 
-			//- 	.sys-color(data-status='' style='background-color:')
-			//- 	|status
-			//- 	.sys-sbtn 修改
-			//- .sys-item 
-			//- 	.sys-color(data-status='' style='background-color:')
-			//- 	|status
-			//- 	.sys-sbtn 修改
-			//- .sys-item 
-			//- 	.sys-color(data-status='' style='background-color:')
-			//- 	|status
-			//- 	.sys-sbtn 修改
-		.sys-right
+		.sys-citem 
+			.sys-ctxt (水)開機中(41~59) 
+			.sys-sbtn 修改
+			input.minicolors-item(type='text' data-control='wheel' value='#f00')
+		.sys-citem.is-seling
+			.sys-ctxt status
+			.sys-sbtn 確認
+			input.minicolors-item(type='text' data-control='wheel' value='#f00')
+		.sys-citem 
+			.sys-ctxt status
+			.sys-sbtn 修改
+			input.minicolors-item(type='text' data-control='wheel' value='#f00')
+		.sys-citem 
+			.sys-ctxt status
+			.sys-sbtn 修改
+			input.minicolors-item(type='text' data-control='wheel' value='#f00')
+		.sys-citem 
+			.sys-ctxt status
+			.sys-sbtn 修改
+			input.minicolors-item(type='text' data-control='wheel' value='#f00')

@@ -87,22 +87,99 @@
 
 // ----------------------------
 // ----------------------------
+$w-cl: 18px
+$h-citem: 30px
 .sys-box.is-color
 	text-align: left
-// 	positon: relative
-// .minicolors
-// 	position: static!important
-.minicolors-position-bottom .minicolors-panel
-	top: 0!important
-	left: 94px
+
+.sys-citem
+	height: $h-citem
+	position: relative
+	width: 200px
+	margin: 0 auto
+	&.is-seling
+		.sys-sbtn
+			z-index: 999
+
+.sys-ctxt
+	position: absolute
+	top: 6px
+	left: 79px
+	font-size: 14px
+
+.sys-sbtn
+	position: absolute
+	top: 5px
+	left: 0
+	display: flex
+	align-items: center
+	justify-content: center
+	width: 50px
+	height: 18px
+	font-size: 13px
+	color: #000
+	border: solid 1px #000
+	border-radius: 10px
+	cursor: pointer
+
+// ----------------------------
+// ----------------------------
+.minicolors
 
 .minicolors-input
-	padding: 0!important
-	width: 0!important
-	height: 20px!important
-	// border: none
+	font-size: 0
+	width: 200px!important
+	background-color: transparent
+	border: none!important
+	cursor: pointer!important
+	padding-left: 0!important
 
 .minicolors-swatch
-	width: 10px!important
-	height: 10px!important
-	left: 0!important
+	left: 56px!important
+	border: solid 1px #000!important
+
+.sys-citem[data-value='0']
+	.minicolors-swatch
+		&:after
+			content: '╳'
+			position: absolute
+			color: #000
+			top: -5px
+			left: 0
+			overflow: hidden
+			font:
+				size: 27px
+				weight: lighter
+
+.minicolors-swatch-color
+
+
+.minicolors-panel
+
+
+
+// .minicolors
+// 	position: static!important
+
+// .minicolors-input
+// 	padding: 0!important
+// 	width: 0!important
+// 	height: $h-citem!important //< ***
+// 	background: red
+// 	border: none
+
+// .minicolors-swatch
+// 	position: static!important
+// 	width: 10px!important
+// 	height: 10px!important
+// 	left: 0!important
+
+// .minicolors-swatch-color
+// 	width: 10px
+// 	height: 10px
+// 	position: static!important
+// 	display: block
+
+// .minicolors-panel
+// 	top: 55px!important
+// 	right: 15px

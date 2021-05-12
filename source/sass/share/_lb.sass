@@ -108,9 +108,15 @@
 
 @media screen and (min-width: $bp-wide)
 	#lb
+		transition: bottom .3s
 		bottom: 0
 		width: 100%
 		min-width: 1024px
+		&[data-status='1']
+			#lb-close
+				display: inline-block
+			#lb-open
+				display: none
 
 	#lb-masker
 		display: none
