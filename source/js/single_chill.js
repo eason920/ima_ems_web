@@ -44,10 +44,22 @@ const fnCanvas = function(id, labels, data, backgroundColor ){
 	});
 };
 
+let colorObj = new Object;
+let ChillObj = new Object;
+let sum = {
+	total: 0,
+	s0: 0, // 0 沒有住戶
+	s1: 0, // 1 關機正常
+	s2: 0, // 2 開機正常
+	s3: 0, // 3 開機異常
+	s4: 0, // 4 關機異常
+	s5: 0  // 5 斷訊
+};
+
 // ----------------------------
 // NAV COLOR ITEM v
 // ----------------------------
-const buHtmStatusItem = function(data){
+const fnRenderColor = function(data){
 	let nav = ''; // NAV 演示用色
 	let fix = ''; // 調整用色 SYS LB
 
@@ -66,14 +78,78 @@ const buHtmStatusItem = function(data){
 	});
 
 	$('.status-chill').html(nav);
-	$('.sys-box.is-color').html(fix);
+	$('.sys-cbox').html(fix);
 }
 
-let colorObj;
-let total='';
-let statusBox={
-	
-}
+const setingMinicolor = function(){
+	$('.minicolors-item').each( function() {
+		$(this).minicolors({
+			control: $(this).attr('data-control') || 'hue',
+			defaultValue: $(this).attr('data-defaultValue') || '',
+			format: $(this).attr('data-format') || 'hex',
+			keywords: $(this).attr('data-keywords') || '',
+			inline: $(this).attr('data-inline') === 'true',
+			letterCase: $(this).attr('data-letterCase') || 'lowercase',
+			opacity: $(this).attr('data-opacity'),
+			position: $(this).attr('data-position') || 'bottom',
+			swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+			change: function(value, opacity) {
+				if( !value ) return;
+				if( opacity ) value += ', ' + opacity;
+				// if( typeof console === 'object' ) {
+				// 	console.log(value);
+				// }
+			}
+		});
+	});
+};
+
+const fnRenderBuild = function(data){
+	let html = '';
+	html += '<div class="build-row">';
+	html += '<div class="build-floor"></div>';
+	html += '<div class="build-house">';
+	data.house.show.forEach(function(item, i){
+		html += '<div class="build-item" title=門牌"' + data.house.number[i] + '">';
+		html += item;
+		html += '</div>';// .build-item
+	});
+	html += '</div>'// .build-house
+	html += '</div>'// .build-row
+	for( f in data.status ){
+		let wf = f;
+		if( /f/i.test(f) ){ wf= wf.replace('f', '') }
+		html += '<div class="build-row">';
+		html += '<div class="build-floor">' + wf + '</div>';
+		html += '<div class="build-house">';
+		data.status[f].forEach(function(v){
+			let code = '';
+			colorObj.forEach(function(jtem, j){
+				if( jtem.value == v ){
+					code = jtem.color
+				}
+			});
+			html += '<div class="build-item "';
+			html += 'data-status="' + v + '" ';
+			html += 'style="background-color:' + code + '">';
+			html += '</div>';// .build-item
+			//
+			switch(v){
+				case 0: sum.s0 ++; break;
+				case 1: sum.s1 ++; break;
+				case 2: sum.s2 ++; break;
+				case 3: sum.s3 ++; break;
+				case 4: sum.s4 ++; break;
+				case 5: sum.s5 ++; break;
+				default:
+			}
+			sum.total ++;
+		});
+		html += '</div>'// .build-house
+		html += '</div>'// .build-row
+	}
+	$('#build').html(html);
+};
 
 $(()=>{
 	// ----------------------------
@@ -84,8 +160,8 @@ $(()=>{
 		url: './data/chill_color.json',
 		dataType: 'json',
 		success: function(res){
-			buHtmStatusItem(res.chiller);
-			colorObj = res;
+			colorObj = res.chiller;
+			fnRenderColor(colorObj);
 
 			// ----------------------------
 			// BUILD v
@@ -95,74 +171,34 @@ $(()=>{
 				url: './data/chill.json',
 				dataType: 'json',
 				success: function(res){
-					// BUILDING HTML v
-					$('#location span').text(res.build);
-					$('.rbox-psyitem.is-dry span').text(res.psy.dry);
-					$('.rbox-psyitem.is-wet span').text(res.psy.wet);
-					//
-					let html = '';
-					html += '<div class="build-row">';
-					html += '<div class="build-floor"></div>';
-					html += '<div class="build-house">';
-					res.house.show.forEach(function(item, i){
-						html += '<div class="build-item" title=門牌"' + res.house.number[i] + '">';
-						html += item;
-						html += '</div>';// .build-item
-					});
-					html += '</div>'// .build-house
-					html += '</div>'// .build-row
-					for( f in res.status ){
-						let wf = f;
-						if( /f/i.test(f) ){ wf= wf.replace('f', '') }
-						html += '<div class="build-row">';
-						html += '<div class="build-floor">' + wf + '</div>';
-						html += '<div class="build-house">';
-						res.status[f].forEach(function(v){
-							let code = '';
-							colorObj.chiller.forEach(function(jtem, j){
-								if( jtem.value == v ){
-									code = jtem.color
-								}
-							});
-							html += '<div class="build-item "';
-							html += 'data-status="' + v + '" ';
-							html += 'style="background-color:' + code + '">';
-							html += '</div>';// .build-item
-							total ++;
-						});
-						html += '</div>'// .build-house
-						html += '</div>'// .build-row
-					}
-					$('#build').html(html);
-					$('.is-chill-total').text(total);
-
-					// NAV HTML v
+					chillObj = res;
+					$('#location span').text(chillObj.build);
+					$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
+					$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
+					fnRenderBuild(chillObj);
+					$('.is-chill-total').text(sum.total);
+					$('.is-chill-err-total').text(sum.s3 + sum.s4);
 
 					// MINICOLORS SETTINGS v
-					$('.minicolors-item').each( function() {
-						$(this).minicolors({
-							control: $(this).attr('data-control') || 'hue',
-							defaultValue: $(this).attr('data-defaultValue') || '',
-							format: $(this).attr('data-format') || 'hex',
-							keywords: $(this).attr('data-keywords') || '',
-							inline: $(this).attr('data-inline') === 'true',
-							letterCase: $(this).attr('data-letterCase') || 'lowercase',
-							opacity: $(this).attr('data-opacity'),
-							position: $(this).attr('data-position') || 'bottom',
-							swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
-							change: function(value, opacity) {
-								if( !value ) return;
-								if( opacity ) value += ', ' + opacity;
-								if( typeof console === 'object' ) {
-									console.log(value);
-								}
-							}
-						});
-				
-					});
+					setingMinicolor();
 				}
 			});
 		}
+	});
+
+	$('#updateColor').click(function(){
+		colorObj = [];
+		$('.sys-citem').each(function(){
+			const value = $(this).attr('data-value');
+			const name = $(this).find('.sys-ctxt').text();
+			const color = $(this).find('.minicolors-item').val();
+			console.log(value, name, color);
+			colorObj.push({name, value, color});
+		});
+		console.log(colorObj);
+		fnRenderColor(colorObj);
+		setingMinicolor();
+		fnRenderBuild(chillObj);
 	});
 
 	// ----------------------------

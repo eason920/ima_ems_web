@@ -15,12 +15,12 @@ $(()=>{
     $('.sys-login').show();
   });
 
-  $('.sys-close').click(function(){
+  $('.sys-close, .sys-btn').click(function(){
     $('#sys-masker, .sys-color, .sys-area, .sys-login').hide();
   })
 
   // ----------------------------
-  $('.sys-box.is-color').on('click', '.minicolors-item', function(){
+  $('.sys-box.is-color').on('click', '.minicolors-item, .minicolors-swatch', function(){
     $(this).parent().siblings('.sys-sbtn').text('確定').css({'z-index': 999});
   });
 

@@ -27,8 +27,9 @@
 			.sys-txt 數據逹
 			input.sys-ipt(type='text' style='width: 30px')
 			.sys-txt 時為開機高
-		br
-		.sys-btn 修改
+		.sys-bbox
+			.sys-btn 取消
+			.sys-btn 修改
 
 //-----------------------------
 .sys.sys-color
@@ -36,23 +37,11 @@
 		|請選擇色彩
 		.sys-close ╳
 	.sys-box.is-color
-		.sys-citem 
-			.sys-ctxt (水)開機中(41~59) 
-			.sys-sbtn 修改
-			input.minicolors-item(type='text' data-control='wheel' value='#f00')
-		.sys-citem.is-seling
-			.sys-ctxt status
-			.sys-sbtn 確認
-			input.minicolors-item(type='text' data-control='wheel' value='#f00')
-		.sys-citem 
-			.sys-ctxt status
-			.sys-sbtn 修改
-			input.minicolors-item(type='text' data-control='wheel' value='#f00')
-		.sys-citem 
-			.sys-ctxt status
-			.sys-sbtn 修改
-			input.minicolors-item(type='text' data-control='wheel' value='#f00')
-		.sys-citem 
-			.sys-ctxt status
-			.sys-sbtn 修改
-			input.minicolors-item(type='text' data-control='wheel' value='#f00')
+		.sys-cbox
+			.sys-citem 
+				.sys-ctxt (水)開機中(41~59) 
+				.sys-sbtn 修改
+				input.minicolors-item(type='text' data-control='wheel' value='#f00')
+		.sys-bbox
+			.sys-btn 取消
+			.sys-btn#updateColor 修改
