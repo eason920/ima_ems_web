@@ -96,47 +96,34 @@ html(lang='en')
 					.right-title 異常冰機列表：
 					.rbox
 						.rbox-top
-							.rbox-status 
-								.rbox-status-item
-									.rbox-status-color(data-status='4' style='background-color: #C1272D')
-									|關機異常
-							.rbox-error
-								.rbox-error-item 
-									.rbox-error-txt F-8
-									.rbox-error-btn 詳細
-							.rbox-status 
-								.rbox-status-item
-									.rbox-status-color(data-status='3' style='background-color: #FC81B4')
-									|開機異常
-							.rbox-error
-								.rbox-error-item 
-									.rbox-error-txt F-8
-									.rbox-error-btn 詳細
-								.rbox-error-item 
-									.rbox-error-txt F-8
-									.rbox-error-btn 詳細
-								.rbox-error-item 
-									.rbox-error-txt F-8
-									.rbox-error-btn 詳細
-								.rbox-error-item 
-									.rbox-error-txt F-8
-									.rbox-error-btn 詳細
-								.rbox-error-item 
-									.rbox-error-txt F-8
-									.rbox-error-btn 詳細
-								.rbox-error-item 
-									.rbox-error-txt F-8
-									.rbox-error-btn 詳細
-								.rbox-error-item 
-									.rbox-error-txt F-8
-									.rbox-error-btn 詳細
+							.errbox(data-status='4') 
+								.rbox-status 
+									.rbox-status-item
+										.rbox-status-color(style='background-color: #C1272D')
+										span 關機異常
+								.rbox-error
+									//- .rbox-error-item 
+									//- 	.rbox-error-txt F-8
+									//- 	.rbox-error-btn 詳細
+							.errbox(data-status='3') 
+								.rbox-status
+									.rbox-status-item
+										.rbox-status-color(style='background-color: #FC81B4')
+										span 開機異常
+								.rbox-error
+									//- .rbox-error-item 
+									//- 	.rbox-error-txt F-8
+									//- 	.rbox-error-btn 詳細
+									//- .rbox-error-item 
+									//- 	.rbox-error-txt F-8
+									//- 	.rbox-error-btn 詳細
 						.rbox-sum
 							|總計異常
 							span.is-chill-err-total 7 
 							|台
 		//-----------------------------
 		#lb-masker 
-		#lb(data-status='0')
+		#lb(data-open='false')
 			#lb-cbox
 				span ╳
 				img#lb-close(src='./images/lb_close.png') 
@@ -146,7 +133,7 @@ html(lang='en')
 					#lb-title 冰機運作時數統計
 					#lb-subtitle
 						|住戶：
-						span A-10
+						span
 				#lb-right
 					.lb-item
 						.lb-title 運轉總數(一週)：

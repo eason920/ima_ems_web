@@ -1,18 +1,14 @@
 const labels= ['5/1','5/2','5/3','5/4','5/5','5/6','5/7'];
 
-// const color_nor = '#102c40';
 const color_nor= 'rgba(16,44,64,.92)'
-// const color_err = '#5f363e';
 const color_err = 'rgba(147,26,49,.92)';
-
 const bg_nor = [color_nor,color_nor,color_nor,color_nor,color_nor,color_nor,color_nor];
-const data_nor = [600, 570, 600, 550, 600, 300, 40]
 const bg_err = [color_err,color_err,color_err,color_err,color_err,color_err,color_err];
-const data_err = [10,30,5,50,2,30,5]
 
 const nua = navigator.userAgent;
+const isMobile = /iphone | ipad | android/i.test(nua);
 
-const fnCanvas = function(id, labels, data, backgroundColor ){
+const fnChart = function(id, data, labels, backgroundColor){
 	const ctx = document.getElementById(id).getContext('2d');
 	new Chart(ctx, {
 		type: 'bar',
@@ -44,6 +40,21 @@ const fnCanvas = function(id, labels, data, backgroundColor ){
 	});
 };
 
+const fnCanvas = function(number, floor, show){
+	// floor = floor.replace('f', '');
+	const url = './data/chill_house/' + number + '_' + floor + '.json';
+	$.ajax({
+		url,
+		type: 'GET',
+		dataType: 'json',
+		success: function(res){
+			$('#lb-subtitle span').text( floor.replace('f', '') + '-' + show );
+			fnChart('cv-1', res.normal, res.label, bg_nor);
+			fnChart('cv-2', res.error, res.label, bg_err);
+		}
+	})
+};
+
 let colorObj = new Object;
 let ChillObj = new Object;
 let sum = {
@@ -53,7 +64,8 @@ let sum = {
 	s2: 0, // 2 開機正常
 	s3: 0, // 3 開機異常
 	s4: 0, // 4 關機異常
-	s5: 0  // 5 斷訊
+	s5: 0,  // 5 斷訊
+	firstTime: true
 };
 
 // ----------------------------
@@ -62,6 +74,7 @@ let sum = {
 const fnRenderColor = function(data){
 	let nav = ''; // NAV 演示用色
 	let fix = ''; // 調整用色 SYS LB
+	let total = ''; // 冰機狀態統計(右上)
 
 	data.forEach(function(item){
 		nav += '<div class="status-item" data-status="' + item.value + '">';
@@ -70,16 +83,32 @@ const fnRenderColor = function(data){
 		nav += '</div>'
 
 		// ----------------------------
+		const sumTarget = 's' + item.value;
 		fix += '<div class="sys-citem" data-value="' + item.value + '">';
 		fix += '<div class="sys-ctxt">' + item.name + '</div>';
 		fix += '<div class="sys-sbtn">修改</div>'
 		fix += '<input class="minicolors-item" type="text" data-control="wheel" value="' + item.color + '">'
 		fix += '</div>';
+
+		// ----------------------------
+		total += '<div class="rbox-status-item">'
+		total += '<div class="rbox-status-color" data-status="' + item.value + '" style="background-color:' + item.color + '"></div>'
+		total += '<div class="rbox-status-info">'
+		total += '<div class="rbox-status-num">'+ sum[sumTarget] +'</div>'
+		total += '<div class="rbox-status-txt">' + item.name + '</div>'
+		total += '</div>'
+		total += '</div>'
 	});
 
-	$('.status-chill').html(nav);
-	$('.sys-cbox').html(fix);
-}
+	$('.status-chill').html(nav); // NAV
+	$('.sys-cbox').html(fix);// 改色 LB
+	$('.rbox-status.is-total').html(total); // 右中
+	// 異常冰機列表 v
+	for(i=3;i<=4;i++){
+		$('.errbox[data-status="'+i+'"]').find('.rbox-status-color').css('background-color', data[i].color);
+		$('.errbox[data-status="'+i+'"] span').text(data[i].name);
+	};
+};
 
 const setingMinicolor = function(){
 	$('.minicolors-item').each( function() {
@@ -106,11 +135,13 @@ const setingMinicolor = function(){
 
 const fnRenderBuild = function(data){
 	let html = '';
+	let status4 = '';
+	let status3 = '';
 	html += '<div class="build-row">';
 	html += '<div class="build-floor"></div>';
 	html += '<div class="build-house">';
 	data.house.show.forEach(function(item, i){
-		html += '<div class="build-item" title=門牌"' + data.house.number[i] + '">';
+		html += '<div class="build-item" title="門牌' + data.house.number[i] + '號">';
 		html += item;
 		html += '</div>';// .build-item
 	});
@@ -122,33 +153,64 @@ const fnRenderBuild = function(data){
 		html += '<div class="build-row">';
 		html += '<div class="build-floor">' + wf + '</div>';
 		html += '<div class="build-house">';
-		data.status[f].forEach(function(v){
+		data.status[f].forEach(function(v, i){
+			const info = wf + '-' + data.house.show[i];
 			let code = '';
 			colorObj.forEach(function(jtem, j){
 				if( jtem.value == v ){
 					code = jtem.color
 				}
 			});
-			html += '<div class="build-item "';
+			html += '<div class="build-item" '
+			html += 'data-floor="' + f + '" '
+			html += 'data-number="' + data.house.number[i] + '" ';
+			html += 'data-show="' + data.house.show[i] + '" ';
+			html += 'title="' + info + '" ';
 			html += 'data-status="' + v + '" ';
 			html += 'style="background-color:' + code + '">';
 			html += '</div>';// .build-item
-			//
-			switch(v){
-				case 0: sum.s0 ++; break;
-				case 1: sum.s1 ++; break;
-				case 2: sum.s2 ++; break;
-				case 3: sum.s3 ++; break;
-				case 4: sum.s4 ++; break;
-				case 5: sum.s5 ++; break;
-				default:
-			}
-			sum.total ++;
+
+			if( sum.firstTime ){
+				// 異常冰機列表 v
+				const statusHtml = function(num){
+					let codeHtml = '';
+					if( v == num ){
+						codeHtml += '';
+						codeHtml += '<div class="rbox-error-item">'
+						codeHtml += '<div class="rbox-error-txt">' + info + '</div>'
+						codeHtml += '<div class="rbox-error-btn" ';
+						codeHtml += 'data-floor="' + f + '" '
+						codeHtml += 'data-number="' + data.house.number[i] + '" ';
+						codeHtml += 'data-show="' + data.house.show[i] + '" ';
+						codeHtml += '>詳細</div>'
+						codeHtml += '</div>'
+					};
+					return codeHtml;
+				};
+				status4 += statusHtml(4);
+				status3 += statusHtml(3);
+				
+				// sum v
+				switch(v){
+					case 0: sum.s0 ++; break;
+					case 1: sum.s1 ++; break;
+					case 2: sum.s2 ++; break;
+					case 3: sum.s3 ++; break;
+					case 4: sum.s4 ++; break;
+					case 5: sum.s5 ++; break;
+					default:
+				};
+				sum.total ++;
+			};
 		});
 		html += '</div>'// .build-house
 		html += '</div>'// .build-row
 	}
 	$('#build').html(html);
+	if( sum.firstTime ){
+		$('.errbox[data-status=4] .rbox-error').html(status4);
+		$('.errbox[data-status=3] .rbox-error').html(status3);
+	};
 };
 
 $(()=>{
@@ -161,7 +223,6 @@ $(()=>{
 		dataType: 'json',
 		success: function(res){
 			colorObj = res.chiller;
-			fnRenderColor(colorObj);
 
 			// ----------------------------
 			// BUILD v
@@ -175,7 +236,10 @@ $(()=>{
 					$('#location span').text(chillObj.build);
 					$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
 					$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
-					fnRenderBuild(chillObj);
+					fnRenderBuild(chillObj); // < 需要計數的都往此 fn 下方寫
+					sum.firstTime = false;
+					//-
+					fnRenderColor(colorObj);
 					$('.is-chill-total').text(sum.total);
 					$('.is-chill-err-total').text(sum.s3 + sum.s4);
 
@@ -204,8 +268,7 @@ $(()=>{
 	// ----------------------------
 	// CHART v
 	// ----------------------------
-	fnCanvas('cv-1', labels, data_nor, bg_nor);
-	fnCanvas('cv-2', labels, data_err, bg_err);
+	
 
 	Chart.plugins.register({
 		afterDatasetsDraw: function(chartInstance, easing) {
@@ -252,40 +315,65 @@ $(()=>{
 	// ----------------------------
 	// LB v
 	// ----------------------------
-	let bottom = 0;
-	if( !/iphone | ipad | android/i.test(nua) ){
-		bottom = $('#lb-content').outerHeight(true) * -1;
-		$('#lb').css({bottom});
-	}
-
-	const part = function(){
-		if( /iphone | ipad | android/i.test(nua) ){
-			$('#lb, #lb-masker').hide();
-		}else{
-			const status = $('#lb').attr('data-status');
-			if( status == 0 ){
-				$('#lb').attr('data-status', 1).removeAttr('style');
+	$('#lb-cbox').click(function(){
+		if( $('#lb-subtitle span').text() !== '' ){
+			console.log('go');
+			const open = $('#lb').attr('data-open');
+			if( open == 'false'){
+				$('#lb').attr('data-open', 'true');
+				if( isMobile ){
+					$('#lb, #lb-masker').show();
+				}else{
+					$('#lb').attr('data-open', 'true').css('transform', 'none');
+				};
 			}else{
-				$('#lb').attr('data-status', 0);
-				$('#lb').css({bottom});
-			}
+				$('#lb').attr('data-open', 'true');
+				if( isMobile ){
+					$('#lb, #lb-masker').hide();
+				}else{
+					$('#lb').attr('data-open', 'flase').removeAttr('style');
+				};
+			};
+		}else{
+			console.log('is empty');
 		};
-	}
-	$('#lb-cbox, .rbox-error-btn').click(function(){ part() });
-	$('#build').on('click', '.build-item', function(){ part() });
+	});
+
+	$('body').on('click', '.build-item, .rbox-error-btn', function(){
+		const status = $(this).attr('data-status');
+		if( status != 0 ){
+			const number = $(this).attr('data-number');
+			const floor = $(this).attr('data-floor');
+			const show = $(this).attr('data-show');
+			console.log(number, floor, status);
+			if( isMobile ){
+				$('#lb, #lb-masker').show();
+			}else{
+				$('#lb').attr('data-open', 'true').css('transform', 'none');
+			};
+			fnCanvas(number, floor, show);
+		}else{
+			console.log('空戶不作用');
+			if( isMobile ){
+				$('#lb, #lb-masker').hide();
+			}else{
+				$('#lb').attr('data-open', 'flase').removeAttr('style');
+			};
+		}
+	});
 
 	$('.build-house').click(function(){
-		if( /iphone | ipad | android/i.test(nua) ){
+		if( isMobile ){
 			$('#lb, #lb-masker').hide();
 		}else{
 			$('#lb').attr('data-status', 1).removeAttr('style');
 		}
 	});
 
-	// ----------------------------
+	// ---------------------------- 
 	// HAMBER v
 	// ----------------------------
-	if( /iphone | ipad | android/i.test(nua) ){
+	if( isMobile ){
 		$('#hamber').click(function(){
 			$(this).toggleClass('is-open');
 			$('#mbbox, #nav-masker').toggle();

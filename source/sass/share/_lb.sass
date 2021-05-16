@@ -42,6 +42,7 @@
 
 @media screen and (max-width: $bp-narrow)
 	#lb
+		display: none
 		margin: auto
 		top: 10px
 		left: 10px
@@ -49,9 +50,9 @@
 		background-color: #fff
 		border-radius: 24px
 		padding: 16px
-		z-index: 6
 	
 	#lb-masker
+		display: none
 		position: fixed
 		top: 0
 		right: 0
@@ -108,11 +109,12 @@
 
 @media screen and (min-width: $bp-wide)
 	#lb
-		transition: bottom .3s
+		transform: translateY(calc(100% - 27px))
+		transition: transform .3s
 		bottom: 0
 		width: 100%
 		min-width: 1024px
-		&[data-status='1']
+		&[data-open='true']
 			#lb-close
 				display: inline-block
 			#lb-open
