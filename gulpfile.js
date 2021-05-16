@@ -174,7 +174,7 @@ const mission = function(){
 	gulp.watch('./source/images/**/*', ['img']);
 	gulp.watch('./source/data/*.json', ['data']);
 }
-gulp.task('default', ['pug', 'email', 'tmp_module', 'css', 'js', 'tmp_js', 'img', 'data'], function(){
+gulp.task('default', ['pug', 'data', 'email', 'tmp_module', 'css', 'js', 'tmp_js', 'img', 'data'], function(){
 	gulp.watch('./source/*.pug', ['pug']);
 	mission();
 });

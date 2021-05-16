@@ -22,10 +22,12 @@ $(()=>{
   // ----------------------------
   $('.sys-box.is-color').on('click', '.minicolors-item, .minicolors-swatch', function(){
     $(this).parent().siblings('.sys-sbtn').text('確定').css({'z-index': 999});
+    $('.sys-bbox').addClass('is-muted');
   });
 
   $('.sys-box.is-color').on('click', '.sys-sbtn', function(){
     $(this).text('修改').removeAttr('style');
+    $('.sys-bbox').removeClass('is-muted');
   });
 
 	// ----------------------------

@@ -57,6 +57,7 @@
 .rbox
 	background-color: #fff
 	overflow: hidden
+	box-shadow: 0 0 12px rgba(0,0,0,.1)
 
 .rbox-top
 	&.is-psy
@@ -138,9 +139,9 @@
 
 // ----------------------------
 .rbox-sum
-	background-color: #f2f2f2
+	background-color: #777
 	font-size: 16px
-	color: #000
+	color: #fff
 	display: flex
 	align-items: center
 	justify-content: flex-end
@@ -148,7 +149,6 @@
 
 @media screen and (max-width: $bp-narrow)
 	#wrapper-single
-		padding-bottom: 40px
 
 	// ----------------------------
 	#left
@@ -187,6 +187,7 @@
 				// left: -2px
 	// ----------------------------
 	#right
+		padding-bottom: 25px
 	
 	.right-title
 		font-size: 18px
@@ -300,6 +301,7 @@
 	// ----------------------------
 	#right
 		width: calc( 100% - #{$w-left-pc} - #{$m} )
+		padding-bottom: 20px
 
 	.right-title
 		font-size: 21px

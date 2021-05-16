@@ -1,4 +1,15 @@
-const labels= ['5/1','5/2','5/3','5/4','5/5','5/6','5/7'];
+let colorObj = new Object;
+let ChillObj = new Object;
+let sum = {
+	total: 0,
+	s0: 0, // 0 沒有住戶
+	s1: 0, // 1 關機正常
+	s2: 0, // 2 開機正常
+	s3: 0, // 3 開機異常
+	s4: 0, // 4 關機異常
+	s5: 0,  // 5 斷訊
+	firstTime: true
+};
 
 const color_nor= 'rgba(16,44,64,.92)'
 const color_err = 'rgba(147,26,49,.92)';
@@ -8,6 +19,9 @@ const bg_err = [color_err,color_err,color_err,color_err,color_err,color_err,colo
 const nua = navigator.userAgent;
 const isMobile = /iphone | ipad | android/i.test(nua);
 
+const build_id = location.href.split('?build_id=')[1];
+
+// ----------------------------
 const fnChart = function(id, data, labels, backgroundColor){
 	const ctx = document.getElementById(id).getContext('2d');
 	new Chart(ctx, {
@@ -42,7 +56,7 @@ const fnChart = function(id, data, labels, backgroundColor){
 
 const fnCanvas = function(number, floor, show){
 	// floor = floor.replace('f', '');
-	const url = './data/chill_house/' + number + '_' + floor + '.json';
+	const url = './data/'+build_id+'/chill/house/' + number + '_' + floor + '.json';
 	$.ajax({
 		url,
 		type: 'GET',
@@ -53,19 +67,6 @@ const fnCanvas = function(number, floor, show){
 			fnChart('cv-2', res.error, res.label, bg_err);
 		}
 	})
-};
-
-let colorObj = new Object;
-let ChillObj = new Object;
-let sum = {
-	total: 0,
-	s0: 0, // 0 沒有住戶
-	s1: 0, // 1 關機正常
-	s2: 0, // 2 開機正常
-	s3: 0, // 3 開機異常
-	s4: 0, // 4 關機異常
-	s5: 0,  // 5 斷訊
-	firstTime: true
 };
 
 // ----------------------------
@@ -219,7 +220,7 @@ $(()=>{
 	// ----------------------------
 	$.ajax({
 		type: 'GET',
-		url: './data/chill_color.json',
+		url: './data/'+build_id+'/chill/color.json',
 		dataType: 'json',
 		success: function(res){
 			colorObj = res.chiller;
@@ -229,7 +230,7 @@ $(()=>{
 			// ----------------------------
 			$.ajax({
 				type: 'GET',
-				url: './data/chill.json',
+				url: './data/'+build_id+'/chill/main.json',
 				dataType: 'json',
 				success: function(res){
 					chillObj = res;
@@ -268,8 +269,6 @@ $(()=>{
 	// ----------------------------
 	// CHART v
 	// ----------------------------
-	
-
 	Chart.plugins.register({
 		afterDatasetsDraw: function(chartInstance, easing) {
 			// To only draw at the end of animation, check for easing === 1
@@ -282,7 +281,7 @@ $(()=>{
 						// console.log(element._chart);
 						// Draw the text in black, with the specified font
 						// nor > err
-						const area = meta.data[index]._chart.config.data.datasets[0].backgroundColor[0] == color_nor ? 40 : 4
+						const area = meta.data[index]._chart.config.data.datasets[0].backgroundColor[0] == color_nor ? 40 : 20
 						// less > more
 						let padding = 5;
 						let color = '#000';
@@ -315,49 +314,82 @@ $(()=>{
 	// ----------------------------
 	// LB v
 	// ----------------------------
+	const switchControl = {
+		"mb": {
+			c2o(){ 
+				$('#lb, #lb-masker').show() },
+			o2c(){ 
+				$('#lb, #lb-masker').hide() }
+		},
+		"pc": {
+			c2o(){
+				setTimeout(()=>{
+					switchControl.height = $('#lb-content').innerHeight() + 2;
+					$('#content').css({maxHeight: 'calc(100vh - ' + switchControl.height +'px)', minHeight: 'auto'})
+				}, 100);
+			},
+			o2c(){
+				$('#content').removeAttr('style');
+			}
+		},
+		heitht: 0,
+		c2o(){ $('#lb').attr('data-open', 'true').css('transform', 'none') },
+		o2c(){ $('#lb').attr('data-open', 'false').removeAttr('style') }
+	};
+
 	$('#lb-cbox').click(function(){
 		if( $('#lb-subtitle span').text() !== '' ){
-			console.log('go');
+			// 不是第一次進場 / canvas 己繪製
 			const open = $('#lb').attr('data-open');
 			if( open == 'false'){
-				$('#lb').attr('data-open', 'true');
+				// c2o
 				if( isMobile ){
-					$('#lb, #lb-masker').show();
+					switchControl.c2o();
+					switchControl.mb.c2o();
 				}else{
-					$('#lb').attr('data-open', 'true').css('transform', 'none');
+					switchControl.c2o();
+					switchControl.pc.c2o();
 				};
 			}else{
-				$('#lb').attr('data-open', 'true');
+				// o2c
 				if( isMobile ){
-					$('#lb, #lb-masker').hide();
+					switchControl.o2c();
+					switchControl.mb.o2c();
 				}else{
-					$('#lb').attr('data-open', 'flase').removeAttr('style');
+					switchControl.o2c();
+					switchControl.pc.o2c();
 				};
 			};
 		}else{
-			console.log('is empty');
+			alert('請點擊指定住戶以察看詳細');
 		};
 	});
 
 	$('body').on('click', '.build-item, .rbox-error-btn', function(){
 		const status = $(this).attr('data-status');
 		if( status != 0 ){
+			// 非空戶 v
+			if( isMobile ){
+				switchControl.c2o();
+				switchControl.mb.c2o();
+			}else{
+				switchControl.c2o();
+				switchControl.pc.c2o();
+			};
+			//-
 			const number = $(this).attr('data-number');
 			const floor = $(this).attr('data-floor');
 			const show = $(this).attr('data-show');
 			console.log(number, floor, status);
-			if( isMobile ){
-				$('#lb, #lb-masker').show();
-			}else{
-				$('#lb').attr('data-open', 'true').css('transform', 'none');
-			};
 			fnCanvas(number, floor, show);
 		}else{
-			console.log('空戶不作用');
+			// 空戶，不作用 v
 			if( isMobile ){
-				$('#lb, #lb-masker').hide();
+				switchControl.o2c();
+				switchControl.mb.o2c();
 			}else{
-				$('#lb').attr('data-open', 'flase').removeAttr('style');
+				switchControl.o2c();
+				switchControl.pc.o2c();
 			};
 		}
 	});
