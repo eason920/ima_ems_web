@@ -64,7 +64,7 @@ const fnCanvas = function(number, floor, show){
 		success: function(res){
 			$('#lb-subtitle span').text( floor.replace('f', '') + '-' + show );
 			fnChart('cv-1', res.normal, res.label, bg_nor);
-			fnChart('cv-2', res.error, res.label, bg_err);
+			fnChart('cv-2', res.alarm, res.label, bg_err);
 		}
 	})
 };
@@ -78,14 +78,14 @@ const fnRenderColor = function(data){
 	let total = ''; // 冰機狀態統計(右上)
 
 	data.forEach(function(item){
-		nav += '<div class="status-item" data-status="' + item.value + '">';
+		nav += '<div class="status-item" data-status="' + item.status + '">';
 		nav += '<div class="status-color" style="background-color:' + item.color + '"></div>';
 		nav += '<div class="status-txt">' + item.name + '</div>';
 		nav += '</div>'
 
 		// ----------------------------
-		const sumTarget = 's' + item.value;
-		fix += '<div class="sys-citem" data-value="' + item.value + '">';
+		const sumTarget = 's' + item.status;
+		fix += '<div class="sys-citem" data-status="' + item.status + '">';
 		fix += '<div class="sys-ctxt">' + item.name + '</div>';
 		fix += '<div class="sys-sbtn">修改</div>'
 		fix += '<input class="minicolors-item" type="text" data-control="wheel" value="' + item.color + '">'
@@ -93,7 +93,7 @@ const fnRenderColor = function(data){
 
 		// ----------------------------
 		total += '<div class="rbox-status-item">'
-		total += '<div class="rbox-status-color" data-status="' + item.value + '" style="background-color:' + item.color + '"></div>'
+		total += '<div class="rbox-status-color" data-status="' + item.status + '" style="background-color:' + item.color + '"></div>'
 		total += '<div class="rbox-status-info">'
 		total += '<div class="rbox-status-num">'+ sum[sumTarget] +'</div>'
 		total += '<div class="rbox-status-txt">' + item.name + '</div>'
@@ -141,8 +141,8 @@ const fnRenderBuild = function(data){
 	html += '<div class="build-row">';
 	html += '<div class="build-floor"></div>';
 	html += '<div class="build-house">';
-	data.house.show.forEach(function(item, i){
-		html += '<div class="build-item" title="門牌' + data.house.number[i] + '號">';
+	data.house.show_name.forEach(function(item, i){
+		html += '<div class="build-item" title="門牌' + data.house.value[i] + '號">';
 		html += item;
 		html += '</div>';// .build-item
 	});
@@ -155,17 +155,17 @@ const fnRenderBuild = function(data){
 		html += '<div class="build-floor">' + wf + '</div>';
 		html += '<div class="build-house">';
 		data.status[f].forEach(function(v, i){
-			const info = wf + '-' + data.house.show[i];
+			const info = wf + '-' + data.house.show_name[i];
 			let code = '';
 			colorObj.forEach(function(jtem, j){
-				if( jtem.value == v ){
+				if( jtem.status == v ){
 					code = jtem.color
 				}
 			});
 			html += '<div class="build-item" '
 			html += 'data-floor="' + f + '" '
-			html += 'data-number="' + data.house.number[i] + '" ';
-			html += 'data-show="' + data.house.show[i] + '" ';
+			html += 'data-number="' + data.house.value[i] + '" ';
+			html += 'data-show="' + data.house.show_name[i] + '" ';
 			html += 'title="' + info + '" ';
 			html += 'data-status="' + v + '" ';
 			html += 'style="background-color:' + code + '">';
@@ -181,8 +181,8 @@ const fnRenderBuild = function(data){
 						codeHtml += '<div class="rbox-error-txt">' + info + '</div>'
 						codeHtml += '<div class="rbox-error-btn" ';
 						codeHtml += 'data-floor="' + f + '" '
-						codeHtml += 'data-number="' + data.house.number[i] + '" ';
-						codeHtml += 'data-show="' + data.house.show[i] + '" ';
+						codeHtml += 'data-number="' + data.house.value[i] + '" ';
+						codeHtml += 'data-show="' + data.house.show_name[i] + '" ';
 						codeHtml += '>詳細</div>'
 						codeHtml += '</div>'
 					};
@@ -254,11 +254,11 @@ $(()=>{
 	$('#updateColor').click(function(){
 		colorObj = [];
 		$('.sys-citem').each(function(){
-			const value = $(this).attr('data-value');
+			const status = $(this).attr('data-status');
 			const name = $(this).find('.sys-ctxt').text();
 			const color = $(this).find('.minicolors-item').val();
-			console.log(value, name, color);
-			colorObj.push({name, value, color});
+			console.log(status, name, color);
+			colorObj.push({name, status, color});
 		});
 		console.log(colorObj);
 		fnRenderColor(colorObj);
@@ -317,7 +317,7 @@ $(()=>{
 	const switchControl = {
 		"mb": {
 			c2o(){ 
-				$('#lb, #lb-masker').show() },
+				$('#lb, #lb-masker').show_name() },
 			o2c(){ 
 				$('#lb, #lb-masker').hide() }
 		},

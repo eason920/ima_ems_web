@@ -2,32 +2,32 @@
 	"chiller": [
 		{
 			"name": "沒有住戶",
-			"value": 0,
+			"status": 0,
 			"color": "#0a3638"
 		},
 		{
 			"name": "關機正常",
-			"value": 1,
+			"status": 1,
 			"color": "#0a3638"
 		},
 		{
 			"name": "開機正常",
-			"value": 2,
+			"status": 2,
 			"color": "#076899"
 		},
 		{
 			"name": "開機異常",
-			"value": 3,
+			"status": 3,
 			"color": "#b065fc"
     },
 		{
 			"name": "關機異常",
-			"value": 4,
+			"status": 4,
 			"color": "#5507c2"
     },
 		{
 			"name": "斷訊",
-			"value": 5,
+			"status": 5,
 			"color": "#dff758"
 		}
 	]
