@@ -8,7 +8,7 @@ let sum = {
 	s3: 0, // 3 開機異常
 	s4: 0, // 4 關機異常
 	s5: 0,  // 5 斷訊
-	firstTime: true
+	// firstTime: true
 };
 
 const color_nor= 'rgba(16,44,64,.92)'
@@ -21,6 +21,10 @@ const isMobile = /iphone | ipad | android/i.test(nua);
 
 const build_id = location.href.split('?build_id=')[1];
 
+const API = {
+	main: './data/'+build_id+'/chill/main.json',
+	color: './data/'+build_id+'/chill/color.json'
+}
 // ----------------------------
 const fnChart = function(id, data, labels, backgroundColor){
 	const ctx = document.getElementById(id).getContext('2d');
@@ -49,6 +53,9 @@ const fnChart = function(id, data, labels, backgroundColor){
 						display: false // 橫軸 hide
 					}
 				}]
+			},
+			animation: {
+				duration: 0
 			}
 		}
 	});
@@ -84,14 +91,14 @@ const fnRenderColor = function(data){
 		nav += '</div>'
 
 		// ----------------------------
-		const sumTarget = 's' + item.status;
 		fix += '<div class="sys-citem" data-status="' + item.status + '">';
 		fix += '<div class="sys-ctxt">' + item.name + '</div>';
 		fix += '<div class="sys-sbtn">修改</div>'
 		fix += '<input class="minicolors-item" type="text" data-control="wheel" value="' + item.color + '">'
 		fix += '</div>';
-
+		
 		// ----------------------------
+		const sumTarget = 's' + item.status;
 		total += '<div class="rbox-status-item">'
 		total += '<div class="rbox-status-color" data-status="' + item.status + '" style="background-color:' + item.color + '"></div>'
 		total += '<div class="rbox-status-info">'
@@ -171,47 +178,43 @@ const fnRenderBuild = function(data){
 			html += 'style="background-color:' + code + '">';
 			html += '</div>';// .build-item
 
-			if( sum.firstTime ){
-				// 異常冰機列表 v
-				const statusHtml = function(num){
-					let codeHtml = '';
-					if( v == num ){
-						codeHtml += '';
-						codeHtml += '<div class="rbox-error-item">'
-						codeHtml += '<div class="rbox-error-txt">' + info + '</div>'
-						codeHtml += '<div class="rbox-error-btn" ';
-						codeHtml += 'data-floor="' + f + '" '
-						codeHtml += 'data-number="' + data.house.value[i] + '" ';
-						codeHtml += 'data-show="' + data.house.show_name[i] + '" ';
-						codeHtml += '>詳細</div>'
-						codeHtml += '</div>'
-					};
-					return codeHtml;
+			// 異常冰機列表 v
+			const statusHtml = function(num){
+				let codeHtml = '';
+				if( v == num ){
+					codeHtml += '';
+					codeHtml += '<div class="rbox-error-item">'
+					codeHtml += '<div class="rbox-error-txt">' + info + '</div>'
+					codeHtml += '<div class="rbox-error-btn" ';
+					codeHtml += 'data-floor="' + f + '" '
+					codeHtml += 'data-number="' + data.house.value[i] + '" ';
+					codeHtml += 'data-show="' + data.house.show_name[i] + '" ';
+					codeHtml += '>詳細</div>'
+					codeHtml += '</div>'
 				};
-				status4 += statusHtml(4);
-				status3 += statusHtml(3);
-				
-				// sum v
-				switch(v){
-					case 0: sum.s0 ++; break;
-					case 1: sum.s1 ++; break;
-					case 2: sum.s2 ++; break;
-					case 3: sum.s3 ++; break;
-					case 4: sum.s4 ++; break;
-					case 5: sum.s5 ++; break;
-					default:
-				};
-				sum.total ++;
+				return codeHtml;
 			};
+			status4 += statusHtml(4);
+			status3 += statusHtml(3);
+			
+			// sum v
+			switch(v){
+				case 0: sum.s0 ++; break;
+				case 1: sum.s1 ++; break;
+				case 2: sum.s2 ++; break;
+				case 3: sum.s3 ++; break;
+				case 4: sum.s4 ++; break;
+				case 5: sum.s5 ++; break;
+				default:
+			};
+			sum.total ++;
 		});
 		html += '</div>'// .build-house
 		html += '</div>'// .build-row
 	}
 	$('#build').html(html);
-	if( sum.firstTime ){
-		$('.errbox[data-status=4] .rbox-error').html(status4);
-		$('.errbox[data-status=3] .rbox-error').html(status3);
-	};
+	$('.errbox[data-status=4] .rbox-error').html(status4);
+	$('.errbox[data-status=3] .rbox-error').html(status3);
 };
 
 $(()=>{
@@ -220,17 +223,17 @@ $(()=>{
 	// ----------------------------
 	$.ajax({
 		type: 'GET',
-		url: './data/'+build_id+'/chill/color.json',
+		url: API.color,
 		dataType: 'json',
 		success: function(res){
-			colorObj = res.chiller;
+			colorObj = res.color.chiller;
 
 			// ----------------------------
 			// BUILD v
 			// ----------------------------
 			$.ajax({
 				type: 'GET',
-				url: './data/'+build_id+'/chill/main.json',
+				url: API.main,
 				dataType: 'json',
 				success: function(res){
 					chillObj = res;
@@ -238,14 +241,57 @@ $(()=>{
 					$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
 					$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
 					fnRenderBuild(chillObj); // < 需要計數的都往此 fn 下方寫
-					sum.firstTime = false;
 					//-
-					fnRenderColor(colorObj);
-					$('.is-chill-total').text(sum.total);
+					$('.is-chill-total').text(sum.total - sum.s0 - sum.s1);
 					$('.is-chill-err-total').text(sum.s3 + sum.s4);
-
+					
 					// MINICOLORS SETTINGS v
+					fnRenderColor(colorObj);
 					setingMinicolor();
+					
+					// ----------------------------
+					let ii = 0;
+					setInterval(function(){
+						ii ++;
+						const jj = ii%4+1;
+						const url ='./data/build01/chill/main_'+jj+'.json';
+						// const url ='./data/build01/chill/main.json';
+						$.ajax({
+							type: 'GET',
+							url,
+							dataType: 'json',
+							success: function(res){
+								chillObj = res;
+								$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
+								$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
+								
+								// init v
+								sum = {
+									total: 0,
+									s0: 0, // 0 沒有住戶
+									s1: 0, // 1 關機正常
+									s2: 0, // 2 開機正常
+									s3: 0, // 3 開機異常
+									s4: 0, // 4 關機異常
+									s5: 0,  // 5 斷訊
+								};
+
+								fnRenderBuild(chillObj); // < 需要計數的都往此 fn 下方寫
+								//-
+								$('.is-chill-total').text(sum.total - sum.s0 - sum.s1 );
+								$('.is-chill-err-total').text(sum.s3 + sum.s4);
+								
+								// 右上 v
+								for(i=0;i<=5;i++){
+									const sumTarget = 's' + i;
+									$('.rbox-status-item:eq('+i+') .rbox-status-num').text(sum[sumTarget]);
+								}
+								console.log(jj, sum);
+							}
+						});
+								
+					}, 1000 * chillObj.update / 1 );
+					// }, 1000 * 10 );
 				}
 			});
 		}

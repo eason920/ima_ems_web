@@ -79,14 +79,15 @@
 .status-chill .status-item[data-status='0'] .status-color
 	position: relative
 	&::after
-		content: '╳'
+		content: ''
 		position: absolute
-		color: #000
-		top: -4px
-		left: -1px
-		// line-height: 10px
-		font-size: 16px
-		font-weight: lighter
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+		background:
+			image: url('../images/x_dark.png')
+			size: cover
 
 // ----------------------------
 #log

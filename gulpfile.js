@@ -18,13 +18,13 @@ console.log(options);
 gulp.task('pug', function(){
 	gulp.src('./source/*.pug')
 		.pipe($.plumber())
-		.pipe($.data(function(){
-			var page = require('./source/data/page.json'),
-				source = {
-					page
-				}
-			return source;
-		}))
+		// .pipe($.data(function(){
+		// 	var page = require('./source/data/page.json'),
+		// 		source = {
+		// 			page
+		// 		}
+		// 	return source;
+		// }))
 		.pipe($.pug({
 			pretty: true
 		}))
@@ -159,26 +159,18 @@ gulp.task('clean', function(){
 gulp.task('build', function(){
 	gulp.src('./.tmp/assets/plugins/**')
 		.pipe(gulp.dest('./public/assets/plugins/'));
-	gulp.src('./source/data/*.json')
+	gulp.src('./source/data/**/.json')
 		.pipe(gulp.dest('./public/data/'))
 })
 
-
-const mission = function(){
+gulp.task('default', ['pug', 'email', 'tmp_module', 'css', 'js', 'tmp_js', 'img', 'data'], function(){
 	gulp.watch('./source/css/**/*.css', ['css']);
+	gulp.watch('./source/*.pug', ['pug']);
 	gulp.watch('./source/partials/**/*.pug', ['pug']);
 	gulp.watch('./source/email/*.pug', ['email']);
 	gulp.watch('./source/tmp_module/*.pug', ['tmp_module']);
 	gulp.watch('./source/js/**/*.js', ['js']);
 	gulp.watch('./.tmp/assets/tmp/*.js', ['tmp_js'])
 	gulp.watch('./source/images/**/*', ['img']);
-	gulp.watch('./source/data/*.json', ['data']);
-}
-gulp.task('default', ['pug', 'data', 'email', 'tmp_module', 'css', 'js', 'tmp_js', 'img', 'data'], function(){
-	gulp.watch('./source/*.pug', ['pug']);
-	mission();
-});
-
-gulp.task('vue', ['email', 'tmp_module', 'css', 'js', 'tmp_js', 'img', 'data'], function () {
-	mission();
+	gulp.watch('./source/data/**/*.json', ['data']);
 });

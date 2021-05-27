@@ -158,18 +158,18 @@ $h-citem: 30px
 	border: solid 1px #000!important
 	cursor: pointer!important
 
-.sys-citem[data-value='0']
+.sys-citem[data-status='0']
 	.minicolors-swatch
 		&:after
-			content: '╳'
+			content: ''
 			position: absolute
-			color: #000
-			top: -5px
+			width: 100%
+			height: 100%
+			top: 0
 			left: 0
-			overflow: hidden
-			font:
-				size: 27px
-				weight: lighter
+			background:
+				image: url('../images/x_dark.png')
+				size: cover
 
 .minicolors-swatch-color
 

@@ -1,34 +1,36 @@
 {
-	"chiller": [
-		{
-			"name": "沒有住戶",
-			"status": 0,
-			"color": "#999"
-		},
-		{
-			"name": "關機正常",
-			"status": 1,
-			"color": "#999"
-		},
-		{
-			"name": "開機正常",
-			"status": 2,
-			"color": "#9AE2BE"
-		},
-		{
-			"name": "開機異常",
-			"status": 3,
-			"color": "#FC81B4"
-    },
-		{
-			"name": "關機異常",
-			"status": 4,
-			"color": "#C1272D"
-    },
-		{
-			"name": "斷訊",
-			"status": 5,
-			"color": "#F7931E"
-		}
-	]
+	"color": {
+		"chiller": [
+			{
+				"name": "沒有住戶",
+				"status": 0,
+				"color": "#999"
+			},
+			{
+				"name": "關機正常",
+				"status": 1,
+				"color": "#999"
+			},
+			{
+				"name": "開機正常",
+				"status": 2,
+				"color": "#9AE2BE"
+			},
+			{
+				"name": "開機異常",
+				"status": 3,
+				"color": "#FC81B4"
+			},
+			{
+				"name": "關機異常",
+				"status": 4,
+				"color": "#C1272D"
+			},
+			{
+				"name": "斷訊",
+				"status": 5,
+				"color": "#F7931E"
+			}
+		]
+	}
 }

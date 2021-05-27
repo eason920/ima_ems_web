@@ -1,3 +1,14 @@
+%afterX
+	content: ''
+	position: absolute
+	width: 100%
+	height: 100%
+	top: 0
+	left: 0
+	background:
+		image: url('../images/x.png')
+		size: cover
+		
 #left
 	font-size: 0
 
@@ -39,10 +50,7 @@
 	&[data-status='0']
 		position: relative
 		&:after
-			content: '╳'
-			position: absolute
-			color: #fff
-			font-weight: lighter
+			@extend %afterX
 
 // ----------------------------
 #right
@@ -99,10 +107,7 @@
 	&[data-status='0']
 		position: relative
 		&:after
-			content: '╳'
-			position: absolute
-			color: #fff
-			font-weight: lighter
+			@extend %afterX
 
 
 .rbox-status-info
@@ -127,7 +132,7 @@
 
 .rbox-error-txt
 	margin-right: 5px
-	width: 38px
+	width: 45px
 	text-align: right
 
 .rbox-error-btn
@@ -178,13 +183,7 @@
 		font-size: 12px
 		width: 17px
 		height: 17px
-		&[data-status='0']
-			&:after
-				font-size: 22px
-				top: -1
-				// line-height: 0
-				// top: 6px
-				// left: -2px
+
 	// ----------------------------
 	#right
 		padding-bottom: 25px
@@ -214,12 +213,6 @@
 	.rbox-status-color
 		width: $w-ball
 		height: $w-ball
-		&[data-status='0']
-			&:after
-				top: 0px
-				left: -1px
-				// line-height: 10px
-				font-size: 23px
 
 	.rbox-status-info
 		
@@ -269,10 +262,12 @@
 		height: $h-roof-top-pc
 		top: 3px
 
+	$v: calc( 100vh - #{$h-roof-top-pc} - 35px - #{$h-nav} )
 	#build
 		padding: 20px 6% 50px
-		height: calc( 100% - #{$h-roof-top-pc})
-		min-height: 660px
+		height: $v
+		min-height: $v
+		max-height: $v
 		border: solid 3px #585858
 
 	// ----------------------------
@@ -320,12 +315,6 @@
 	.rbox-status-color
 		width: $w-ball - 8
 		height: $w-ball - 8
-		&[data-status='0']
-			&:after
-				top: -3px
-				left: 2.5px
-				// line-height: 10px
-				font-size: 27px
 
 	.rbox-status-info
 
