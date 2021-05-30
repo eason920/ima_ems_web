@@ -9,6 +9,7 @@ html(lang='en')
 		//-----------------------------
 		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js?111')
 		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js?111')
+		script(src='./js/time_check.js')
 		script(src='./js/single_chiller.js?111')
 		//-----------------------------
 		link(href='./assets/plugins/minicolors/jquery.minicolors.css?111' rel='stylesheet' )
@@ -57,7 +58,7 @@ html(lang='en')
 								|濕球
 								span 25.5
 					.right-title 冰機狀態統計： 
-					.rbox
+					.rbox.is-status
 						.rbox-top
 							.rbox-status.is-total 
 								.rbox-status-item
@@ -95,29 +96,30 @@ html(lang='en')
 							span.is-chill-total 90
 							|台
 					.right-title 異常冰機列表：
-					.rbox
-						.rbox-top
-							.errbox(data-status='4') 
-								.rbox-status 
-									.rbox-status-item
-										.rbox-status-color(style='background-color: #C1272D')
-										span 關機異常
-								.rbox-error
-									//- .rbox-error-item 
-									//- 	.rbox-error-txt F-8
-									//- 	.rbox-error-btn 詳細
-							.errbox(data-status='3') 
-								.rbox-status
-									.rbox-status-item
-										.rbox-status-color(style='background-color: #FC81B4')
-										span 開機異常
-								.rbox-error
-									//- .rbox-error-item 
-									//- 	.rbox-error-txt F-8
-									//- 	.rbox-error-btn 詳細
-									//- .rbox-error-item 
-									//- 	.rbox-error-txt F-8
-									//- 	.rbox-error-btn 詳細
+					.rbox.is-err
+						.rbox-top.is-err
+							.rbox-container
+								.errbox(data-status='4') 
+									.rbox-status 
+										.rbox-status-item
+											.rbox-status-color(style='background-color: #C1272D')
+											span 關機異常
+									.rbox-error
+										//- .rbox-error-item 
+										//- 	.rbox-error-txt F-8
+										//- 	.rbox-error-btn 詳細
+								.errbox(data-status='3') 
+									.rbox-status
+										.rbox-status-item
+											.rbox-status-color(style='background-color: #FC81B4')
+											span 開機異常
+									.rbox-error
+										//- .rbox-error-item 
+										//- 	.rbox-error-txt F-8
+										//- 	.rbox-error-btn 詳細
+										//- .rbox-error-item 
+										//- 	.rbox-error-txt F-8
+										//- 	.rbox-error-btn 詳細
 						.rbox-sum
 							|總計異常
 							span.is-chill-err-total 7 

@@ -19,12 +19,35 @@ const bg_err = [color_err,color_err,color_err,color_err,color_err,color_err,colo
 const nua = navigator.userAgent;
 const isMobile = /iphone | ipad | android/i.test(nua);
 
-const build_id = location.href.split('?build_id=')[1];
+const build_id = location.href.split('?build_id=')[1].split('&')[0];
+
+const switchControl = {
+	"mb": {
+		c2o(){ 
+			$('#lb, #lb-masker').show() },
+		o2c(){ 
+			$('#lb, #lb-masker').hide() }
+	},
+	"pc": {
+		c2o(){
+			setTimeout(()=>{
+				switchControl.height = $('#lb-content').innerHeight() + 2;
+				$('#content').css({maxHeight: 'calc(100vh - ' + switchControl.height +'px)', minHeight: 'auto'}).addClass('lb-open');
+			}, 100);
+		},
+		o2c(){
+			$('#content').removeAttr('style').removeClass('lb-open');
+		}
+	},
+	heitht: 0,
+	c2o(){ $('#lb').attr('data-open', 'true').css('transform', 'none') },
+	o2c(){ $('#lb').attr('data-open', 'false').removeAttr('style') }
+};
 
 const API = {
 	main: './data/'+build_id+'/chill/main_4.json',
 	color: './data/'+build_id+'/chill/color.json'
-}
+};
 // ----------------------------
 const fnChart = function(id, data, labels, backgroundColor){
 	const ctx = document.getElementById(id).getContext('2d');
@@ -94,7 +117,7 @@ const fnCanvasActive = function(number, floor, show){
 	// 多次性
 	lbObj.sid = setInterval(function(){
 		fnCanvas(number, floor, show);
-	}, 1000 * chillObj.update / 40 );
+	}, 1000 * chillObj.update );
 }
 
 // ----------------------------
@@ -244,7 +267,7 @@ const fnIntervalBuild = function(){
 	setInterval(function(){
 		ii ++;
 		const jj = ii%4+1;
-		const url ='./data/build01/chill/main_'+jj+'.json';
+		const url ='./data/'+build_id+'/chill/main_'+jj+'.json';
 		// const url ='./data/build01/chill/main.json';
 		$.ajax({
 			type: 'GET',
@@ -252,6 +275,7 @@ const fnIntervalBuild = function(){
 			dataType: 'json',
 			success: function(res){
 				chillObj = res;
+				fnTime(chillObj.data_time);
 				$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
 				$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
 				
@@ -276,11 +300,11 @@ const fnIntervalBuild = function(){
 					const sumTarget = 's' + i;
 					$('.rbox-status-item:eq('+i+') .rbox-status-num').text(sum[sumTarget]);
 				}
-				console.log(jj, sum);
+				// console.log(jj, sum);
 			}
 		});
 				
-	}, 1000 * chillObj.update / 1 );
+	}, 1000 * chillObj.update );
 	// }, 1000 * 10 );
 };
 
@@ -304,6 +328,8 @@ $(()=>{
 				dataType: 'json',
 				success: function(res){
 					chillObj = res;
+
+					// structure v
 					$('#location span').text(chillObj.build);
 					$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
 					$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
@@ -312,12 +338,25 @@ $(()=>{
 					$('.is-chill-total').text(sum.total - sum.s0 - sum.s1);
 					$('.is-chill-err-total').text(sum.s3 + sum.s4);
 					
+					// time v
+					fnTime(chillObj.data_time);
+
 					// MINICOLORS SETTINGS v
 					fnRenderColor(colorObj);
 					setingMinicolor();
 					
 					// interval v
 					fnIntervalBuild();
+
+					// UI v
+					// const errH0 = $('#left').innerHeight();
+					// const errH1 = $('.right-title').outerHeight(true);
+					// const errH2 = $('.rbox-top.is-psy').innerHeight();
+					// const errH3 = $('.rbox.is-status').height();
+					// const errH4 = $('.rbox-sum').height();
+					// const errH = 'calc(' + errH0 + 'px - ' + errH1 * 2 + 'px - ' + errH2 + 'px - ' + errH3 +'px - ' + errH4 + 'px)';
+					// console.log(errH, 'errh');
+					// $('.rbox-top.is-err').css('height', errH)
 				}
 			});
 		}
@@ -386,28 +425,7 @@ $(()=>{
 	// ----------------------------
 	// LB v
 	// ----------------------------
-	const switchControl = {
-		"mb": {
-			c2o(){ 
-				$('#lb, #lb-masker').show() },
-			o2c(){ 
-				$('#lb, #lb-masker').hide() }
-		},
-		"pc": {
-			c2o(){
-				setTimeout(()=>{
-					switchControl.height = $('#lb-content').innerHeight() + 2;
-					$('#content').css({maxHeight: 'calc(100vh - ' + switchControl.height +'px)', minHeight: 'auto'})
-				}, 100);
-			},
-			o2c(){
-				$('#content').removeAttr('style');
-			}
-		},
-		heitht: 0,
-		c2o(){ $('#lb').attr('data-open', 'true').css('transform', 'none') },
-		o2c(){ $('#lb').attr('data-open', 'false').removeAttr('style') }
-	};
+
 
 	$('#lb-cbox').click(function(){
 		if( $('#lb-subtitle span').text() !== '' ){
@@ -429,6 +447,7 @@ $(()=>{
 
 			}else{
 				// o2c
+				lbObj.openedId = 'reset';
 				if( isMobile ){
 					switchControl.o2c();
 					switchControl.mb.o2c();

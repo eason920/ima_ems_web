@@ -185,7 +185,7 @@
 
 	// ----------------------------
 	#right
-		padding-bottom: 25px
+		padding-bottom: 40px
 	
 	.right-title
 		font-size: 18px
@@ -251,6 +251,7 @@
 	$m: 30px
 	#wrapper-single
 		display: flex
+		max-height: calc( 100vh - 35px - 45px )
 
 	// ----------------------------
 	#left
@@ -303,9 +304,20 @@
 
 	.rbox
 		border-radius: 15px
+		&.is-err
+			height: calc( 100% - 35px - (18px + 21px + 5px)*2 - 56px - 140px - 35px )
+
+	#content.lb-open .rbox.is-err
+		height: calc( 100% - 35px - (18px + 21px + 5px)*2 - 56px - 140px + 30px)
+	
 
 	.rbox-top
 		padding: 20px
+		&.is-err
+			height: calc( 100% - 30px)
+			overflow:
+				x: hidden
+				y: auto
 
 	// ----------------------------
 	.rbox-status
