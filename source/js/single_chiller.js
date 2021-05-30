@@ -22,7 +22,7 @@ const isMobile = /iphone | ipad | android/i.test(nua);
 const build_id = location.href.split('?build_id=')[1];
 
 const API = {
-	main: './data/'+build_id+'/chill/main.json',
+	main: './data/'+build_id+'/chill/main_4.json',
 	color: './data/'+build_id+'/chill/color.json'
 }
 // ----------------------------
@@ -61,9 +61,19 @@ const fnChart = function(id, data, labels, backgroundColor){
 	});
 };
 
+let lbObj = {
+	openedId: 'start',
+	times: 0,
+	sid: '',
+	floor: 0,
+	show: 0,
+	number: 0
+};
+
 const fnCanvas = function(number, floor, show){
 	// floor = floor.replace('f', '');
-	const url = './data/'+build_id+'/chill/house/' + number + '_' + floor + '.json';
+	const cjj = lbObj.times % 4 + 1;
+	const url = './data/'+build_id+'/chill/house/' + number + '_' + floor + '_'+cjj+'.json';
 	$.ajax({
 		url,
 		type: 'GET',
@@ -72,9 +82,20 @@ const fnCanvas = function(number, floor, show){
 			$('#lb-subtitle span').text( floor.replace('f', '') + '-' + show );
 			fnChart('cv-1', res.normal, res.label, bg_nor);
 			fnChart('cv-2', res.alarm, res.label, bg_err);
+			lbObj.times ++;
 		}
 	})
 };
+
+const fnCanvasActive = function(number, floor, show){
+	// 一次性 v
+	fnCanvas(number, floor, show);
+
+	// 多次性
+	lbObj.sid = setInterval(function(){
+		fnCanvas(number, floor, show);
+	}, 1000 * chillObj.update / 40 );
+}
 
 // ----------------------------
 // NAV COLOR ITEM v
@@ -189,6 +210,7 @@ const fnRenderBuild = function(data){
 					codeHtml += 'data-floor="' + f + '" '
 					codeHtml += 'data-number="' + data.house.value[i] + '" ';
 					codeHtml += 'data-show="' + data.house.show_name[i] + '" ';
+					codeHtml += 'title="' + info + '" ';
 					codeHtml += '>詳細</div>'
 					codeHtml += '</div>'
 				};
@@ -215,6 +237,51 @@ const fnRenderBuild = function(data){
 	$('#build').html(html);
 	$('.errbox[data-status=4] .rbox-error').html(status4);
 	$('.errbox[data-status=3] .rbox-error').html(status3);
+};
+
+const fnIntervalBuild = function(){
+	let ii = 0;
+	setInterval(function(){
+		ii ++;
+		const jj = ii%4+1;
+		const url ='./data/build01/chill/main_'+jj+'.json';
+		// const url ='./data/build01/chill/main.json';
+		$.ajax({
+			type: 'GET',
+			url,
+			dataType: 'json',
+			success: function(res){
+				chillObj = res;
+				$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
+				$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
+				
+				// init v
+				sum = {
+					total: 0,
+					s0: 0, // 0 沒有住戶
+					s1: 0, // 1 關機正常
+					s2: 0, // 2 開機正常
+					s3: 0, // 3 開機異常
+					s4: 0, // 4 關機異常
+					s5: 0,  // 5 斷訊
+				};
+
+				fnRenderBuild(chillObj); // < 需要計數的都往此 fn 下方寫
+				//-
+				$('.is-chill-total').text(sum.total - sum.s0 - sum.s1 );
+				$('.is-chill-err-total').text(sum.s3 + sum.s4);
+				
+				// 右上 v
+				for(i=0;i<=5;i++){
+					const sumTarget = 's' + i;
+					$('.rbox-status-item:eq('+i+') .rbox-status-num').text(sum[sumTarget]);
+				}
+				console.log(jj, sum);
+			}
+		});
+				
+	}, 1000 * chillObj.update / 1 );
+	// }, 1000 * 10 );
 };
 
 $(()=>{
@@ -249,49 +316,8 @@ $(()=>{
 					fnRenderColor(colorObj);
 					setingMinicolor();
 					
-					// ----------------------------
-					let ii = 0;
-					setInterval(function(){
-						ii ++;
-						const jj = ii%4+1;
-						const url ='./data/build01/chill/main_'+jj+'.json';
-						// const url ='./data/build01/chill/main.json';
-						$.ajax({
-							type: 'GET',
-							url,
-							dataType: 'json',
-							success: function(res){
-								chillObj = res;
-								$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
-								$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
-								
-								// init v
-								sum = {
-									total: 0,
-									s0: 0, // 0 沒有住戶
-									s1: 0, // 1 關機正常
-									s2: 0, // 2 開機正常
-									s3: 0, // 3 開機異常
-									s4: 0, // 4 關機異常
-									s5: 0,  // 5 斷訊
-								};
-
-								fnRenderBuild(chillObj); // < 需要計數的都往此 fn 下方寫
-								//-
-								$('.is-chill-total').text(sum.total - sum.s0 - sum.s1 );
-								$('.is-chill-err-total').text(sum.s3 + sum.s4);
-								
-								// 右上 v
-								for(i=0;i<=5;i++){
-									const sumTarget = 's' + i;
-									$('.rbox-status-item:eq('+i+') .rbox-status-num').text(sum[sumTarget]);
-								}
-								console.log(jj, sum);
-							}
-						});
-								
-					}, 1000 * chillObj.update / 1 );
-					// }, 1000 * 10 );
+					// interval v
+					fnIntervalBuild();
 				}
 			});
 		}
@@ -363,7 +389,7 @@ $(()=>{
 	const switchControl = {
 		"mb": {
 			c2o(){ 
-				$('#lb, #lb-masker').show_name() },
+				$('#lb, #lb-masker').show() },
 			o2c(){ 
 				$('#lb, #lb-masker').hide() }
 		},
@@ -386,6 +412,7 @@ $(()=>{
 	$('#lb-cbox').click(function(){
 		if( $('#lb-subtitle span').text() !== '' ){
 			// 不是第一次進場 / canvas 己繪製
+			clearInterval(lbObj.sid);
 			const open = $('#lb').attr('data-open');
 			if( open == 'false'){
 				// c2o
@@ -396,6 +423,10 @@ $(()=>{
 					switchControl.c2o();
 					switchControl.pc.c2o();
 				};
+
+				// ----------------------------
+				fnCanvasActive(lbObj.number, lbObj.floor, lbObj.show);
+
 			}else{
 				// o2c
 				if( isMobile ){
@@ -412,31 +443,39 @@ $(()=>{
 	});
 
 	$('body').on('click', '.build-item, .rbox-error-btn', function(){
-		const status = $(this).attr('data-status');
-		if( status != 0 ){
-			// 非空戶 v
-			if( isMobile ){
-				switchControl.c2o();
-				switchControl.mb.c2o();
+		lbObj.floor = $(this).attr('data-floor');
+		lbObj.show = $(this).attr('data-show');
+		if( lbObj.openedId != lbObj.floor + lbObj.show ){
+			clearInterval(lbObj.sid);
+			lbObj.openedId = lbObj.floor + lbObj.show;
+			console.log('different btn');
+			const status = $(this).attr('data-status');
+			if( status != 0 ){
+				// 非空戶 v
+				if( isMobile ){
+					switchControl.c2o();
+					switchControl.mb.c2o();
+				}else{
+					switchControl.c2o();
+					switchControl.pc.c2o();
+				};
+
+				// ----------------------------
+				lbObj.number = $(this).attr('data-number');
+				fnCanvasActive(lbObj.number, lbObj.floor, lbObj.show);
+
 			}else{
-				switchControl.c2o();
-				switchControl.pc.c2o();
-			};
-			//-
-			const number = $(this).attr('data-number');
-			const floor = $(this).attr('data-floor');
-			const show = $(this).attr('data-show');
-			console.log(number, floor, status);
-			fnCanvas(number, floor, show);
+				// 空戶，不作用 v
+				if( isMobile ){
+					switchControl.o2c();
+					switchControl.mb.o2c();
+				}else{
+					switchControl.o2c();
+					switchControl.pc.o2c();
+				};
+			}
 		}else{
-			// 空戶，不作用 v
-			if( isMobile ){
-				switchControl.o2c();
-				switchControl.mb.o2c();
-			}else{
-				switchControl.o2c();
-				switchControl.pc.o2c();
-			};
+			console.log('same btn');
 		}
 	});
 
