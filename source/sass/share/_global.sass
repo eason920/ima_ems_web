@@ -1,28 +1,24 @@
 body
-  height: 100vh
+	height: 100vh
 
 #content
-  background-image: linear-gradient(to bottom, #aaa, #eee)
-  // height: calc( 100vh - #{$h-nav} ) 
-  // margin-top: $h-nav
-  max-height: 100vh
-  min-height: 100vh
-  // overflow:
-  padding-top: $h-nav
+	background-image: linear-gradient(to bottom, #aaa, #eee)
+	min-height: 100vh
+	padding-top: $h-nav
 
 #wrapper-single
-  margin: 0 auto
-  padding-bottom: 1px
-  min-height: 100%
-  // background: red
+	margin: 0 auto
+	padding-bottom: 1px
+	min-height: 100%
+	// background: red
 
 @media screen and (max-width: $bp-narrow)
-  #wrapper-single
-    width: calc( 100% - 20px )
-    padding-top: 10px
+	#wrapper-single
+		width: calc( 100% - 20px )
+		padding-top: 10px
 
 @media screen and (min-width: $bp-wide)
-  #wrapper-single
-    width: 90%
-    min-width: 980px
-    padding-top: 35px
+	#wrapper-single
+		width: 90%
+		min-width: 980px
+		padding-top: 35px

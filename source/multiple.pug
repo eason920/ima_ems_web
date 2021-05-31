@@ -9,14 +9,15 @@ html(lang='en')
 		//-----------------------------
 		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js?111')
 		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js?111')
-		script(src='./js/single_water.js?111')
+		script(src='./js/time_check.js')
+		script(src='./js/single_pump.js?111')
 		//-----------------------------
-		link(href='jquery.minicolors.css?111' rel='stylesheet' )
-		script(src='jquery.minicolors.js?111')
-		script(src='setting.js?111')
-		script(src='./js/sys.js?111')
+		link(href='./assets/plugins/minicolors/jquery.minicolors.css?111' rel='stylesheet' )
+		script(src='./assets/plugins/minicolors/jquery.minicolors.js?111')
+		script(src='./js/sys_minicolors.js?111')
 	body.is-open
 		include nav
+		include times
 		#content
 			#wrapper-single
 				//- include partials/mul_row

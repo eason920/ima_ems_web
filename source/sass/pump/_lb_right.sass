@@ -1,6 +1,17 @@
 .lb-title
 
+.canvas-basic
+	position: relative
 
+.canvas-limit
+	position: absolute
+	top: calc( 6px + 0px )
+	top: calc( 6px + 310px ) // 為了定住手機版的機械最佳功率位置
+	top: calc( 6px + 51px ) // demo
+	left: 30px
+	right: 6px
+	height: 1px
+	background-color: $c-nav
 
 @media screen and (max-width: $bp-narrow)
 	#lb-right
@@ -13,7 +24,7 @@
 
 	.lb-title
 		font:
-			size: 21px
+			size: 19px
 			weight: bold
 		color: #fff
 		display: inline
@@ -21,7 +32,7 @@
 
 	.lb-subtitle
 		color: #fff
-		font-size: 16px
+		font-size: 15px
 		display: inline
 
 	.canvas-box

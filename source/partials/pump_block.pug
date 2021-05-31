@@ -14,8 +14,9 @@
 	.card
 		.card-item(data-type='chill')
 			.card-left
-				.left-img
-					img(src='./images/chill_nor.png')
+				.left-img.is-err
+					img.is-nor(src='./images/chill_nor.png')
+					img.is-err(src='./images/chill_err.png')
 				.left-name 水泵浦
 			.card-right
 				.right-item
@@ -32,8 +33,9 @@
 					include right_btn
 		.card-item(data-type='water')
 			.card-left
-				.left-img
-					img(src='./images/water_nor.png')
+				.left-img.is-err
+					img.is-nor(src='./images/water_nor.png')
+					img.is-err(src='./images/water_err.png')
 				.left-name 水塔風扇
 			.card-right
 				.right-item
@@ -50,19 +52,20 @@
 					include right_btn
 		.card-item(data-type='pipe')
 			.card-left
-				.left-img
-					img(src='./images/pipe.png')
+				.left-img.is-err
+					img.is-nor(src='./images/pipe_nor.png')
+					img.is-err(src='./images/pipe_err.png')
 				.left-name 水溫/水壓
 			.pipe 
 				.pipe-box
 					.pipe-item
-						.pipe-name 出水溫：
-						.pipe-num 25.5
-					.pipe-item
 						.pipe-name 回水溫：
 						.pipe-num 35.3
 					.pipe-item
+						.pipe-name 出水溫：
+						.pipe-num(data-status='' style='background-color: #8CC63F') 25.5
+					.pipe-item
 						.pipe-name 水壓差：
-						.pipe-num 0.60
+						.pipe-num(data-status='' style='background-color: #C1272D') 0.60
 				.pipe-board
 					.pipe-guide(style='transform: rotate(80deg)')

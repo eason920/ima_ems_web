@@ -11,7 +11,13 @@
 .card-left
 
 .left-img
-
+	.is-err
+		display: none
+	&.is-err
+		.is-err
+			display: block
+		.is-nor
+			display: none
 	img
 		width: 100%
 
