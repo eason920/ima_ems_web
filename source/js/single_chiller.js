@@ -117,7 +117,7 @@ const fnCanvasActive = function(number, floor, show){
 	// 多次性
 	lbObj.sid = setInterval(function(){
 		fnCanvas(number, floor, show);
-	}, 1000 * chillObj.update * 40 );
+	}, 1000 * chillObj.update );
 }
 
 // ----------------------------
@@ -276,8 +276,8 @@ const fnIntervalBuild = function(){
 			success: function(res){
 				chillObj = res;
 				fnTime(chillObj.data_time);
-				$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
-				$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
+				$('.rbox-psyitem.is-dry span').text(chillObj.physical.dry);
+				$('.rbox-psyitem.is-wet span').text(chillObj.physical.wet);
 				
 				// init v
 				sum = {
@@ -304,7 +304,7 @@ const fnIntervalBuild = function(){
 			}
 		});
 				
-	}, 1000 * chillObj.update * 40 );
+	}, 1000 * chillObj.update );
 	// }, 1000 * 10 );
 };
 
@@ -331,8 +331,8 @@ $(()=>{
 
 					// structure v
 					$('#location span').text(chillObj.build);
-					$('.rbox-psyitem.is-dry span').text(chillObj.psy.dry);
-					$('.rbox-psyitem.is-wet span').text(chillObj.psy.wet);
+					$('.rbox-psyitem.is-dry span').text(chillObj.physical.dry);
+					$('.rbox-psyitem.is-wet span').text(chillObj.physical.wet);
 					fnRenderBuild(chillObj); // < 需要計數的都往此 fn 下方寫
 					//-
 					$('.is-chill-total').text(sum.total - sum.s0 - sum.s1);
