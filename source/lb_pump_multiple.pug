@@ -1,0 +1,139 @@
+#lb-masker 
+#lb
+	#lb-cbox
+		span ╳
+		img#lb-close(src='./images/lb_close.png') 
+		img#lb-open(src='./images/lb_open.png') 
+	#lb-content
+		#lb-lr
+			#lb-left
+				#lb-title 變頻器省電表
+				if multiple
+					#lb-build
+						|案場：
+						span 中國信托大樓
+				#lb-subtitle
+					|今日總耗電量：
+					span 420 KW
+				#lb-label
+					.lblabel-item.active 客梯側
+					.lblabel-item 貨梯側
+					.lblabel-item 第三側
+				#c-all
+					.c-all-item 
+						.c-all-title 水泵浦
+						.c-box
+							.c-item
+								.c-mc
+									.c-machine 
+										|30HP01
+										span 原始耗電：47 KW
+									.c-c
+										.c-box
+											.c-limit
+											canvas#c1
+								.c-msg
+									.c-msg-item 耗電 
+										span 30
+										|KW    
+									.c-msg-item 節能 
+										span 11.25
+										|KWh
+							.c-item
+								.c-mc
+									.c-machine 
+										|30HP01
+										span 原始耗電：47 KW
+									.c-c
+										.c-box
+											.c-limit
+											canvas#c2
+								.c-msg
+									.c-msg-item 耗電 
+										span 30
+										|KW    
+									.c-msg-item 節能 
+										span 11.25
+										|KWh
+							.c-item
+								.c-mc
+									.c-machine
+										|30HP01
+										span 原始耗電：47 KW
+									.c-c
+										.c-box
+											.c-limit
+											canvas#c3
+								.c-msg
+									.c-msg-item 耗電 
+										span 30
+										|KW     
+									.c-msg-item 節能 
+										span 11.25
+										|KWh
+					//-----------------------------
+					.c-all-item 
+						.c-all-title 水塔風扇
+						.c-box
+							.c-item
+								.c-mc
+									.c-machine
+										|Tower01
+										span 原始耗電：47 KW
+									.c-c
+										.c-box
+											.c-limit
+											canvas#w1
+								.c-msg
+									.c-msg-item 耗電 
+										span 30
+										|KW    
+									.c-msg-item 節能 
+										span 11.25
+										|KWh
+							.c-item
+								.c-mc
+									.c-machine
+										|Tower01
+										span 原始耗電：47 KW
+									.c-c
+										.c-box
+											.c-limit
+											canvas#w2
+								.c-msg
+									.c-msg-item 耗電 
+										span 30
+										|KW    
+									.c-msg-item 節能 
+										span 11.25
+										|KWh
+							.c-item
+								.c-mc
+									.c-machine
+										|Tower01
+										span 原始耗電：47 KW
+									.c-c
+										.c-box
+											.c-limit
+											canvas#w3
+								.c-msg
+									.c-msg-item 耗電 
+										span 30
+										|KW    
+									.c-msg-item 節能 
+										span 11.25
+										|KWh
+					
+			#lb-right
+				.lb-title 機具：水泵浦 30HP-1 客梯側
+				.lb-subtitle
+					|原始耗電：
+					span 47 KW
+					|當前耗電：
+					span 30 KW
+					|至目前為止節能度數：
+					span 11.25 KWh
+				.canvas-box
+					.canvas-basic
+						.canvas-limit
+						canvas#m

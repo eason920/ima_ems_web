@@ -37,6 +37,10 @@
 
 	#c-all
 
+	#lb-cbox
+		right: calc( (100% - #{$w-lb-mb})/2 + 20px )
+		z-index: 9
+
 	#lb-subtitle
 		color: $c-nav-deep
 
@@ -87,7 +91,7 @@
 		left: 30px
 		right: 6px
 		height: 1px
-		background-color: $c-nav
+		background-color: $c-limit
 
 	.c-machine
 		font-size: 14px
@@ -122,7 +126,7 @@
 			right: auto
 			bottom: auto
 			width: calc( 100% - 24px )
-			width: 336px // 為了定住手機版的機械最佳功率位置
+			width: $w-lb-mb // 為了定住手機版的機械最佳功率位置
 			margin: 10px auto
 
 @media screen and (min-width: $bp-wide)

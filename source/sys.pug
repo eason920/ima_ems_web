@@ -16,7 +16,10 @@
 //-----------------------------
 .sys.sys-area
 	.sys-title
-		|請調整變頻器警示區間
+		if multiple
+			|交界-中國信托大樓
+		else
+			|請調整變頻器警示區間
 		.sys-close ╳
 	.sys-box
 		.sys-item
@@ -43,19 +46,22 @@
 //-----------------------------
 .sys.sys-color
 	.sys-title
-		|請選擇色彩
+		if multiple
+			|色彩-中國信托大樓
+		else
+			|請選擇色彩
 		.sys-close ╳
 	.sys-box.is-color
 		.sys-cbox
 			.sys-citem 
 				.sys-ctxt (水)開機中(41~59) 
 				.sys-sbtn 修改
-				input.minicolors-item(type='text' data-control='wheel' value='#f00')
+				input.minicolors-item(type='text' data-control='wheel' value='#f00' readonly)
 			hr
 			.sys-citem 
 				.sys-ctxt (水)開機中(41~59) 
 				.sys-sbtn 修改
-				input.minicolors-item(type='text' data-control='wheel' value='#f00')
+				input.minicolors-item(type='text' data-control='wheel' value='#f00' readonly)
 		.sys-bbox
 			.sys-btn 取消
 			.sys-btn#updateColor 修改

@@ -1,5 +1,5 @@
 $(()=>{
-  $('.log-color, .log-area, .log-out').click(function(){
+  $('.log-color, .log-area, .log-out, .col-limit[data-for="fix"]').click(function(){
     $('#sys-masker').show();
   });
 
@@ -7,7 +7,7 @@ $(()=>{
     $('.sys-color').show();
   });
 
-  $('.log-area').click(function(){
+  $('.log-area, .col-limit[data-for="fix"]').click(function(){
     $('.sys-area').show();
   });
 
@@ -21,12 +21,12 @@ $(()=>{
 
   // ----------------------------
   $('.sys-box.is-color').on('click', '.minicolors-item, .minicolors-swatch', function(){
-    $(this).parent().siblings('.sys-sbtn').text('確定').css({'z-index': 999});
+    $(this).parent().siblings('.sys-sbtn').text('確定').addClass('is-edit');
     $('.sys-bbox').addClass('is-muted');
   });
 
   $('.sys-box.is-color').on('click', '.sys-sbtn', function(){
-    $(this).text('修改').removeAttr('style');
+    $(this).text('修改').removeClass('is-edit');
     $('.sys-bbox').removeClass('is-muted');
   });
 

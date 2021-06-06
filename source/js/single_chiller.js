@@ -138,7 +138,7 @@ const fnRenderColor = function(data){
 		fix += '<div class="sys-citem" data-status="' + item.status + '">';
 		fix += '<div class="sys-ctxt">' + item.name + '</div>';
 		fix += '<div class="sys-sbtn">修改</div>'
-		fix += '<input class="minicolors-item" type="text" data-control="wheel" value="' + item.color + '">'
+		fix += '<input class="minicolors-item" type="text" data-control="wheel" value="' + item.color + '" readonly>'
 		fix += '</div>';
 		
 		// ----------------------------

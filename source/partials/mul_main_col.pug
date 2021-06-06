@@ -1,0 +1,148 @@
+.build
+	.build-title 中國信托大樓
+	.build-body
+		//- col x 5 + 1 x ( 1 cwp + 1 fan )
+		.col(data-unit='group')
+			//- 機械 or 數值量
+			.col-item
+				//- row 數同 group 數 + 1 title
+				.col-title 群組
+				.col-row(data-for='lb')
+					span 客梯側
+					.col-btn 詳
+				.col-row 
+					span 貨梯側
+					.col-btn 詳
+			.col-limit(data-for='fix') 異常交界
+				.col-btn 調
+		.col(data-unit='chill')
+			.col-item
+				.col-title 正常
+				.col-row
+					span 32
+				.col-row
+					span 28
+			.col-item
+				.col-title 異常
+				.col-row 
+					.col-status(data-status='' style='background-color:#39B54A')
+					span 1
+				.col-row
+					.col-status(data-status='' style='background-color:#C1272D')
+					span 6
+			.col-limit
+				span 5
+				|台
+		.col(data-unit='motor')
+			.col(data-unit='cwp')
+				.col-item
+					.col-title (水泵)30HP01
+					.col-row 
+						.col-status(data-status='1' style='background-color:#999')
+						span off
+					.col-row
+						.col-status(data-status='2' style='background-color:#9B9BEA')
+						span 25.0
+				.col-item
+					.col-title 30HP02
+					.col-row 
+						.col-status(data-status='3' style='background-color:#4B4BEA')
+						span 35.0
+					.col-row
+						.col-status(data-status='4' style='background-color:#C1272D')
+						span 47.0
+				.col-item
+					.col-title 15HP
+					.col-row 
+						.col-status(data-status='5' style='background-color:#F7931E')
+						span -
+					.col-row
+						.col-status(data-status='1' style='background-color:#999')
+						span off
+			.col(data-unit='fan')
+				.col-item
+					.col-title (風扇)Tower01
+					.col-row 
+						.col-status(data-status='1' style='background-color:#999')
+						span off
+					.col-row
+						.col-status(data-status='1' style='background-color:#999')
+						span off
+				.col-item
+					.col-title Tower02
+					.col-row 
+						.col-status(data-status='1' style='background-color:#999')
+						span off
+					.col-row
+						.col-status(data-status='2' style='background-color:#9B9BEA')
+						span 25.0
+				.col-item
+					.col-title Tower03
+					.col-row 
+						.col-status(data-status='1' style='background-color:#999')
+						span off
+					.col-row
+						.col-status(data-status='2' style='background-color:#9B9BEA')
+						span 25.0
+			.col-limit
+				|中
+				span 34
+				|kWh / 高 
+				span 41
+				|kWh
+		.col(data-unit='pipe')
+			.col-item
+				.col-title (溫壓)回水溫
+				.col-row
+					span 23.02
+				.col-row
+					span 22.09
+			.col-item
+				.col-title 出水溫
+				.col-row
+					.col-status(data-status='' style='background-color:#39B54A')
+					span 25.19
+				.col-row
+					.col-status(data-status='' style='background-color:#C1272D')
+					span 23.22
+			.col-item
+				.col-title 水壓差
+				.col-row
+					.col-status(data-status='' style='background-color:#39B54A')
+					span 0.21
+				.col-row
+					.col-status(data-status='' style='background-color:#C1272D')
+					span 0.62
+			.col-limit
+				|出水 
+				span 34 
+				|度  /  水壓
+				span 0.50
+		.col(data-unit='switch')
+			.col-item
+				.col-title (開關狀態)
+				.col-row
+					span -
+				.col-row(data-status='man')
+					span SW1:MAN
+			.col-item
+				.col-title -
+				.col-row
+					span -
+				.col-row(data-status='auto')
+					span SW2:AUTO
+			.col-limit -
+		.col(data-unit='psy')
+			.col-item
+				.col-title 乾球 
+				.col-row
+					span 33.83
+				.col-row
+					span -
+			.col-item
+				.col-title 濕球
+				.col-row
+					span 25.1
+				.col-row
+					span -
+			.col-limit -

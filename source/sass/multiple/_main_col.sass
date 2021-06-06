@@ -28,20 +28,28 @@
 .col
 	display: flex
 	border-right: solid 4px $c-border
-	&:last-child
+	position: relative
+	&[data-unit='group']
+		.col-row, .col-title
+			min-width: 100px
+		.col-row, .col-limit
+			cursor: pointer
+			justify-content: flex-end
+
+	&:last-child, &[data-unit='fan']
 		border: none
 
 	&.col-psy
 		.col-item:last-child
-			.col-row
+			.col-row, .col-title
 				padding-right: 12px
 
 .col-item
 	&:last-child
-		.col-row
+		.col-row, .col-title
 			border-right: none
 
-.col-row
+.col-row, .col-title
 	display: flex
 	padding: 5px
 	align-items: center
@@ -49,23 +57,58 @@
 	border:
 		bottom: solid 1px $c-border
 		right: solid 1px $c-border
-	height: 25px
+	height: $h-col-row
 	min-width: 55px
 	white-space: nowrap
 	&:first-child
 		background-color: $c-bg
 	&:last-child
-		border-bottom: none
+		// border-bottom: none
+		margin-bottom: $h-col-row
+
+.col-row
+	span
+		min-width: 30px
+		text-align: left
+	// for switch
 	&[data-status='man']
 		color: #006837
 	&[data-status='auto']
-		color: #b35906
+		color: #f00
 
-.col-color
+.col-status
 	width: 13px
 	height: 13px
 	border-radius: 50%
 	margin-right: 3px
+
+.col-limit
+	position: absolute
+	bottom: 0
+	left: 0
+	height: $h-col-row
+	display: flex
+	justify-content: center
+	padding: 0 5px
+	align-items: center
+	width: 100%
+	border-right: solid 1px $c-border
+	background-color: $c-bg
+	span
+		margin: 0 3px
+
+.col-btn
+	font:
+		size: 12px
+	height: 18px
+	padding: 0 5px
+	margin-left: 5px
+	display: inline-flex
+	align-items: center
+	border: solid 1px #333
+	border-radius: 9px
+	color: #333
+	background-color: #fff
 
 // ----------------------------
 #lb-build
@@ -79,6 +122,7 @@
 @media screen and (max-width: $bp-narrow)
 	#wrapper-single
 		// padding-right: 20px
+		padding-bottom: 30px
 		overflow:
 			y: auto
 	.build
@@ -87,6 +131,8 @@
 
 	// ----------------------------
 	.build-title
+		font-size: 12px
+		width: 28px
 		
 	.build-body
 
@@ -95,7 +141,7 @@
 
 	.col-item
 
-	.col-row
+	.col-row, .col-title
 
 		
 
@@ -108,8 +154,11 @@
 		padding: 10px 0 0
 
 @media screen and (min-width: $bp-wide)
+	body
+		overflow-x: hidden
+
 	#wrapper-single
-		padding: 90px 20px 0
+		padding: 90px 20px 38px
 		text-align: center
 		min-height: calc( 100vh - #{$h-nav})
 		min-width: 100vw
@@ -127,6 +176,6 @@
 
 	.col-item
 
-	.col-row
+	.col-row, .col-title
 
 	.col-color

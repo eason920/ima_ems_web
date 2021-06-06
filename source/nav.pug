@@ -19,8 +19,12 @@
 		.hamber-line.is-b
 	#mbbox
 		#navlabel
-			.navlabel-item 冰機狀態
-			.navlabel-item.active 冷卻水系統狀態
+			if page == 'chiller'
+				.navlabel-item.active 冰機狀態
+				a.navlabel-item(href='./single_pump.html') 冷卻水系統狀態
+			else
+				a.navlabel-item(href='./single_chiller.html?build_id=build01') 冰機狀態
+				.navlabel-item.active 冷卻水系統狀態
 		#statusbox
 			.status-chillm.status-box
 				.status-item(data-status='0')

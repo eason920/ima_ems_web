@@ -10,11 +10,13 @@ html(lang='en')
 		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js?111')
 		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js?111')
 		script(src='./js/time_check.js')
-		script(src='./js/single_pump.js?111')
+		script(src='./js/share_pump_multiple.js?111')
+		script(src='./js/multiple.js')
 		//-----------------------------
 		link(href='./assets/plugins/minicolors/jquery.minicolors.css?111' rel='stylesheet' )
 		script(src='./assets/plugins/minicolors/jquery.minicolors.js?111')
 		script(src='./js/sys_minicolors.js?111')
+		script(src='./js/sys_minicolors_multiple.js?111')
 	//- body.is-open
 	body
 		include nav
@@ -22,125 +24,12 @@ html(lang='en')
 		#content
 			#wrapper-single
 				//- include partials/mul_row
-				include partials/mul_col
-				include partials/mul_col
-				include partials/mul_col
-				include partials/mul_col
-				include partials/mul_col
-				include partials/mul_col
-				include partials/mul_col
+				include partials/mul_main_col
+				include partials/mul_main_col
+				include partials/mul_main_col
+				include partials/mul_main_col
+				include partials/mul_main_col
 
+		-var multiple = true
 		include sys
-		#lb-masker 
-		#lb
-			#lb-cbox
-				span ╳
-				img#lb-close(src='./images/lb_close.png') 
-				img#lb-open(src='./images/lb_open.png') 
-			#lb-content
-				#lb-lr
-					#lb-left
-						#lb-title 變頻器省電表
-						// 與 single-water 的差別在 lb-build v
-						#lb-build
-							|案場：
-							span 中國信托大樓
-						#lb-subtitle
-							|總省電數：
-							span 420 kWh
-						#lb-label
-							.lblabel-item.active 客梯側
-							.lblabel-item 貨梯側
-							.lblabel-item 第三側
-						#c-all
-							.c-all-item 
-								.c-all-title 水泵浦
-								.c-box
-									.c-item
-										.c-mc
-											.c-machine 30HP01
-											.c-c
-												canvas#c1
-										.c-msg
-											.c-msg-item 頻率 
-												span 30
-												|Hz    
-											.c-msg-item 節能 
-												span 11.25
-												|kWh
-									.c-item
-										.c-mc
-											.c-machine 30HP01
-											.c-c
-												canvas#c2
-										.c-msg
-											.c-msg-item 頻率 
-												span 30
-												|Hz    
-											.c-msg-item 節能 
-												span 11.25
-												|kWh
-									.c-item
-										.c-mc
-											.c-machine 30HP01
-											.c-c
-												canvas#c3
-										.c-msg
-											.c-msg-item 頻率 
-												span 30
-												|Hz    
-											.c-msg-item 節能 
-												span 11.25
-												|kWh
-							//-----------------------------
-							.c-all-item 
-								.c-all-title 水塔風扇
-								.c-box
-									.c-item
-										.c-mc
-											.c-machine Tower01
-											.c-c
-												canvas#w1
-										.c-msg
-											.c-msg-item 頻率 
-												span 30
-												|Hz    
-											.c-msg-item 節能 
-												span 11.25
-												|kWh
-									.c-item
-										.c-mc
-											.c-machine Tower01
-											.c-c
-												canvas#w2
-										.c-msg
-											.c-msg-item 頻率 
-												span 30
-												|Hz    
-											.c-msg-item 節能 
-												span 11.25
-												|kWh
-									.c-item
-										.c-mc
-											.c-machine Tower01
-											.c-c
-												canvas#w3
-										.c-msg
-											.c-msg-item 頻率 
-												span 30
-												|Hz    
-											.c-msg-item 節能 
-												span 11.25
-												|kWh
-							
-					#lb-right
-						.lb-title 機具：水泵浦 30HP-1 客梯側
-						.lb-subtitle 
-							|當前頻率：
-							span 30
-							|Hz 至目前為止節能度數：
-							span 11.25
-							|kWh
-						.canvas-box
-							canvas#m
-
+		include lb_pump_multiple
