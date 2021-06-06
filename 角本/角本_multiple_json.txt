@@ -1,0 +1,73 @@
+---------------------------
+b01 
+中國信托大樓
+chiller 5
+motor
+pipe 34.1 0.61
+
+---------------------------
+b02
+內科Benq大樓
+g = 2 = 客梯 + 貨梯
+chiller 10
+motor
+pipe 34.2 0.62
+
+---------------------------
+b03
+湯城大樓
+g = 3 = A + B + C
+chiller 30
+motor
+pipe 34.3 0.63
+
+---------------------------
+b04
+林口廣達大樓
+g = 4 = 41 + 42 + 43 + 44
+chiller 100
+motor
+pipe 34.4 0.64
+
+---------------------------
+b05
+文德大樓
+g = 5 = 甲~戊
+chiller
+motor
+pipe 34.5 0.65
+
+
+
+
+
+
+===============================
+ele 數量 v
+===============================
+.col of GROUP
+  .col-item = 1 (平行長)
+    .col-title
+    .col-row = res.data.group (垂直長)
+g = 1 = 中央
+--
+.col of CHILLER
+  .col-item = 2 = res.data.group.chiller (obj)
+--
+.col of MOTOR vvvvv
+--
+.col of cwp
+  .col-item = res.data.group.cwp (ary)
+--
+.col of fan
+  .col-item = res.data.group.fan (ary)
+--
+--MOTO END ^^^^^^
+.col of PIPE
+  .col-item = res.data.group.pipe
+--
+.col of SWITCH
+  .col-item = rew.data.group.switch
+--
+.col of PHY
+  .col-item = 1 (平行長) res.data.physical
