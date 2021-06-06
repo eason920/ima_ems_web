@@ -28,13 +28,22 @@
 	#location
 		width: calc( 100% - #{$w-logo-mb} - 66px) // 66= hamber
 		justify-content: center
+	
+	#nav
+		z-index: 9
+
+	#nav-masker
+		z-index: 8
+
+	#mbbox
+		z-index: 9
 		
 	#nav-mul
 		position: fixed
 		bottom: 0
 		width: 100%
 		background-color: #f2f2f2
-		box-shadow: 0 0 8px rgba(0,0,0,.3)
+		// box-shadow: 0 0 8px rgba(0,0,0,.3)
 		justify-content: space-around
 		span
 			display: none
@@ -56,4 +65,4 @@
 			margin-right: 5px
 
 	.status-chillm
-		margin-bottom: 8px
+		// margin-bottom: 8px

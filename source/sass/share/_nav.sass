@@ -195,13 +195,18 @@
 
 	// ----------------------------
 	#statusbox
-		border-top: solid 1px #ddd
-		padding-top: 10px
+		border-top: solid 1px $c-big-hr
+		padding: 10px 5px 0
 		margin: 0 auto
 		width: 100%
 
 	.status-box
 		flex-wrap: wrap
+		border-bottom: solid 1px #ccc
+		margin-bottom: 10px
+		&:last-child
+			border: none
+			margin: 0
 		
 	.status-item
 		width: calc( (100% - 20px) / 2)
@@ -212,7 +217,7 @@
 	// ----------------------------
 	#log
 		width: 100%
-		border-top: solid 1px #ddd
+		border-top: solid 1px $c-big-hr
 		padding-top: 10px
 		flex-direction: column
 
@@ -261,6 +266,11 @@
 			top: $dis
 			left: 10px
 		display: inline-flex
+
+	.status-box
+		padding-bottom: 8px
+		&:last-child
+			padding: 0
 
 	.navlabel-item
 		height: 100%
