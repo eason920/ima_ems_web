@@ -101,23 +101,27 @@
 						}
 					],
 					"pipe": {
-						"in": 35.43,
+						"in": 22.22,
 						"out": {
-							"value": 25.21,
+							"value": 11.11,
 							"status": 13
 						},
 						"p": {
-							"value": 0.60,
+							"value": 0.37,
 							"status": 14
 						}
 					},
 					"switch": [
 						{
-							"machine": "40HP1",
+							"machine": "233HP1",
 							"status": "man"
 						},
 						{
-							"machine": "40HP2",
+							"machine": "233HP2",
+							"status": "auto"
+						},
+						{
+							"machine": "233HP3",
 							"status": "auto"
 						}
 					]
@@ -218,6 +222,17 @@
 								"current_kw": 20.12,
 								"data": []
 							}
+						},
+						{
+							"machine": "tower04",
+							"status": 11,
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
 						}
 					],
 					"pipe": {
@@ -233,12 +248,12 @@
 					},
 					"switch": [
 						{
-							"machine": "40HP1",
-							"status": "man"
+							"machine": "",
+							"status": ""
 						},
 						{
-							"machine": "40HP2",
-							"status": "auto"
+							"machine": "",
+							"status": ""
 						}
 					]
 				},
@@ -327,6 +342,17 @@
 								"current_kw": 20.12,
 								"data": []
 							}
+						},
+						{
+							"machine": "tower04",
+							"status": 11,
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
 						}
 					],
 					"pipe": {
@@ -402,6 +428,19 @@
 						},
 						{
 							"machine": "15HP",
+							"status": 10,
+							"frequency": 0,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						},
+						{
+							"machine": "15HP2",
 							"status": 10,
 							"frequency": 0,
 							"chart": {
@@ -521,6 +560,19 @@
 									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 								]
 							}
+						},
+						{
+							"machine": "15HP2",
+							"status": 10,
+							"frequency": 0,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
 						}
 					],
 					"fan": [
@@ -559,24 +611,24 @@
 						}
 					],
 					"pipe": {
-						"in": 35.43,
+						"in": 11.11,
 						"out": {
-							"value": 25.21,
+							"value": 66.66,
 							"status": 13
 						},
 						"p": {
-							"value": 0.60,
+							"value": 0.33,
 							"status": 14
 						}
 					},
 					"switch": [
 						{
-							"machine": "40HP1",
-							"status": "man"
+							"machine": "",
+							"status": ""
 						},
 						{
-							"machine": "40HP2",
-							"status": "auto"
+							"machine": "",
+							"status": ""
 						}
 					]
 				},
@@ -620,6 +672,19 @@
 						},
 						{
 							"machine": "15HP",
+							"status": 10,
+							"frequency": 0,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						},
+						{
+							"machine": "15HP2",
 							"status": 10,
 							"frequency": 0,
 							"chart": {
@@ -909,12 +974,12 @@
 					},
 					"switch": [
 						{
-							"machine": "40HP1",
-							"status": "man"
+							"machine": "",
+							"status": ""
 						},
 						{
-							"machine": "40HP2",
-							"status": "auto"
+							"machine": "",
+							"status": ""
 						}
 					]
 				},
@@ -1127,12 +1192,12 @@
 					},
 					"switch": [
 						{
-							"machine": "40HP1",
-							"status": "man"
+							"machine": "",
+							"status": ""
 						},
 						{
-							"machine": "40HP2",
-							"status": "auto"
+							"machine": "",
+							"status": ""
 						}
 					]
 				}
@@ -1158,7 +1223,7 @@
 						{
 							"machine": "30HP01",
 							"status": 8,
-							"frequency": 35,
+							"frequency": 51,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1173,7 +1238,7 @@
 						{
 							"machine": "30HP02",
 							"status": 9,
-							"frequency": 35,
+							"frequency": 52,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1188,7 +1253,7 @@
 						{
 							"machine": "15HP",
 							"status": 10,
-							"frequency": 0,
+							"frequency": 53,
 							"chart": {
 								"total_kwh_saved": 0,
 								"original_kw": 21,
@@ -1203,7 +1268,7 @@
 						{
 							"machine": "tower01",
 							"status": 11,
-							"frequency": 35,
+							"frequency": 15,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1214,7 +1279,7 @@
 						{
 							"machine": "tower02",
 							"status": 12,
-							"frequency": 41,
+							"frequency": 25,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1225,7 +1290,7 @@
 						{
 							"machine": "tower03",
 							"status": 11,
-							"frequency": 60,
+							"frequency": 35,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1344,13 +1409,13 @@
 						}
 					],
 					"pipe": {
-						"in": 35.43,
+						"in": 33.33,
 						"out": {
-							"value": 25.21,
+							"value": 22.22,
 							"status": 13
 						},
 						"p": {
-							"value": 0.60,
+							"value": 0.50,
 							"status": 14
 						}
 					},
@@ -1376,7 +1441,7 @@
 						{
 							"machine": "30HP01",
 							"status": 8,
-							"frequency": 35,
+							"frequency": 11,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1391,7 +1456,7 @@
 						{
 							"machine": "30HP02",
 							"status": 9,
-							"frequency": 35,
+							"frequency": 22,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1406,7 +1471,7 @@
 						{
 							"machine": "15HP",
 							"status": 10,
-							"frequency": 0,
+							"frequency": 33,
 							"chart": {
 								"total_kwh_saved": 0,
 								"original_kw": 21,
@@ -1421,7 +1486,7 @@
 						{
 							"machine": "tower01",
 							"status": 11,
-							"frequency": 35,
+							"frequency": 44,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1432,7 +1497,7 @@
 						{
 							"machine": "tower02",
 							"status": 12,
-							"frequency": 41,
+							"frequency": 66,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1443,7 +1508,7 @@
 						{
 							"machine": "tower03",
 							"status": 11,
-							"frequency": 60,
+							"frequency": 55,
 							"chart": {
 								"total_kwh_saved": 11.25,
 								"original_kw": 21,
@@ -1465,12 +1530,12 @@
 					},
 					"switch": [
 						{
-							"machine": "40HP1",
-							"status": "man"
+							"machine": "",
+							"status": ""
 						},
 						{
-							"machine": "40HP2",
-							"status": "auto"
+							"machine": "",
+							"status": ""
 						}
 					]
 				},
@@ -1574,12 +1639,12 @@
 					},
 					"switch": [
 						{
-							"machine": "40HP1",
-							"status": "man"
+							"machine": "",
+							"status": ""
 						},
 						{
-							"machine": "40HP2",
-							"status": "auto"
+							"machine": "",
+							"status": ""
 						}
 					]
 				},

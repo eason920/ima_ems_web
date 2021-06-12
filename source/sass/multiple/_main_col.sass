@@ -29,15 +29,31 @@
 	display: flex
 	border-right: solid 4px $c-border
 	position: relative
+	background:
+		image: url('../images/border.png')
+		position: 0 0
 	&[data-unit='group']
 		.col-row, .col-title
 			min-width: 100px
 		.col-row, .col-limit
 			cursor: pointer
 			justify-content: flex-end
+	&[data-unit='motor']
+		.col-limit
+			// border: none
+
+	&[data-unit='switch']
+		.col-row
+			span
+				text-transform: uppercase
 
 	&:last-child, &[data-unit='fan']
 		border: none
+
+	// &[data-unit='psy']
+	// 	.col-item:last-child
+	// 		.col-row
+	// 			border: none
 
 	&.col-psy
 		.col-item:last-child
@@ -47,7 +63,7 @@
 .col-item
 	&:last-child
 		.col-row, .col-title
-			border-right: none
+			// border-right: none
 
 .col-row, .col-title
 	display: flex
@@ -122,7 +138,7 @@
 @media screen and (max-width: $bp-narrow)
 	#wrapper-single
 		// padding-right: 20px
-		padding-bottom: 30px
+		padding-bottom: 65px
 		overflow:
 			y: auto
 	.build
@@ -131,8 +147,8 @@
 
 	// ----------------------------
 	.build-title
-		font-size: 12px
-		width: 28px
+		// font-size: 12px
+		// width: 28px
 		
 	.build-body
 

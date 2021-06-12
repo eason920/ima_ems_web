@@ -46,9 +46,9 @@ pipe 34.5 0.65
 ele 數量 v
 ===============================
 .col of GROUP
-  .col-item = 1 (平行長)
+  .col-item = 1 (水平行X長數台機器)
     .col-title
-    .col-row = res.data.group (垂直長)
+    .col-row = res.data.group (垂直Y長不同group(側))
 g = 1 = 中央
 --
 .col of CHILLER
