@@ -1,7 +1,7 @@
 let ii = 1;
 
 const fnUpdateChiller = function(build, from){
-	const group = mainBuild.data[build].group;
+	const group = dataMain.data[build].group;
 	// normal item v
 	group.forEach(function(item, i){
 		const target = '.build:eq('+build+') .col[data-unit="'+from+'"] .col-item:eq(0) .col-row:eq('+i+') span'; // 0 為正常,直控span
@@ -11,11 +11,11 @@ const fnUpdateChiller = function(build, from){
 	});
 
 	// alarm item v
-	const thre = mainThre[build].data[from];
+	const thre = dataThre[build].data[from];
 	group.forEach(function(item, i){
 		const status = item[from].alarm < thre? 6 : 7;
-		const index = mainColor[from].findIndex( item => item.status == status );
-		const color = mainColor[from][index].color;
+		const index = dataColor[from].findIndex( item => item.status == status );
+		const color = dataColor[from][index].color;
 		const target = '.build:eq('+build+') .col[data-unit="'+from+'"] .col-item:eq(1) .col-row:eq('+i+')'; // 1 為異常,有兩target
 		const value = item[from].alarm;
 		//
@@ -25,16 +25,37 @@ const fnUpdateChiller = function(build, from){
 };
 
 const fnUpdateMotor = function(build, from){
-	const group = mainBuild.data[build].group;
+	const group = dataMain.data[build].group;
 	const xLength = group[0][from].length;
 	for(c=0; c<xLength; c++){
 		const yLength = group.length;
 		for(r=0;r<yLength; r++){
 			const target = '.build:eq('+build+') .col[data-unit="'+from+'"] .col-item:eq('+c+') .col-row:eq('+r+')';
-			const status = group[r][from][c].status;
-			const index = mainColor.motor.findIndex( item => item.status == status);
-			const color = mainColor.motor[index].color;
-			const value = group[r][from][c].frequency;
+			let status = group[r][from][c].status;
+			let value;
+			switch(status){
+				case 8:
+					value= 'Off'
+					break;
+				case 12:
+					value= '-';
+					break;
+				default:
+					value = group[r][from][c].frequency;
+					const limit_m = dataThre[build].data.motor[0];
+					const limit_h = dataThre[build].data.motor[1];
+					switch(true){
+						case value < limit_m:
+							status = 9;break;
+						case value >= limit_m && value < limit_h:
+							status = 10;break;
+						case value >= limit_h:
+							status = 11;break;
+						default:
+					}
+			};
+			const index = dataColor.motor.findIndex( item => item.status == status);
+			const color = dataColor.motor[index].color;
 			//
 			$(target).find('.col-status').attr('data-status', status).css('backgroundColor', color);
 			$(target).find('span').text(value);
@@ -43,22 +64,19 @@ const fnUpdateMotor = function(build, from){
 };
 
 const fnUpdatePipe = function(build, from){
-	for( a in mainBuild.data[build].group[0][from] ){
-		mainBuild.data[build].group.forEach(function(item, i){
-			
-			if( a == 'in'){
-				const target = '.build:eq('+build+') .col[data-unit="'+from+'"] .col-item:eq('+i+') .col-row:eq(0)';
-				console.log(target);
-				const value = item[from][a];
+	for( c in dataMain.data[build].group[0][from] ){
+		dataMain.data[build].group.forEach(function(item, r){
+			if( c == 'in'){
+				const target = '.build:eq('+build+') .col[data-unit="'+from+'"] .col-item:eq(0) .col-row:eq('+r+')';
+				const value = item[from][c];
 				$(target).find('span').text(value);
 			}else{
-				const w = a == 'out' ? 1 : 2;
-				const target = '.build:eq('+build+') .col[data-unit="'+from+'"] .col-item:eq('+i+') .col-row:eq('+w+')';
-				console.log(target);
-				const status = item[from][a].status;
-				const index = mainColor[from].findIndex( item => item.status == status );
-				const color = mainColor[from][index].color;
-				const value = item[from][a].value;
+				const w = c == 'out' ? 1 : 2;
+				const target = '.build:eq('+build+') .col[data-unit="'+from+'"] .col-item:eq('+w+') .col-row:eq('+r+')';
+				const value = item[from][c].value;
+				const status = value >= dataThre[build].data[from][c] ? 14 : 13
+				const index = dataColor[from].findIndex( item => item.status == status );
+				const color = dataColor[from][index].color;
 				//
 				$(target).find('.col-status').attr('data-status', status).css('backgroundColor', color);
 				$(target).find('span').text(value);
@@ -68,7 +86,7 @@ const fnUpdatePipe = function(build, from){
 }
 
 const fnUpdateSwitch = function(build, from){
-	const group = mainBuild.data[build].group;
+	const group = dataMain.data[build].group;
 	const xLength = group[0][from].length;
 	for(c=0; c<xLength; c++){
 		const yLength = group.length;
@@ -85,7 +103,7 @@ const fnUpdateSwitch = function(build, from){
 }
 
 const fnUpdatePhy = function(build, from){
-	const group = mainBuild.data[build].group;
+	const group = dataMain.data[build].group;
 	const xLength = 2;
 	for(c=0; c<xLength; c++){
 		const yLength = group.length;
@@ -93,7 +111,7 @@ const fnUpdatePhy = function(build, from){
 			if( r == 0){
 				let key = c==0 ? 'dry' : 'wet';
 				let target = '.build:eq('+build+') .col[data-unit="phy"] .col-item:eq('+c+') .col-row:eq('+r+')';
-				let value = mainBuild.data[build].physical[key];
+				let value = dataMain.data[build].physical[key];
 				//
 				$(target).text(value)
 			}
@@ -104,14 +122,12 @@ const fnUpdatePhy = function(build, from){
 $(()=>{
 	$('body').on('click', '.col-row[data-for="lb"]', function(){
 		ii = ii == 1 ? 2:1;
-		console.log('got, ii is ', ii);
 		$.ajax({
 			type: "GET",
 			url: './data/page1/main_' + ii + '.json',
 			dataType: 'json',
 			success(res){
-				mainBuild = res;
-				// console.log(mainBuild.data[0].physical);
+				dataMain = res;
 				for( build in res.data ){
 					fnUpdateChiller(build, 'chiller');
 					fnUpdateMotor(build, 'cwp');
@@ -120,7 +136,6 @@ $(()=>{
 					fnUpdateSwitch(build, 'switch');
 					fnUpdatePhy(build);
 				};
-				
 			}
 		})
 	});

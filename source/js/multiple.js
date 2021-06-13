@@ -1,11 +1,11 @@
-let mainBuild = new Object();
-let mainColor = new Object();
-let mainThre = new Object()
+let dataMain = new Object();
+let dataColor = new Object();
+let dataThre = new Object()
 
 const fnHtmlGroup = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const data = mainBuild.data[build].group;
+		const data = dataMain.data[build].group;
 			h+='<div class="col-item">'
 				h+='<div class="col-title">群組</div>'
 				data.forEach(function(item, i){
@@ -16,7 +16,10 @@ const fnHtmlGroup = function(build, from){
 					h+='<div class="col-btn">詳</div></div>'
 				});
 			h+='</div>' // item
-		h+='<div class="col-limit" data-for="fix">異常交界<div class="col-btn">調</div></div>'
+		h+='<div class="col-limit" data-for="fix" '
+		h+='data-id="'+dataMain.data[build].build_id+'"'
+		h+='data-build="'+dataMain.data[build].build+'"'
+		h+='>異常交界<div class="col-btn">調</div></div>'
 	h+='</div>' // col
 	return h;
 };
@@ -25,7 +28,7 @@ const fnHtmlChiller = function(build, from){
 	const titleObj = ['正常', '異常']
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const group = mainBuild.data[build].group;
+		const group = dataMain.data[build].group;
 		// normal item v
 		h+='<div class="col-item">'
 			h+='<div class="col-title">'+titleObj[0]+'</div>'
@@ -35,15 +38,15 @@ const fnHtmlChiller = function(build, from){
 		h+='</div>'// item
 
 		// alarm item v
-		const thre = mainThre[build].data[from];
+		const thre = dataThre[build].data[from];
 		h+='<div class="col-item">'
 			h+='<div class="col-title">'+titleObj[1]+'</div>'
 			group.forEach(function(item, i){
 				const status = item.chiller.alarm < thre? 6 : 7;
-				const index = mainColor.chiller.findIndex(function(item){
+				const index = dataColor.chiller.findIndex(function(item){
 					return item.status == status;
 				});
-				const color = mainColor.chiller[index].color;
+				const color = dataColor.chiller[index].color;
 				h+='<div class="col-row">';
 					h+='<div class="col-status" data-status="'+status+'" '
 					h+='style="background-color:'+color+'"></div>'
@@ -62,7 +65,7 @@ const fnHtmlChiller = function(build, from){
 const fnHtmlMotor = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const group = mainBuild.data[build].group;
+		const group = dataMain.data[build].group;
 		const xLength = group[0][from].length;
 		for(c=0; c<xLength; c++){
 			h+='<div class="col-item">'
@@ -74,13 +77,35 @@ const fnHtmlMotor = function(build, from){
 				h+='</div>'
 				const yLength = group.length;
 				for(r=0;r<yLength; r++){
-					const status = group[r][from][c].status;
-					const index = mainColor.motor.findIndex( item => item.status == status);
-					const color = mainColor.motor[index].color;
+					let status = group[r][from][c].status;
+					let value;
+					switch(status){
+						case 8:
+							value= 'Off'
+							break;
+						case 12:
+							value= '-';
+							break;
+						default:
+							value = group[r][from][c].frequency;
+							const limit_m = dataThre[build].data.motor[0];
+							const limit_h = dataThre[build].data.motor[1];
+							switch(true){
+								case value < limit_m:
+									status = 9;break;
+								case value >= limit_m && value < limit_h:
+									status = 10;break;
+								case value >= limit_h:
+									status = 11;break;
+								default:
+							}
+					};
+					const index = dataColor.motor.findIndex( item => item.status == status);
+					const color = dataColor.motor[index].color;
 					h+='<div class="col-row">'
 						h+='<div class="col-status" data-status="'+status+'" '
 						h+='style="background-color:'+color+'"></div>'
-						h+='<span>'+group[r][from][c].frequency+'</span>'
+						h+='<span>'+value+'</span>'
 					h+='</div>' // row
 				}
 			h+='</div>'// item
@@ -88,7 +113,7 @@ const fnHtmlMotor = function(build, from){
 	h+='</div>' // col
 
 	if( from == 'fan' ){
-		const thre = mainThre[build].data.motor;
+		const thre = dataThre[build].data.motor;
 		h+='<div class="col-limit">中<span>'+ thre[0] +'</span>kWh / 高 <span>'+thre[1]+'</span>kWh</div>'
 	}
 	return h;
@@ -99,26 +124,28 @@ const fnHtmlPipe = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
 		let i = 0;
-		for( a in mainBuild.data[build].group[0][from] ){
+		for( c in dataMain.data[build].group[0][from] ){
 			h+='<div class="col-item">'
 				h+='<div class="col-title">'+titleObj[i]+'</div>'
-				mainBuild.data[build].group.forEach(function(item){
+				dataMain.data[build].group.forEach(function(item){
 					h+='<div class="col-row">'
-						if( a == 'in'){
-							h+='<span>'+item[from][a]+'</span>'
+						if( c == 'in'){
+							h+='<span>'+item[from][c]+'</span>'
 						}else{
-							const status = item[from][a].status;
-							const index = mainColor[from].findIndex( item => item.status == status );
-							const color = mainColor[from][index].color;
+							// const status = item[from][c].status;
+							const value = item[from][c].value;
+							const status = value >= dataThre[build].data[from][c] ? 14 : 13
+							const index = dataColor[from].findIndex( item => item.status == status );
+							const color = dataColor[from][index].color;
 							h+='<div class="col-status" data-status="'+status+'"'
 							h+=' style="background-color:'+color+'"></div>'
-							h+='<span>'+item[from][a].value+'</span>'
+							h+='<span>'+value+'</span>'
 						}
 					h+='</div>' // row
 				});
 			h+='</div>' // item
 			if( i == 2 ){// 每列只會有三 item
-				const thre = mainThre[build].data.pipe;
+				const thre = dataThre[build].data.pipe;
 				h+='<div class="col-limit">出水 <span>'+thre.out+'</span>度  /  水壓<span>'+thre.p+'</span></div>'
 			}
 			i ++;
@@ -130,7 +157,7 @@ const fnHtmlPipe = function(build, from){
 const fnHtmlSwitch = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const group = mainBuild.data[build].group;
+		const group = dataMain.data[build].group;
 		const xLength = group[0][from].length;
 		for(c=0; c<xLength; c++){
 			h+='<div class="col-item">'
@@ -161,7 +188,7 @@ const fnHtmlSwitch = function(build, from){
 const fnHtmlPhy = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const group = mainBuild.data[build].group;
+		const group = dataMain.data[build].group;
 		const xLength = 2;
 		for(c=0; c<xLength; c++){
 			h+='<div class="col-item">'
@@ -173,7 +200,7 @@ const fnHtmlPhy = function(build, from){
 					h+='<div class="col-row"><span>'
 					if( r == 0){
 						const key = c==0 ? 'dry' : 'wet'
-						h+=mainBuild.data[build].physical[key]
+						h+=dataMain.data[build].physical[key]
 					}
 					h+='</span></div>' // row
 				}
@@ -224,7 +251,9 @@ $(()=>{
 		url: './data/page1/color.json',
 		dataType: 'json',
 		success(res){
-			mainColor = res.color;
+			dataColor = res.color;
+			fnRenderColor(dataColor);
+			setingMinicolor();
 
 			// ----------------------------
 			// THRESHOLD v
@@ -234,7 +263,7 @@ $(()=>{
 				url: './data/page1/threshold.json',
 				dataType: 'json',
 				success(res){
-					mainThre = res.threshold;
+					dataThre = res.threshold;
 
 					// ----------------------------
 					// BUILD v
@@ -244,11 +273,11 @@ $(()=>{
 						url: './data/page1/main_1.json',
 						dataType: 'json',
 						success(res){
-							mainBuild = res;
+							dataMain = res;
 							let h = '';
-							for( build in res.data ){
+							for( build in dataMain.data ){
 								h+='<div class="build">'
-								h+=	'<div class="build-title">' + res.data[build].build +'</div>'
+								h+=	'<div class="build-title">' + dataMain.data[build].build +'</div>'
 								h+=	'<div class="build-body">'
 								// G
 								h+= fnHtmlGroup(build, 'group')
@@ -269,7 +298,7 @@ $(()=>{
 								h+=	'</div>' // .build-body
 								h+='</div><br>' // .build
 								// ----------------------------
-								if( Number(build) == mainBuild.data.length - 1 ){
+								if( Number(build) == dataMain.data.length - 1 ){
 									setTimeout(function(){
 										fnBalance();
 									}, 0);

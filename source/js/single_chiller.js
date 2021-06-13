@@ -1,5 +1,5 @@
-let colorObj = new Object;
-let ChillObj = new Object;
+let dataColor = new Object;
+let dataMain = new Object;
 let sum = {
 	total: 0,
 	s0: 0, // 0 沒有住戶
@@ -117,73 +117,8 @@ const fnCanvasActive = function(number, floor, show){
 	// 多次性
 	lbObj.sid = setInterval(function(){
 		fnCanvas(number, floor, show);
-	}, 1000 * chillObj.update );
+	}, 1000 * dataMain.update );
 }
-
-// ----------------------------
-// NAV COLOR ITEM v
-// ----------------------------
-const fnRenderColor = function(data){
-	let nav = ''; // NAV 演示用色
-	let fix = ''; // 調整用色 SYS LB
-	let total = ''; // 冰機狀態統計(右上)
-
-	data.forEach(function(item){
-		nav += '<div class="status-item" data-status="' + item.status + '">';
-		nav += '<div class="status-color" style="background-color:' + item.color + '"></div>';
-		nav += '<div class="status-txt">' + item.name + '</div>';
-		nav += '</div>'
-
-		// ----------------------------
-		fix += '<div class="sys-citem" data-status="' + item.status + '">';
-		fix += '<div class="sys-ctxt">' + item.name + '</div>';
-		fix += '<div class="sys-sbtn">修改</div>'
-		fix += '<input class="minicolors-item" type="text" data-control="wheel" value="' + item.color + '" readonly>'
-		fix += '</div>';
-		
-		// ----------------------------
-		const sumTarget = 's' + item.status;
-		total += '<div class="rbox-status-item">'
-		total += '<div class="rbox-status-color" data-status="' + item.status + '" style="background-color:' + item.color + '"></div>'
-		total += '<div class="rbox-status-info">'
-		total += '<div class="rbox-status-num">'+ sum[sumTarget] +'</div>'
-		total += '<div class="rbox-status-txt">' + item.name + '</div>'
-		total += '</div>'
-		total += '</div>'
-	});
-
-	$('.status-chill').html(nav); // NAV
-	$('.sys-cbox').html(fix);// 改色 LB
-	$('.rbox-status.is-total').html(total); // 右中
-	// 異常冰機列表 v
-	for(i=3;i<=4;i++){
-		$('.errbox[data-status="'+i+'"]').find('.rbox-status-color').css('background-color', data[i].color);
-		$('.errbox[data-status="'+i+'"] span').text(data[i].name);
-	};
-};
-
-const setingMinicolor = function(){
-	$('.minicolors-item').each( function() {
-		$(this).minicolors({
-			control: $(this).attr('data-control') || 'hue',
-			defaultValue: $(this).attr('data-defaultValue') || '',
-			format: $(this).attr('data-format') || 'hex',
-			keywords: $(this).attr('data-keywords') || '',
-			inline: $(this).attr('data-inline') === 'true',
-			letterCase: $(this).attr('data-letterCase') || 'lowercase',
-			opacity: $(this).attr('data-opacity'),
-			position: $(this).attr('data-position') || 'bottom',
-			swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
-			change: function(value, opacity) {
-				if( !value ) return;
-				if( opacity ) value += ', ' + opacity;
-				// if( typeof console === 'object' ) {
-				// 	console.log(value);
-				// }
-			}
-		});
-	});
-};
 
 const fnRenderBuild = function(data){
 	let html = '';
@@ -208,7 +143,7 @@ const fnRenderBuild = function(data){
 		data.status[f].forEach(function(v, i){
 			const info = wf + '-' + data.house.show_name[i];
 			let code = '';
-			colorObj.forEach(function(jtem, j){
+			dataColor.forEach(function(jtem, j){
 				if( jtem.status == v ){
 					code = jtem.color
 				}
@@ -274,10 +209,10 @@ const fnIntervalBuild = function(){
 			url,
 			dataType: 'json',
 			success: function(res){
-				chillObj = res;
-				fnTime(chillObj.data_time);
-				$('.rbox-psyitem.is-dry span').text(chillObj.physical.dry);
-				$('.rbox-psyitem.is-wet span').text(chillObj.physical.wet);
+				dataMain = res;
+				fnTime(dataMain.data_time);
+				$('.rbox-psyitem.is-dry span').text(dataMain.physical.dry);
+				$('.rbox-psyitem.is-wet span').text(dataMain.physical.wet);
 				
 				// init v
 				sum = {
@@ -290,7 +225,7 @@ const fnIntervalBuild = function(){
 					s5: 0,  // 5 斷訊
 				};
 
-				fnRenderBuild(chillObj); // < 需要計數的都往此 fn 下方寫
+				fnRenderBuild(dataMain); // < 需要計數的都往此 fn 下方寫
 				//-
 				$('.is-chill-total').text(sum.total - sum.s0 - sum.s1 );
 				$('.is-chill-err-total').text(sum.s3 + sum.s4);
@@ -304,7 +239,7 @@ const fnIntervalBuild = function(){
 			}
 		});
 				
-	}, 1000 * chillObj.update );
+	}, 1000 * dataMain.update );
 	// }, 1000 * 10 );
 };
 
@@ -317,7 +252,7 @@ $(()=>{
 		url: API.color,
 		dataType: 'json',
 		success: function(res){
-			colorObj = res.color.chiller;
+			dataColor = res.color.chiller;
 
 			// ----------------------------
 			// BUILD v
@@ -327,22 +262,22 @@ $(()=>{
 				url: API.main,
 				dataType: 'json',
 				success: function(res){
-					chillObj = res;
+					dataMain = res;
 
 					// structure v
-					$('#location span').text(chillObj.build);
-					$('.rbox-psyitem.is-dry span').text(chillObj.physical.dry);
-					$('.rbox-psyitem.is-wet span').text(chillObj.physical.wet);
-					fnRenderBuild(chillObj); // < 需要計數的都往此 fn 下方寫
+					$('#location span').text(dataMain.build);
+					$('.rbox-psyitem.is-dry span').text(dataMain.physical.dry);
+					$('.rbox-psyitem.is-wet span').text(dataMain.physical.wet);
+					fnRenderBuild(dataMain); // < 需要計數的都往此 fn 下方寫
 					//-
 					$('.is-chill-total').text(sum.total - sum.s0 - sum.s1);
 					$('.is-chill-err-total').text(sum.s3 + sum.s4);
 					
 					// time v
-					fnTime(chillObj.data_time);
+					fnTime(dataMain.data_time);
 
 					// MINICOLORS SETTINGS v
-					fnRenderColor(colorObj);
+					fnRenderColor(dataColor);
 					setingMinicolor();
 					
 					// interval v
@@ -360,21 +295,6 @@ $(()=>{
 				}
 			});
 		}
-	});
-
-	$('#updateColor').click(function(){
-		colorObj = [];
-		$('.sys-citem').each(function(){
-			const status = $(this).attr('data-status');
-			const name = $(this).find('.sys-ctxt').text();
-			const color = $(this).find('.minicolors-item').val();
-			console.log(status, name, color);
-			colorObj.push({name, status, color});
-		});
-		console.log(colorObj);
-		fnRenderColor(colorObj);
-		setingMinicolor();
-		fnRenderBuild(chillObj);
 	});
 
 	// ----------------------------
