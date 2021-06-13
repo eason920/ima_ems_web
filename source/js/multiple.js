@@ -1,9 +1,11 @@
-let mainData = new Object();
+let mainBuild = new Object();
+let mainColor = new Object();
+let mainThre = new Object()
 
 const fnHtmlGroup = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const data = mainData.data[build].group;
+		const data = mainBuild.data[build].group;
 			h+='<div class="col-item">'
 				h+='<div class="col-title">群組</div>'
 				data.forEach(function(item, i){
@@ -23,7 +25,7 @@ const fnHtmlChiller = function(build, from){
 	const titleObj = ['正常', '異常']
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const group = mainData.data[build].group;
+		const group = mainBuild.data[build].group;
 		// normal item v
 		h+='<div class="col-item">'
 			h+='<div class="col-title">'+titleObj[0]+'</div>'
@@ -33,18 +35,25 @@ const fnHtmlChiller = function(build, from){
 		h+='</div>'// item
 
 		// alarm item v
+		const thre = mainThre[build].data[from];
 		h+='<div class="col-item">'
 			h+='<div class="col-title">'+titleObj[1]+'</div>'
 			group.forEach(function(item, i){
+				const status = item.chiller.alarm < thre? 6 : 7;
+				const index = mainColor.chiller.findIndex(function(item){
+					return item.status == status;
+				});
+				const color = mainColor.chiller[index].color;
 				h+='<div class="col-row">';
-					h+='<div class="col-status" data-status="" style="background-color:#39B54A"></div>'
+					h+='<div class="col-status" data-status="'+status+'" '
+					h+='style="background-color:'+color+'"></div>'
 					h+='<span>'+item.chiller.alarm+'</span>'
 				h+='</div>'//row
 			});
 		h+='</div>'// item
 
 		// limit v
-		h+='<div class="col-limit"><span>5</span>台</div>'
+		h+='<div class="col-limit"><span>'+ thre +'</span>台</div>'
 
 	h+='</div>' // col
 	return h;
@@ -53,7 +62,7 @@ const fnHtmlChiller = function(build, from){
 const fnHtmlMotor = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const group = mainData.data[build].group;
+		const group = mainBuild.data[build].group;
 		const xLength = group[0][from].length;
 		for(c=0; c<xLength; c++){
 			h+='<div class="col-item">'
@@ -65,8 +74,12 @@ const fnHtmlMotor = function(build, from){
 				h+='</div>'
 				const yLength = group.length;
 				for(r=0;r<yLength; r++){
+					const status = group[r][from][c].status;
+					const index = mainColor.motor.findIndex( item => item.status == status);
+					const color = mainColor.motor[index].color;
 					h+='<div class="col-row">'
-						h+='<div class="col-status" data-status="'+group[r][from][c].status+'" style="background-color:green"></div>'
+						h+='<div class="col-status" data-status="'+status+'" '
+						h+='style="background-color:'+color+'"></div>'
 						h+='<span>'+group[r][from][c].frequency+'</span>'
 					h+='</div>' // row
 				}
@@ -75,33 +88,38 @@ const fnHtmlMotor = function(build, from){
 	h+='</div>' // col
 
 	if( from == 'fan' ){
-		h+='<div class="col-limit">'+build+'--中<span>34</span>kWh / 高 <span>41</span>kWh</div>'
+		const thre = mainThre[build].data.motor;
+		h+='<div class="col-limit">中<span>'+ thre[0] +'</span>kWh / 高 <span>'+thre[1]+'</span>kWh</div>'
 	}
 	return h;
 }
 
 const fnHtmlPipe = function(build, from){
-	console.log('here');
 	const titleObj = ['(管線)回水溫', '出水溫', '水壓差']
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
 		let i = 0;
-		for( a in mainData.data[build].group[0][from] ){
+		for( a in mainBuild.data[build].group[0][from] ){
 			h+='<div class="col-item">'
 				h+='<div class="col-title">'+titleObj[i]+'</div>'
-				mainData.data[build].group.forEach(function(item){
+				mainBuild.data[build].group.forEach(function(item){
 					h+='<div class="col-row">'
 						if( a == 'in'){
 							h+='<span>'+item[from][a]+'</span>'
 						}else{
-							h+='<div class="col-status" data-status="'+item[from][a].status+'" style="background-color:#39B54A"></div>'
+							const status = item[from][a].status;
+							const index = mainColor[from].findIndex( item => item.status == status );
+							const color = mainColor[from][index].color;
+							h+='<div class="col-status" data-status="'+status+'"'
+							h+=' style="background-color:'+color+'"></div>'
 							h+='<span>'+item[from][a].value+'</span>'
 						}
 					h+='</div>' // row
 				});
 			h+='</div>' // item
 			if( i == 2 ){// 每列只會有三 item
-				h+='<div class="col-limit">'+build+'--出水 <span>34 </span>度  /  水壓<span>0.50</span></div>'
+				const thre = mainThre[build].data.pipe;
+				h+='<div class="col-limit">出水 <span>'+thre.out+'</span>度  /  水壓<span>'+thre.p+'</span></div>'
 			}
 			i ++;
 		}
@@ -112,7 +130,7 @@ const fnHtmlPipe = function(build, from){
 const fnHtmlSwitch = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const group = mainData.data[build].group;
+		const group = mainBuild.data[build].group;
 		const xLength = group[0][from].length;
 		for(c=0; c<xLength; c++){
 			h+='<div class="col-item">'
@@ -126,7 +144,8 @@ const fnHtmlSwitch = function(build, from){
 						if( status == ''){
 							h+='<span>-</span>'
 						}else{
-							h+='<span>'+group[r][from][c].machine+'：'+status+'</span>'
+							h+='<span>'+group[r][from][c].machine+'：</span>'
+							h+='<b>'+status+'</b>'
 						}
 					h+='</div>' // row
 				}
@@ -142,7 +161,7 @@ const fnHtmlSwitch = function(build, from){
 const fnHtmlPhy = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
-		const group = mainData.data[build].group;
+		const group = mainBuild.data[build].group;
 		const xLength = 2;
 		for(c=0; c<xLength; c++){
 			h+='<div class="col-item">'
@@ -151,14 +170,12 @@ const fnHtmlPhy = function(build, from){
 				h+='</div>'
 				const yLength = group.length;
 				for(r=0;r<yLength; r++){
-					h+='<div class="col-row">'
+					h+='<div class="col-row"><span>'
 					if( r == 0){
 						const key = c==0 ? 'dry' : 'wet'
-						h+='<span>'+mainData.data[build].physical[key]+'</span>'
-					}else{
-						h+='<span>-</span>'
+						h+=mainBuild.data[build].physical[key]
 					}
-					h+='</div>' // row
+					h+='</span></div>' // row
 				}
 			h+='</div>'// item
 			if( c == xLength - 1 ){
@@ -185,7 +202,6 @@ const fnBalance = function(){
 		const w = $(this).outerWidth(true);
 		if( w > s ){ s = w };
 	});
-	console.log(c, f, s);
 	setTimeout(function(){
 		$('.col[data-unit="cwp"]').each(function(){
 			$(this).css('width', c + 'px')
@@ -200,46 +216,72 @@ const fnBalance = function(){
 }
 
 $(()=>{
-	console.log('got multiple.js');
+	// ----------------------------
+	// COLOR v
+	// ----------------------------
 	$.ajax({
 		type: 'GET',
-		url: './data/page1/main_1.json',
+		url: './data/page1/color.json',
 		dataType: 'json',
-		success: function(res){
-			console.log(res);
-			mainData = res;
-			let h = '';
-			for( build in res.data ){
-				h+='<div class="build">'
-				h+=	'<div class="build-title">' + res.data[build].build +'</div>'
-				h+=	'<div class="build-body">'
-				// G
-				h+= fnHtmlGroup(build, 'group')
-				// C
-				h+= fnHtmlChiller(build, 'chiller')
-				// // M
-				h+='<div class="col" data-unit="motor">'
-				h+= fnHtmlMotor(build, 'cwp')
-				h+= fnHtmlMotor(build, 'fan')
-				h+='</div>'
-				// // P
-				h+= fnHtmlPipe(build, 'pipe')
-				// // S
-				h+= fnHtmlSwitch(build, 'switch')
-				// // p
-				h+= fnHtmlPhy(build, 'phy')
-				// GCMPSP END
-				h+=	'</div>' // .build-body
-				h+='</div><br>' // .build
-				// ----------------------------
-				if( Number(build) == mainData.data.length - 1 ){
-					setTimeout(function(){
-						fnBalance();
-					}, 0);
-				}
-			}
+		success(res){
+			mainColor = res.color;
 
-			$('#wrapper-single').html(h);
+			// ----------------------------
+			// THRESHOLD v
+			// ----------------------------
+			$.ajax({
+				type: 'GET',
+				url: './data/page1/threshold.json',
+				dataType: 'json',
+				success(res){
+					mainThre = res.threshold;
+
+					// ----------------------------
+					// BUILD v
+					// ----------------------------
+					$.ajax({
+						type: 'GET',
+						url: './data/page1/main_1.json',
+						dataType: 'json',
+						success(res){
+							mainBuild = res;
+							let h = '';
+							for( build in res.data ){
+								h+='<div class="build">'
+								h+=	'<div class="build-title">' + res.data[build].build +'</div>'
+								h+=	'<div class="build-body">'
+								// G
+								h+= fnHtmlGroup(build, 'group')
+								// C
+								h+= fnHtmlChiller(build, 'chiller')
+								// // M
+								h+='<div class="col" data-unit="motor">'
+								h+= fnHtmlMotor(build, 'cwp')
+								h+= fnHtmlMotor(build, 'fan')
+								h+='</div>'
+								// // P
+								h+= fnHtmlPipe(build, 'pipe')
+								// // S
+								h+= fnHtmlSwitch(build, 'switch')
+								// // p
+								h+= fnHtmlPhy(build, 'phy')
+								// GCMPSP END
+								h+=	'</div>' // .build-body
+								h+='</div><br>' // .build
+								// ----------------------------
+								if( Number(build) == mainBuild.data.length - 1 ){
+									setTimeout(function(){
+										fnBalance();
+									}, 0);
+								}
+							}
+				
+							$('#wrapper-single').html(h);
+						}
+					})
+				}
+			});
 		}
-	})
+	});
+
 })

@@ -42,10 +42,18 @@
 		.col-limit
 			// border: none
 
+	&[data-unit='pipe']
+		width: 214px
+		.col-item
+			min-width: 62px
+
 	&[data-unit='switch']
 		.col-row
-			span
+			span, b
 				text-transform: uppercase
+			b
+				width: 42px
+				text-align: left
 
 	&:last-child, &[data-unit='fan']
 		border: none
@@ -88,9 +96,9 @@
 		text-align: left
 	// for switch
 	&[data-status='man']
-		color: #006837
-	&[data-status='auto']
 		color: #f00
+	&[data-status='auto']
+		color: #006837
 
 .col-status
 	width: 13px
