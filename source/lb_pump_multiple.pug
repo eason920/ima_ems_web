@@ -1,5 +1,5 @@
 #lb-masker 
-#lb
+#lb(data-open='false')
 	#lb-cbox
 		span ╳
 		img#lb-close(src='./images/lb_close.png') 
@@ -22,7 +22,7 @@
 				#c-all
 					.c-all-item 
 						.c-all-title 水泵浦
-						.c-box
+						.c-box#for-cwp
 							.c-item
 								.c-mc
 									.c-machine 
@@ -31,7 +31,7 @@
 									.c-c
 										.c-box
 											.c-limit
-											canvas#c1
+											canvas#cwp1
 								.c-msg
 									.c-msg-item 耗電 
 										span 30
@@ -47,7 +47,7 @@
 									.c-c
 										.c-box
 											.c-limit
-											canvas#c2
+											canvas#cwp2
 								.c-msg
 									.c-msg-item 耗電 
 										span 30
@@ -63,7 +63,7 @@
 									.c-c
 										.c-box
 											.c-limit
-											canvas#c3
+											canvas#cwp3
 								.c-msg
 									.c-msg-item 耗電 
 										span 30
@@ -74,7 +74,7 @@
 					//-----------------------------
 					.c-all-item 
 						.c-all-title 水塔風扇
-						.c-box
+						.c-box#for-fan
 							.c-item
 								.c-mc
 									.c-machine
@@ -83,7 +83,7 @@
 									.c-c
 										.c-box
 											.c-limit
-											canvas#w1
+											canvas#fan1
 								.c-msg
 									.c-msg-item 耗電 
 										span 30
@@ -99,7 +99,7 @@
 									.c-c
 										.c-box
 											.c-limit
-											canvas#w2
+											canvas#fan2
 								.c-msg
 									.c-msg-item 耗電 
 										span 30
@@ -115,7 +115,7 @@
 									.c-c
 										.c-box
 											.c-limit
-											canvas#w3
+											canvas#fan3
 								.c-msg
 									.c-msg-item 耗電 
 										span 30
@@ -136,4 +136,4 @@
 				.canvas-box
 					.canvas-basic
 						.canvas-limit
-						canvas#m
+						canvas#main

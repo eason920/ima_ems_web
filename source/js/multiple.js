@@ -2,6 +2,9 @@ let dataMain = new Object();
 let dataColor = new Object();
 let dataThre = new Object()
 
+const nua = navigator.userAgent;
+const isMobile = /iphone | ipad | android/i.test(nua);
+
 const fnHtmlGroup = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
@@ -313,4 +316,13 @@ $(()=>{
 		}
 	});
 
+	// ----------------------------
+	// HAMBER v
+	// ----------------------------
+	if( isMobile ){
+		$('#hamber').click(function(){
+			$(this).toggleClass('is-open');
+			$('#mbbox, #nav-masker').toggle();
+		});
+	}
 })

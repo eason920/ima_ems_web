@@ -120,7 +120,7 @@ const fnUpdatePhy = function(build, from){
 };
 
 $(()=>{
-	$('body').on('click', '.col-row[data-for="lb"]', function(){
+	$('body').on('click', '.build-title', function(){
 		ii = ii == 1 ? 2:1;
 		$.ajax({
 			type: "GET",
@@ -135,6 +135,13 @@ $(()=>{
 					fnUpdatePipe(build, 'pipe');
 					fnUpdateSwitch(build, 'switch');
 					fnUpdatePhy(build);
+				};
+				// ----------------------------
+				if( $('#lb').attr('data-open') == 'true' ){ // LB開着才需要更新
+					nowChart.data = dataMain.data[nowChart.bindex];
+					nowChart.dataCwp = nowChart.data.group[nowChart.gindex].cwp;
+					nowChart.dataFan = nowChart.data.group[nowChart.gindex].fan;
+					fnRanderAll();
 				};
 			}
 		})

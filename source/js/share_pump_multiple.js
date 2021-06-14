@@ -135,13 +135,13 @@ $(()=>{
 		console.log('mb');
 		for(i=1;i<=3;i++){
 			fnRander('c'+i, scales_m);
-			fnRander('w'+i, scales_m);
+			fnRander('f'+i, scales_m);
 		};
 	}else{
 		console.log('pc');
 		for(i=1;i<=3;i++){
 			fnRander('c'+i, scales);
-			fnRander('w'+i, scales);
+			fnRander('f'+i, scales);
 		};
 	}
 	
