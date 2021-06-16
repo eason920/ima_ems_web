@@ -1,6 +1,7 @@
 const nowChart = {
 	bindex: 0,
 	gindex: 0,
+	mindex: 0,
 	data: new Object,
 	dataCwp: new Array,
 	dataFan: new Array,
@@ -118,13 +119,11 @@ const fnRander = function(target, scales, data) {
 	if( target != 'main'){
 		new Chart(ctx, obj);
 	}else{
-		console.log('is #main');
 		if( chartMain != undefined ){
 			chartMain.destroy();
 		}
 		chartMain = new Chart(ctx, obj);
 	}
-	
 };
 
 const fnRanderAll = function(){
@@ -137,8 +136,9 @@ const fnRanderAll = function(){
 	};
 	if( !isMobile ){
 		const data = nowChart.main == 'cwp' ? nowChart.dataCwp : nowChart.dataFan;
+		console.log('main ', nowChart.main,' /data',data);
 		// --
-		fnRander('main', scales_m, data[nowChart.gindex].chart.data);
+		fnRander('main', scales_m, data[nowChart.mindex].chart.data);
 		// fnRander('main', scales_m, nowChart.dataCwp[0].chart.data);
 	};
 };
@@ -146,10 +146,10 @@ const fnRanderAll = function(){
 const fnCItemHtml = function(from, data){
 	let h = '';
 	for( i=0; i< data.length; i++ ){
-		h+='<div class="c-item" data-from="'+from+'" data-gindex="'+i+'">'
+		h+='<div class="c-item" data-from="'+from+'" data-machine-index="'+i+'">'
 			h+='<div class="c-mc">'
 				h+='<div class="c-machine">'
-				h+='30HP01<span>原始耗電：47 KW</span></div>'
+				h+=data[i].machine+'<span>原始耗電：'+data[i].chart.original_kw+' KW</span></div>'
 				h+='<div class="c-c">'
 				h+='<div class="c-box">'
 					h+='<div class="c-limit"></div>'
@@ -158,8 +158,8 @@ const fnCItemHtml = function(from, data){
 				h+='</div>'
 			h+='</div>'
 			h+='<div class="c-msg">'
-				h+='<div class="c-msg-item">耗電 <span>30</span>KW</div>'
-				h+='<div class="c-msg-item">節能 <span>11.25</span>KWh</div>'
+				h+='<div class="c-msg-item">耗電 <span>'+data[i].chart.current_kw+'</span>KW</div>'
+				h+='<div class="c-msg-item">節能 <span>'+data[i].chart.total_kwh_saved+'</span>KWh</div>'
 			h+='</div>'
 		h+='</div>' // item
 	}
@@ -175,13 +175,13 @@ const switchControl = {
 	},
 	"pc": {
 		c2o(){
-			// setTimeout(()=>{
-			// 	switchControl.height = $('#lb-content').innerHeight() + 2;
-			// 	$('#content').css({maxHeight: 'calc(100vh - ' + switchControl.height +'px)', minHeight: 'auto'}).addClass('lb-open');
-			// }, 100);
+			setTimeout(()=>{
+				switchControl.height = $('#lb-content').innerHeight() + 2;
+				$('#content').css({maxHeight: 'calc(100vh - ' + switchControl.height +'px)', minHeight: 'auto'}).addClass('lb-open');
+			}, 100);
 		},
 		o2c(){
-			// $('#content').removeAttr('style').removeClass('lb-open');
+			$('#content').removeAttr('style').removeClass('lb-open');
 		}
 	},
 	height: 0,
@@ -194,6 +194,7 @@ $(()=>{
 	$('body').on('click', '.col-row[data-for="lb"]', function(){
 		nowChart.bindex = $(this).attr('data-build-index');
 		nowChart.gindex = $(this).attr('data-group-index');
+		nowChart.mindex = 0;
 		nowChart.data = dataMain.data[nowChart.bindex];
 		nowChart.dataCwp = nowChart.data.group[nowChart.gindex].cwp;
 		nowChart.dataFan = nowChart.data.group[nowChart.gindex].fan;
@@ -204,11 +205,26 @@ $(()=>{
 			// ----------------------------
 			// HTML v
 			// ----------------------------
-			if( $('#lb').attr('data-open') == 'false' ){
+			$('#lb-build span').text(nowChart.data.build);
+			$('#lb-subtitle span').text(nowChart.data.total_pc);
+			//-
+
+			$('#lb-label').html('');
+			let g = '';
+			nowChart.data.group.forEach(function(item, i){
+				g+='<div class="lblabel-item';
+				if( i == nowChart.gindex ){ g+=' active'};
+				g+='" data-group-index='+i+'>'+item.show_name;
+				g+='</div>';
+			});
+			$('#lb-label').html(g);
+
+			//-
+			// if( $('#lb').attr('data-open') == 'false' ){
 				$('.c-box#for-cwp, .c-box#for-fan').html('');
 				$('.c-box#for-cwp').html(fnCItemHtml('cwp',nowChart.dataCwp));
 				$('.c-box#for-fan').html(fnCItemHtml('fan',nowChart.dataFan));
-			};
+			// };
 
 			// ----------------------------
 			// CHART v
@@ -223,6 +239,7 @@ $(()=>{
 				$('body').addClass('is-open')
 			}else{
 				$('#lb').css('transform', 'none');
+				switchControl.pc.c2o();
 			};
 			$('#lb').attr('data-open', 'true');
 		}else{
@@ -236,13 +253,33 @@ $(()=>{
 				switchControl.pc.o2c();
 			};
 		}
-
-		
 	});
+
+	$('body').on('click', '.lblabel-item', function(){
+		$('.lblabel-item').removeClass('active');
+		$(this).addClass('active');
+
+		//
+		nowChart.mindex = 0;
+		nowChart.gindex = $(this).attr('data-group-index');
+		nowChart.dataCwp = nowChart.data.group[nowChart.gindex].cwp;
+		nowChart.dataFan = nowChart.data.group[nowChart.gindex].fan;
+
+		// value v
+		$('#lb-build span').text(nowChart.data.build);
+		$('#lb-subtitle span').text(nowChart.data.total_pc);
+		//
+		$('.c-box#for-cwp, .c-box#for-fan').html('');
+		$('.c-box#for-cwp').html(fnCItemHtml('cwp',nowChart.dataCwp));
+		$('.c-box#for-fan').html(fnCItemHtml('fan',nowChart.dataFan));
+
+		// chart v
+		fnRanderAll();
+	})
 
 	// lb ^ 鈕 v
 	$('#lb-cbox').click(function(){
-		if( $('#lb-subtitle span').text() !== '' ){
+		if( $('#lb-subtitle span').text().trim() !== '' ){
 			// 不是第一次進場 / canvas 己繪製
 			// clearInterval(lbObj.sid);
 			const open = $('#lb').attr('data-open');
@@ -261,7 +298,7 @@ $(()=>{
 
 			}else{
 				// o2c
-				// lbObj.openedId = 'reset';
+				lbObj.openedId = 'reset';
 				if( isMobile ){
 					switchControl.o2c();
 					switchControl.mb.o2c();
@@ -281,10 +318,22 @@ $(()=>{
 	if( !isMobile ){
 		$('body').on('click', '.c-item', function(){
 			nowChart.main = $(this).attr('data-from');
-			nowChart.gindex = $(this).attr('data-gindex');
-			const data = nowChart.main == 'cwp' ? nowChart.dataCwp : nowChart.dataFan;
+			nowChart.mindex = $(this).attr('data-machine-index');
+			// const data = nowChart.main == 'cwp' ? nowChart.dataCwp : nowChart.dataFan;
 			// --
-			fnRander('main', scales_m, data[nowChart.gindex].chart.data);
+			nowChart.dataCwp = nowChart.data.group[nowChart.gindex].cwp;
+			nowChart.dataFan = nowChart.data.group[nowChart.gindex].fan;
+
+			// value v
+			$('#lb-build span').text(nowChart.data.build);
+			$('#lb-subtitle span').text(nowChart.data.total_pc);
+			//
+			$('.c-box#for-cwp, .c-box#for-fan').html('');
+			$('.c-box#for-cwp').html(fnCItemHtml('cwp',nowChart.dataCwp));
+			$('.c-box#for-fan').html(fnCItemHtml('fan',nowChart.dataFan));
+
+			// chart v
+			fnRanderAll();
 		})
 	};
 });

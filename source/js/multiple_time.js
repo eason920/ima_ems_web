@@ -141,6 +141,16 @@ $(()=>{
 					nowChart.data = dataMain.data[nowChart.bindex];
 					nowChart.dataCwp = nowChart.data.group[nowChart.gindex].cwp;
 					nowChart.dataFan = nowChart.data.group[nowChart.gindex].fan;
+
+					// value v
+					$('#lb-build span').text(nowChart.data.build);
+					$('#lb-subtitle span').text(nowChart.data.total_pc);
+					//
+					$('.c-box#for-cwp, .c-box#for-fan').html('');
+					$('.c-box#for-cwp').html(fnCItemHtml('cwp',nowChart.dataCwp));
+					$('.c-box#for-fan').html(fnCItemHtml('fan',nowChart.dataFan));
+
+					// chart v
 					fnRanderAll();
 				};
 			}
