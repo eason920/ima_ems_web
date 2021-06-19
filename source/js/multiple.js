@@ -5,6 +5,8 @@ let dataThre = new Object()
 const nua = navigator.userAgent;
 const isMobile = /iphone | ipad | android/i.test(nua);
 
+let PAGE = 0;
+
 const fnHtmlGroup = function(build, from){
 	let h = '';
 	h+='<div class="col" data-unit="' + from + '">'
@@ -243,15 +245,51 @@ const fnBalance = function(){
 			$(this).css('width', s + 'px')
 		});
 	}, 0)
+};
+
+const fnPageLabel = function(){
+	let p ='';
+	
+	// PREV v
+	if( dataMain.prev == false ){
+		p+='<a href="" class="mullabel-item muted">Prev</a>'
+	}else{
+		p+='<a href="multiple.html?page='+PAGE+'" class="mullabel-item">Prev</a>'
+	};
+	
+	// MIDDLE v
+	for(i=1;i<=dataMain.page_total;i++){
+		console.log('i', i);
+		p+='<a href="multiple.html?page='+i+'" class="mullabel-item'
+		if(i==PAGE){
+			p+=' active';
+		}
+		p+='">'+i+'</a>'
+	}
+
+	// NEXT v
+	if( dataMain.next == false ){
+		p+='<a href="" class="mullabel-item muted">Next</a>'
+	}else{
+		p+='<a href="multiple.html?page='+dataMain.next+'" class="mullabel-item">Next</a>'
+	};
+
+	$('#mullabel').html(p);
 }
 
 $(()=>{
+	if( location.href.split('page=')[1].split('&')[1] == undefined ){
+		PAGE = location.href.split('page=')[1];
+	}else{
+		PAGE = location.href.split('page=')[1].split('&')[0];
+	};
+
 	// ----------------------------
 	// COLOR v
 	// ----------------------------
 	$.ajax({
 		type: 'GET',
-		url: './data/page1/color.json',
+		url: './data/multiple_color.json',
 		dataType: 'json',
 		success(res){
 			dataColor = res.color;
@@ -263,7 +301,7 @@ $(()=>{
 			// ----------------------------
 			$.ajax({
 				type: 'GET',
-				url: './data/page1/threshold.json',
+				url: './data/page'+PAGE+'/threshold.json',
 				dataType: 'json',
 				success(res){
 					dataThre = res.threshold;
@@ -273,10 +311,16 @@ $(()=>{
 					// ----------------------------
 					$.ajax({
 						type: 'GET',
-						url: './data/page1/main_1.json',
+						url: './data/page'+PAGE+'/main_1.json',
 						dataType: 'json',
 						success(res){
 							dataMain = res;
+							fnTime(dataMain.data_time);
+							fnPageLabel();
+
+							// ----------------------------
+							// START v
+							// ----------------------------
 							let h = '';
 							for( build in dataMain.data ){
 								h+='<div class="build">'
@@ -305,16 +349,16 @@ $(()=>{
 									setTimeout(function(){
 										fnBalance();
 									}, 0);
+									fnInterval();
 								}
 							}
-				
 							$('#wrapper-single').html(h);
 						}
-					})
+					}); // ajax main
 				}
-			});
+			}); // ajax threshold
 		}
-	});
+	}); // ajax color
 
 	// ----------------------------
 	// HAMBER v

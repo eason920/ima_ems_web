@@ -119,12 +119,13 @@ const fnUpdatePhy = function(build, from){
 	}
 };
 
-$(()=>{
-	$('body').on('click', '.build-title', function(){
+const fnInterval = function(){
+	setInterval(function(){
+		fnTime(dataMain.data_time);
 		ii = ii == 1 ? 2:1;
 		$.ajax({
 			type: "GET",
-			url: './data/page1/main_' + ii + '.json',
+			url: './data/page'+PAGE+'/main_' + ii + '.json',
 			dataType: 'json',
 			success(res){
 				dataMain = res;
@@ -155,5 +156,9 @@ $(()=>{
 				};
 			}
 		})
-	});
+	}, 1000 * dataMain.update /40);
+}
+
+$(()=>{
+
 })

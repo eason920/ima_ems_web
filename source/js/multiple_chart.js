@@ -173,7 +173,6 @@ const fnRanderAll = function(){
 	};
 	if( !isMobile ){
 		const data = nowChart.main == 'cwp' ? nowChart.dataCwp : nowChart.dataFan;
-		console.log('main ', nowChart.main,' /data',data);
 		// --
 		fnRander('main', scales_m, data[nowChart.mindex].chart.data, data[nowChart.mindex]);
 	};

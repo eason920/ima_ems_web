@@ -2,7 +2,8 @@
 	"data_time": "2021/05/22-07:20",
 	"update": 60,
 	"prev": false,
-	"next": true,
+	"page_total": 5,
+	"next": 2,
 	"data": [
 		{
 			"build": "中國信托大樓",
