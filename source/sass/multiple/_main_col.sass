@@ -89,10 +89,13 @@
 		margin-bottom: $h-col-row
 
 .col-row
+	user-select: none
 	span
 		min-width: 30px
 		text-align: left
 	// for switch
+	&.active
+		background-color: $c-citem-active
 	&[data-status='man']
 		color: #f00
 	&[data-status='auto']

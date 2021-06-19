@@ -126,14 +126,18 @@
 										|KWh
 					
 			#lb-right
-				.lb-title 機具：水泵浦 30HP-1 客梯側
+				.lb-title
+					span(data-span='show_name')
+					span(data-span='motor')
+					|：
+					span(data-span='machine') 水泵浦 30HP-1
 				.lb-subtitle
 					|原始耗電：
-					span 47 KW
+					span(data-span='original_kw') 47
 					|當前耗電：
-					span 30 KW
+					span(data-span='current_kw') 30
 					|至目前為止節能度數：
-					span 11.25 KWh
+					span(data-span='total_kwh_saved') 11.25
 				.canvas-box
 					.canvas-basic
 						.canvas-limit

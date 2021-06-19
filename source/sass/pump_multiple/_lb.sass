@@ -85,9 +85,9 @@
 
 	.c-limit
 		position: absolute
-		top: calc( 6px + 0px )
-		top: calc( 6px + 85px ) // 為了定住手機版的機械最佳功率位置
-		top: calc( 6px + 14px ) // demo
+		bottom: calc( 53px + 0px )
+		bottom: calc( 53px + 85px ) // 為了定住手機版的機械最佳功率位置
+		bottom: calc( 53px + 14px ) // demo
 		left: 30px
 		right: 6px
 		height: 1px
@@ -135,11 +135,11 @@
 
 	#lb-lr
 		display: flex
-		width: calc( 230px + 800px )
+		width: calc( #{$w-lb-left} + #{$w-lb-right} )
 		margin: 0 auto
 
 	#lb-left
-		width: 230px
+		width: $w-lb-left
 
 	#lb-subtitle
 		color: yellow
@@ -162,7 +162,11 @@
 		margin-right: 15px
 
 	.c-item
-		margin-bottom: 8px
+		cursor: pointer
+		padding: 6px
+		border-radius: 6px
+		&.active
+			background-color: $c-citem-active
 		&:last-child
 			margin: 0
 

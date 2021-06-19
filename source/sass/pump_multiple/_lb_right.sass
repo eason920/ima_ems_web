@@ -5,9 +5,9 @@
 
 .canvas-limit
 	position: absolute
-	top: calc( 6px + 0px )
-	top: calc( 6px + 310px ) // 為了定住手機版的機械最佳功率位置
-	top: calc( 6px + 51px ) // demo
+	bottom: calc( 53px + 0px )
+	bottom: calc( 53px + 335px ) // 為了定住手機版的機械最佳功率位置
+	bottom: calc( 53px + 55px ) // demo
 	left: 30px
 	right: 6px
 	height: 1px
@@ -20,11 +20,11 @@
 @media screen and (min-width: $bp-wide)
 	#lb-right
 		width: calc( 100% - 330px )
-		width: 800px
+		width: $w-lb-right
 
 	.lb-title
 		font:
-			size: 19px
+			size: 18px
 			weight: bold
 		color: #fff
 		display: inline
@@ -35,7 +35,7 @@
 		font-size: 15px
 		display: inline
 		span
-			padding-right: 22px
+			padding-right: 12px
 
 	.canvas-box
 		background-color: #fff

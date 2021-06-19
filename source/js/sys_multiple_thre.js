@@ -2,6 +2,15 @@
 
 $(()=>{
 	$('body').on('click', '.col-limit[data-for="fix"]', function(){
+		// if( isMobile ){
+		// 	switchControl.o2c();
+		// 	switchControl.mb.o2c();
+		// }else{
+		// 	switchControl.o2c();
+		// 	switchControl.pc.o2c();
+		// };
+
+		// ----------------------------
 		const build = $(this).attr('data-build');
 		const build_id = $(this).attr('data-id');
 		const index = dataThre.findIndex( item => item.build_id == build_id );

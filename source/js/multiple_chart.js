@@ -9,8 +9,13 @@ const nowChart = {
 };
 
 let lbObj = {
-	openedId: 'start'
-}
+	openedId: 'start',
+	times: 0,
+	sid: '',
+	floor: 0,
+	show: 0,
+	number: 0
+};
 
 let chartMain;
 
@@ -64,7 +69,7 @@ for( i=0;i<24;i++ ){
 	});
 };
 
-const fnRander = function(target, scales, data) {
+const fnRander = function(target, scales, data, machineData) {
 	var ctx = document.getElementById(target);
 	if( isMobile ){
 		ctx.width = 20;  // w & h 兩值應一起看，結果實益是寬高比例 
@@ -118,41 +123,74 @@ const fnRander = function(target, scales, data) {
 
 	if( target != 'main'){
 		new Chart(ctx, obj);
+
+		if( isMobile ){
+			// LIMIT v
+			const original = machineData.chart.original_kw;
+			const bottomMax = 85;
+			const yMax = 60;
+			const percent = original / yMax;
+			const addTop = bottomMax * percent;
+			console.log($('#' + target).siblings(0), machineData.chart);
+			$('.'+target).css('bottom', 'calc(53px + '+Math.floor(addTop)+'px)');	
+			// $('.c-limit').css('bottom', 'calc(53px + '+Math.floor(addTop)+'px)');	
+		}
 	}else{
+		// CHART v
 		if( chartMain != undefined ){
 			chartMain.destroy();
 		}
 		chartMain = new Chart(ctx, obj);
+
+		// LIMIT v
+		const original = machineData.chart.original_kw;
+		const bottomMax = 335;
+		const yMax = 60;
+		const percent = original / yMax;
+		const addTop = bottomMax * percent;
+		$('.canvas-limit').css('bottom', 'calc(53px + '+Math.floor(addTop)+'px)');
+
+		// VALUE v
+		const ch = nowChart.main == 'cwp' ? '水泵浦' : '水塔風扇';
+		$('span[data-span="show_name"').text(nowChart.data.group[nowChart.gindex].show_name);
+		$('span[data-span="motor"]').text(ch);
+		$('span[data-span="machine"]').text(machineData.machine);
+		//
+		$('span[data-span="original_kw"]').text(original + ' KW')
+		$('span[data-span="current_kw"]').text(machineData.chart.current_kw + ' KWh')
+		$('span[data-span="total_kwh_saved"]').text(machineData.chart.total_kwh_saved + ' KW')
 	}
 };
 
 const fnRanderAll = function(){
 	const scaleSetting = isMobile ? scales_m : scales;
+
 	for(i=0;i<nowChart.dataCwp.length;i++){
-		fnRander('cwp'+i, scaleSetting, nowChart.dataCwp[i].chart.data);
+		fnRander('cwp'+i, scaleSetting, nowChart.dataCwp[i].chart.data, nowChart.dataCwp[i]);
 	};
 	for(i=0;i<nowChart.dataFan.length;i++){
-		fnRander('fan'+i, scaleSetting, nowChart.dataFan[i].chart.data);
+		fnRander('fan'+i, scaleSetting, nowChart.dataFan[i].chart.data, nowChart.dataFan[i]);
 	};
 	if( !isMobile ){
 		const data = nowChart.main == 'cwp' ? nowChart.dataCwp : nowChart.dataFan;
 		console.log('main ', nowChart.main,' /data',data);
 		// --
-		fnRander('main', scales_m, data[nowChart.mindex].chart.data);
-		// fnRander('main', scales_m, nowChart.dataCwp[0].chart.data);
+		fnRander('main', scales_m, data[nowChart.mindex].chart.data, data[nowChart.mindex]);
 	};
 };
 
 const fnCItemHtml = function(from, data){
 	let h = '';
 	for( i=0; i< data.length; i++ ){
-		h+='<div class="c-item" data-from="'+from+'" data-machine-index="'+i+'">'
+		h+='<div class="c-item'
+		if( from == nowChart.main && i == nowChart.mindex ){ h+=' active'}
+		h+='" data-from="'+from+'" data-machine-index="'+i+'">'
 			h+='<div class="c-mc">'
 				h+='<div class="c-machine">'
 				h+=data[i].machine+'<span>原始耗電：'+data[i].chart.original_kw+' KW</span></div>'
 				h+='<div class="c-c">'
 				h+='<div class="c-box">'
-					h+='<div class="c-limit"></div>'
+					h+='<div class="c-limit '+from+i+'"></div>'
 					h+='<canvas id="'+from+i+'"></canvas>'
 				h+='</div>'
 				h+='</div>'
@@ -186,7 +224,11 @@ const switchControl = {
 	},
 	height: 0,
 	c2o(){ $('#lb').attr('data-open', 'true').css('transform', 'none') },
-	o2c(){ $('#lb').attr('data-open', 'false').removeAttr('style') }
+	o2c(){
+		console.log('o2c');
+		$('#lb').attr('data-open', 'false').removeAttr('style');
+		$('.col-row[data-for="lb"]').removeClass('active');
+	}
 };
 
 $(()=>{
@@ -201,6 +243,8 @@ $(()=>{
 		const thisOpenedId = nowChart.bindex + nowChart.gindex;
 
 		if( thisOpenedId != lbObj.openedId ){
+			$('.col-row[data-for="lb"]').removeClass('active');
+		$(this).addClass('active');
 			lbObj.openedId = thisOpenedId;
 			// ----------------------------
 			// HTML v
@@ -294,8 +338,6 @@ $(()=>{
 				};
 
 				// ----------------------------
-				// fnCanvasActive(lbObj.number, lbObj.floor, lbObj.show);
-
 			}else{
 				// o2c
 				lbObj.openedId = 'reset';
