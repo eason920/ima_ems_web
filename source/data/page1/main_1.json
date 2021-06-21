@@ -522,7 +522,7 @@
 						}
 					]
 				},
-        {
+				{
 					"show_name": "B側",
 					"id": "g1",
 					"chiller": {
@@ -644,7 +644,7 @@
 						}
 					]
 				},
-        {
+				{
 					"show_name": "C側",
 					"id": "g2",
 					"chiller": {
