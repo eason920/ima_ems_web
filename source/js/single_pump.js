@@ -1,6 +1,5 @@
 let dataMain = new Object();
-let dataColor = new Object();
-let dataThre = new Object()
+let dataCT = new Object();
 
 const nua = navigator.userAgent;
 const isMobile = /iphone | ipad | android/i.test(nua);
@@ -29,54 +28,105 @@ const fnHtmlTitle = function(data, name){
 	return h
 };
 
-const fnHtmlPump = function(data){
+const fnHtmlCwp = function(data){
 	// console.log('pump ', data);
 	let h = '';
-	h+='<div class="card-item" data-type="pump">'
+	let picStatus = 'is-nor';
+	h+='<div class="card-item" data-type="cwp">'
 		h+='<div class="card-left">'
-			h+='<div class="left-img is-err"><img class="is-nor" src="./images/pump_nor.png"><img class="is-err" src="./images/pump_err.png"></div>'
+			h+='<div class="left-img @@"><img class="is-nor" src="./images/cwp_nor.png"><img class="is-err" src="./images/cwp_err.png"></div>'
 			h+='<div class="left-name">水泵浦</div>'
 		h+='</div>'
 		h+='<div class="card-right">'
+			const middler = dataCT.threshold.motor[0];
+			const heighter = dataCT.threshold.motor[1];
 			data.forEach(function(item, i){
+				let status = item.status;
+				const value = item.frequency;
+				let checkPicStatus = false;
+				if( status != 8 || status != 12){
+					switch(true){
+						case value < middler:
+							status = 9;break;
+						case value >= middler && value < heighter:
+							status = 10;break;
+						case value >= heighter:
+							status = 11;
+							if( !checkPicStatus ){
+								picStatus = 'is-err'
+								checkPicStatus = true;
+							};
+							break;
+						default:
+					}
+				};
+				const index = dataCT.color.motor.findIndex( item => item.status == status );
+				const color= dataCT.color.motor[index].color;
 				h+='<div class="right-item">'
 				h+='<div class="right-name">'+item.machine+'：</div>'
-				h+='<div class="right-color" data-status="'+item.status+'" style="background-color: #9B9BEA">'+item.frequency+'</div>'
+				h+='<div class="right-color" data-status="'+status+'" style="background-color:'+color+'">'+value+'</div>'
 				h+='<div class="right-btn">詳細</div>'
 				h+='</div>' // item
 			});
 		h+='</div>'
 	h+='</div>' // chill 1/3
+	h = h.replace('@@', picStatus);
 	return h
 };
 
 const fnHtmlFan = function(data){
 	// console.log('fan ', data);
 	let h = '';
+	let picStatus = 'is-nor';
 	h+='<div class="card-item" data-type="fan">'
 		h+='<div class="card-left">'
-			h+='<div class="left-img is-err"><img class="is-nor" src="./images/fan_nor.png"><img class="is-err" src="./images/fan_err.png"></div>'
+			h+='<div class="left-img @@"><img class="is-nor" src="./images/fan_nor.png"><img class="is-err" src="./images/fan_err.png"></div>'
 			h+='<div class="left-name">水塔風扇</div>'
 		h+='</div>'
 		h+='<div class="card-right">'
+			const middler = dataCT.threshold.motor[0];
+			const heighter = dataCT.threshold.motor[1];
 			data.forEach(function(item, i){
+				let status = item.status;
+				const value = item.frequency;
+				let checkPicStatus = false;
+				if( status != 8 || status != 12){
+					switch(true){
+						case value < middler:
+							status = 9;break;
+						case value >= middler && value < heighter:
+							status = 10;break;
+						case value >= heighter:
+							status = 11;
+							if( !checkPicStatus ){
+								picStatus = 'is-err'
+								checkPicStatus = true;
+							};
+							break;
+						default:
+					}
+				};
+				const index = dataCT.color.motor.findIndex( item => item.status == status );
+				const color= dataCT.color.motor[index].color;
 				h+='<div class="right-item">'
 				h+='<div class="right-name">'+item.machine+'：</div>'
-				h+='<div class="right-color" data-status="'+item.status+'" style="background-color: #4B4BEA">'+item.frequency+'</div>'
+				h+='<div class="right-color" data-status="'+status+'" style="background-color:'+color+'">'+value+'</div>'
 				h+='<div class="right-btn">詳細</div>'
 				h+='</div>' // item
 			});
 		h+='</div>'
 	h+='</div>' // pump 2/3
+	h = h.replace('@@', picStatus);
 	return h
 };
 
 const fnHtmlPipe = function(data){
 	console.log('pipe ', data);
 	let h = '';
+	let picStatus = 'is-nor';
 	h+='<div class="card-item" data-type="pipe">'
 		h+='<div class="card-left">'
-			h+='<div class="left-img is-err"><img class="is-nor" src="./images/pipe_nor.png"><img class="is-err" src="./images/pipe_err.png"></div>'
+			h+='<div class="left-img @@"><img class="is-nor" src="./images/pipe_nor.png"><img class="is-err" src="./images/pipe_err.png"></div>'
 			h+='<div class="left-name">水溫/水壓</div>'
 		h+='</div>'
 		h+='<div class="pipe"> '
@@ -87,42 +137,63 @@ const fnHtmlPipe = function(data){
 				h+='</div>'
 				h+='<div class="pipe-item">'
 					h+='<div class="pipe-name">出水溫：</div>'
-					h+='<div class="pipe-num" data-status="'+data.out.status+'" style="background-color: #8CC63F">'+data.out.value+'</div>'
+					const outValue = data.out.value;
+					const outLimit = dataCT.threshold.pipe.out;
+					const outStatus = outValue >= outLimit ? 14 : 13;
+					const outIndex = dataCT.color.pipe.findIndex( item => item.status == outStatus );
+					const outColor = dataCT.color.pipe[outIndex].color;
+					h+='<div class="pipe-num" data-status="'+outStatus+'" style="background-color:'+outColor+'">'+outValue+'</div>'
 				h+='</div>'
 				h+='<div class="pipe-item">'
 					h+='<div class="pipe-name">水壓差：</div>'
-					h+='<div class="pipe-num" data-status="'+data.p.status+'" style="background-color: #C1272D">'+data.p.value+'</div>'
+					const pValue = data.p.value;
+					const pLimit = dataCT.threshold.pipe.p;
+					const pStatus = pValue >= pLimit ? 14 : 13;
+					const pIndex = dataCT.color.pipe.findIndex( item => item.status == pStatus );
+					const pColor = dataCT.color.pipe[pIndex].color;
+					h+='<div class="pipe-num" data-status="'+pStatus+'" style="background-color:'+pColor+'">'+pValue+'</div>'
 				h+='</div>'
 			h+='</div>'
 			h+='<div class="pipe-board">'
-				const deg = Math.round( 180 * ( data.p.value / 2 ) / 10 ) * 10;
+				const deg = Math.round( 180 * ( pValue / 2 ) / 10 ) * 10;
 				h+='<div class="pipe-guide" style="transform: rotate('+deg+'deg)"></div>'
 			h+='</div>'
 		h+='</div>'
 	h+='</div>' // pipe 3/3
+	if( outStatus == 14 || pStatus == 14 ){ picStatus = 'is-err' }
+	h = h.replace('@@', picStatus);
 	return h
 }
 
 $(()=>{
 	console.log('got single_pump.js');
 	$.ajax({
-		url: './data/build01/pump/main_'+ii+'.json',
+		url: './data/build01/pump/pump_setting.json',
 		type: 'GET',
 		dataType: 'json',
 		success(res){
-			dataMain = res;
-			let h = '<div id="mb-btn">省電詳細</div>';
-			dataMain.group.forEach(function(item, i){
-				h+='<div class="block">'
-					h+=fnHtmlTitle(item.switch, item.show_name);
-					h+='<div class="card">'
-						h+=fnHtmlPump(item.cwp);
-						h+=fnHtmlFan(item.fan);
-						h+=fnHtmlPipe(item.pipe);
-					h+='</div>' // card
-				h+='</div>' // block
-			});
-			$('#wrapper-single').html(h);
+			dataCT = res;
+			console.log(dataCT);
+			$.ajax({
+				url: './data/build01/pump/main_'+ii+'.json',
+				type: 'GET',
+				dataType: 'json',
+				success(res){
+					dataMain = res;
+					let h = '<div id="mb-btn">省電詳細</div>';
+					dataMain.group.forEach(function(item, i){
+						h+='<div class="block">'
+							h+=fnHtmlTitle(item.switch, item.show_name);
+							h+='<div class="card">'
+								h+=fnHtmlCwp(item.cwp);
+								h+=fnHtmlFan(item.fan);
+								h+=fnHtmlPipe(item.pipe);
+							h+='</div>' // card
+						h+='</div>' // block
+					});
+					$('#wrapper-single').html(h);
+				}
+			})
 		}
 	})
 });
