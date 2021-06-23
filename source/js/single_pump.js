@@ -28,7 +28,7 @@ const fnHtmlTitle = function(data, name){
 	return h
 };
 
-const fnHtmlCwp = function(data){
+const fnHtmlCwp = function(data, gindex){
 	// console.log('pump ', data);
 	let h = '';
 	let picStatus = 'is-nor';
@@ -62,7 +62,7 @@ const fnHtmlCwp = function(data){
 				};
 				const index = dataCT.color.motor.findIndex( item => item.status == status );
 				const color= dataCT.color.motor[index].color;
-				h+='<div class="right-item">'
+				h+='<div class="right-item" data-group-index="'+gindex+'" data-from="cwp" data-machine-index="'+i+'">'
 				h+='<div class="right-name">'+item.machine+'：</div>'
 				h+='<div class="right-color" data-status="'+status+'" style="background-color:'+color+'">'+value+'</div>'
 				h+='<div class="right-btn">詳細</div>'
@@ -74,7 +74,7 @@ const fnHtmlCwp = function(data){
 	return h
 };
 
-const fnHtmlFan = function(data){
+const fnHtmlFan = function(data, gindex){
 	// console.log('fan ', data);
 	let h = '';
 	let picStatus = 'is-nor';
@@ -108,7 +108,7 @@ const fnHtmlFan = function(data){
 				};
 				const index = dataCT.color.motor.findIndex( item => item.status == status );
 				const color= dataCT.color.motor[index].color;
-				h+='<div class="right-item">'
+				h+='<div class="right-item" data-group-index="'+gindex+'" data-from="fan" data-machine-index="'+i+'">'
 				h+='<div class="right-name">'+item.machine+'：</div>'
 				h+='<div class="right-color" data-status="'+status+'" style="background-color:'+color+'">'+value+'</div>'
 				h+='<div class="right-btn">詳細</div>'
@@ -121,7 +121,7 @@ const fnHtmlFan = function(data){
 };
 
 const fnHtmlPipe = function(data){
-	console.log('pipe ', data);
+	// console.log('pipe ', data);
 	let h = '';
 	let picStatus = 'is-nor';
 	h+='<div class="card-item" data-type="pipe">'
@@ -185,8 +185,8 @@ $(()=>{
 						h+='<div class="block">'
 							h+=fnHtmlTitle(item.switch, item.show_name);
 							h+='<div class="card">'
-								h+=fnHtmlCwp(item.cwp);
-								h+=fnHtmlFan(item.fan);
+								h+=fnHtmlCwp(item.cwp, i);
+								h+=fnHtmlFan(item.fan, i);
 								h+=fnHtmlPipe(item.pipe);
 							h+='</div>' // card
 						h+='</div>' // block

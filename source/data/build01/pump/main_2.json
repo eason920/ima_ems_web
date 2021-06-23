@@ -15,7 +15,7 @@
         {
           "machine": "30HP01",
           "status": 9,
-          "frequency": 211,
+          "frequency": 0,
           "chart": {
             "total_kwh_saved": 11.25,
             "original_kw": 21,
@@ -30,7 +30,7 @@
         {
           "machine": "30HP02",
           "status": 9,
-          "frequency": 212,
+          "frequency": 61,
           "chart": {
             "total_kwh_saved": 11.25,
             "original_kw": 21,
@@ -44,8 +44,8 @@
         },
         {
           "machine": "15HP",
-          "status": 9,
-          "frequency": 213,
+          "status": 12,
+          "frequency": "-",
           "chart": {
             "total_kwh_saved": 0,
             "original_kw": 21,
@@ -59,8 +59,8 @@
       "fan": [
         {
           "machine": "fan2-g1-1",
-          "status": 11,
-          "frequency": 212,
+          "status": 8,
+          "frequency": "-",
           "chart": {
             "total_kwh_saved": 21.2,
             "original_kw": 21,
@@ -138,8 +138,8 @@
       "cwp": [
         {
           "machine": "30HP01",
-          "status": 9,
-          "frequency": 221,
+          "status": 8,
+          "frequency": "-",
           "chart": {
             "total_kwh_saved": 11.25,
             "original_kw": 21,
@@ -154,7 +154,7 @@
         {
           "machine": "30HP02",
           "status": 9,
-          "frequency": 222,
+          "frequency": 30,
           "chart": {
             "total_kwh_saved": 11.25,
             "original_kw": 21,
@@ -169,7 +169,7 @@
         {
           "machine": "15HP",
           "status": 9,
-          "frequency": 223,
+          "frequency": 31,
           "chart": {
             "total_kwh_saved": 0,
             "original_kw": 21,
