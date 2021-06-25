@@ -1,10 +1,13 @@
-const fnUpdateMotor = function(from, group, data){
+const fnUpdateMotor = function(group, data, from){
+	const prefix = $('.block:eq('+group+') .card-item[data-type="'+from+'"]');
+	let picStatus = 'is-nor';
+	let checkPicStatus = false;
+	//
 	const middler = dataCT.threshold.motor[0];
 	const heighter = dataCT.threshold.motor[1];
 	data.forEach(function(item, i){
 		let status = item.status;
 		const value = item.frequency;
-		let checkPicStatus = false;
 		if( status != 8 || status != 12){
 			switch(true){
 				case value < middler:
@@ -23,17 +26,43 @@ const fnUpdateMotor = function(from, group, data){
 		};
 		const index = dataCT.color.motor.findIndex( item => item.status == status );
 		const backgroundColor= dataCT.color.motor[index].color;
-		$('.block:eq('+group+') .card-item[data-type="'+from+'"] .right-item:eq('+i+') .right-color').attr('data-status', status).css({backgroundColor}).text(value);
+		prefix.find('.right-item:eq('+i+') .right-color').attr('data-status', status).css({backgroundColor}).text(value);
 	});
-
-
-
+	prefix.find('.card-left .left-img').removeClass('is-nor is-err').addClass(picStatus);
 };
 
-$(()=>{
-	console.log('aaa');
+const fnUpdatePipe = function(group, data){
+	const prefix = $('.block:eq('+group+') .card-item[data-type="pipe"]');
+	//-----
+	const outValue = data.out.value;
+	const outLimit = dataCT.threshold.pipe.out;
+	const outStatus = outValue >= outLimit ? 14 : 13;
+	const outIndex = dataCT.color.pipe.findIndex( item => item.status == outStatus );
+	const outColor = dataCT.color.pipe[outIndex].color;
+	prefix.find('.pipe-item[data-pipe="out"] .pipe-num').attr('data-status', outStatus).css('backgroundColor', outColor).text(outValue);
+	//-----
+	const pValue = data.p.value;
+	const pLimit = dataCT.threshold.pipe.p;
+	const pStatus = pValue >= pLimit ? 14 : 13;
+	const pIndex = dataCT.color.pipe.findIndex( item => item.status == pStatus );
+	const pColor = dataCT.color.pipe[pIndex].color;
+	prefix.find('.pipe-item[data-pipe="p"] .pipe-num').attr('data-status', pStatus).css('backgroundColor', pColor).text(pValue);
+	//-
+	const deg = Math.round( 180 * ( pValue / 2 ) / 10 ) * 10;
+	console.log(pValue, deg);
+	prefix.find('.pipe-guide').css('transform', 'rotate('+deg+'deg)');
+	// prefix.find('.pipe-guide').text('aaaaa')
+	//-----
+	prefix.find('.left-img').removeClass('is-err is-nor')
+	if(outStatus == 14 || pStatus == 14){
+		prefix.find('.left-img').addClass('is-err');
+	}else{
+		prefix.find('.left-img').addClass('is-nor');
+	}
+};
 
-	$('.logo-title').click(function(){
+const fnUpdate = function(time){
+	setInterval(function(){
 		ii = ii == 1 ? 2 : 1;
 		console.log('ii is ', ii);
 		$.ajax({
@@ -44,10 +73,15 @@ $(()=>{
 				dataMain = res;
 				// console.log(dataMain.group);
 				for(i=0;i<dataMain.group.length;i++){
-					fnUpdateMotor('cwp', i, dataMain.group[i].cwp);
-					fnUpdateMotor('fan', i, dataMain.group[i].fan);
+					fnUpdateMotor(i, dataMain.group[i].cwp, 'cwp');
+					fnUpdateMotor(i, dataMain.group[i].fan, 'fan');
+					fnUpdatePipe(i, dataMain.group[i].pipe);
 				}
 			}
 		})
-	})
+	}, time * 1000 / 40 );
+}
+
+$(()=>{
+
 })

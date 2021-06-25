@@ -1,5 +1,4 @@
 const nowChart = {
-	bindex: 0,
 	gindex: 0,
 	mindex: 0,
 	data: new Object,
@@ -152,7 +151,7 @@ const fnRander = function(target, scales, data, machineData) {
 
 		// VALUE v
 		const ch = nowChart.main == 'cwp' ? '水泵浦' : '水塔風扇';
-		$('span[data-span="show_name"').text(nowChart.data.group[nowChart.gindex].show_name);
+		$('span[data-span="show_name"').text(dataMain.group[nowChart.gindex].show_name);
 		$('span[data-span="motor"]').text(ch);
 		$('span[data-span="machine"]').text(machineData.machine);
 		//
@@ -232,29 +231,28 @@ const switchControl = {
 
 $(()=>{
 	// 各 group btn v
-	$('body').on('click', '.col-row[data-for="lb"]', function(){
-		nowChart.bindex = $(this).attr('data-build-index');
+  $('body').on('click', '.right-item', function(){
 		nowChart.gindex = $(this).attr('data-group-index');
-		nowChart.mindex = 0;
-		nowChart.data = dataMain.data[nowChart.bindex];
-		nowChart.dataCwp = nowChart.data.group[nowChart.gindex].cwp;
-		nowChart.dataFan = nowChart.data.group[nowChart.gindex].fan;
-		const thisOpenedId = nowChart.bindex + nowChart.gindex;
+		nowChart.mindex = $(this).attr('data-machine-index');
+    nowChart.main = $(this).attr('data-from');
+		nowChart.dataCwp = dataMain.group[nowChart.gindex].cwp;
+		nowChart.dataFan = dataMain.group[nowChart.gindex].fan;
+		const thisOpenedId = nowChart.gindex + nowChart.main + nowChart.mindex;
 
 		if( thisOpenedId != lbObj.openedId ){
-			$('.col-row[data-for="lb"]').removeClass('active');
-			$(this).addClass('active');
+			$('.right-item').removeClass('active');
+		  $(this).addClass('active');
 			lbObj.openedId = thisOpenedId;
 			// ----------------------------
 			// HTML v
 			// ----------------------------
-			$('#lb-build span').text(nowChart.data.build);
-			$('#lb-subtitle span').text(nowChart.data.total_pc);
+			$('#lb-build span').text(dataMain.build);
+			$('#lb-subtitle span').text(dataMain.total_pc);
 			//-
 
 			$('#lb-label').html('');
 			let g = '';
-			nowChart.data.group.forEach(function(item, i){
+			dataMain.group.forEach(function(item, i){
 				g+='<div class="lblabel-item';
 				if( i == nowChart.gindex ){ g+=' active'};
 				g+='" data-group-index='+i+'>'+item.show_name;
@@ -305,12 +303,16 @@ $(()=>{
 		//
 		nowChart.mindex = 0;
 		nowChart.gindex = $(this).attr('data-group-index');
-		nowChart.dataCwp = nowChart.data.group[nowChart.gindex].cwp;
-		nowChart.dataFan = nowChart.data.group[nowChart.gindex].fan;
+		nowChart.dataCwp = dataMain.group[nowChart.gindex].cwp;
+		nowChart.dataFan = dataMain.group[nowChart.gindex].fan;
+
+		//
+		$('.right-item').removeClass('active');
+		$('.block:eq('+nowChart.gindex+') .card-item[data-type="'+nowChart.main+'"] .right-item:eq(0)').addClass('active');
 
 		// value v
-		$('#lb-build span').text(nowChart.data.build);
-		$('#lb-subtitle span').text(nowChart.data.total_pc);
+		$('#lb-build span').text(dataMain.build);
+		$('#lb-subtitle span').text(dataMain.total_pc);
 		//
 		$('.c-box#for-cwp, .c-box#for-fan').html('');
 		$('.c-box#for-cwp').html(fnCItemHtml('cwp',nowChart.dataCwp));
@@ -362,12 +364,12 @@ $(()=>{
 			nowChart.mindex = $(this).attr('data-machine-index');
 			// const data = nowChart.main == 'cwp' ? nowChart.dataCwp : nowChart.dataFan;
 			// --
-			nowChart.dataCwp = nowChart.data.group[nowChart.gindex].cwp;
-			nowChart.dataFan = nowChart.data.group[nowChart.gindex].fan;
+			nowChart.dataCwp = dataMain.group[nowChart.gindex].cwp;
+			nowChart.dataFan = dataMain.group[nowChart.gindex].fan;
 
 			// value v
-			$('#lb-build span').text(nowChart.data.build);
-			$('#lb-subtitle span').text(nowChart.data.total_pc);
+			$('#lb-build span').text(dataMain.build);
+			$('#lb-subtitle span').text(dataMain.total_pc);
 			//
 			$('.c-box#for-cwp, .c-box#for-fan').html('');
 			$('.c-box#for-cwp').html(fnCItemHtml('cwp',nowChart.dataCwp));

@@ -135,7 +135,7 @@ const fnHtmlPipe = function(data){
 					h+='<div class="pipe-name">回水溫：</div>'
 					h+='<div class="pipe-num">'+data.in+'</div>'
 				h+='</div>'
-				h+='<div class="pipe-item">'
+				h+='<div class="pipe-item" data-pipe="out">'
 					h+='<div class="pipe-name">出水溫：</div>'
 					const outValue = data.out.value;
 					const outLimit = dataCT.threshold.pipe.out;
@@ -144,7 +144,7 @@ const fnHtmlPipe = function(data){
 					const outColor = dataCT.color.pipe[outIndex].color;
 					h+='<div class="pipe-num" data-status="'+outStatus+'" style="background-color:'+outColor+'">'+outValue+'</div>'
 				h+='</div>'
-				h+='<div class="pipe-item">'
+				h+='<div class="pipe-item" data-pipe="p">'
 					h+='<div class="pipe-name">水壓差：</div>'
 					const pValue = data.p.value;
 					const pLimit = dataCT.threshold.pipe.p;
@@ -192,6 +192,8 @@ $(()=>{
 						h+='</div>' // block
 					});
 					$('#wrapper-single').html(h);
+
+					// fnUpdate(dataMain.update);
 				}
 			})
 		}

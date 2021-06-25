@@ -109,11 +109,11 @@
 			"pipe": {
 				"in": 33,
 				"out": {
-					"value": 33,
+					"value": 30,
 					"status": 13
 				},
 				"p": {
-					"value": 0.1,
+					"value": 0.6,
 					"status": 14
 				}
 			},
@@ -237,11 +237,11 @@
 			"pipe": {
 				"in": 34,
 				"out": {
-					"value": 34,
+					"value": 33,
 					"status": 14
 				},
 				"p": {
-					"value": 0.6,
+					"value": 0.1,
 					"status": 14
 				}
 			},
