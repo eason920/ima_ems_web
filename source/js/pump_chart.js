@@ -130,7 +130,7 @@ const fnRander = function(target, scales, data, machineData) {
 			const yMax = 60;
 			const percent = original / yMax;
 			const addTop = bottomMax * percent;
-			console.log($('#' + target).siblings(0), machineData.chart);
+			// console.log($('#' + target).siblings(0), machineData.chart);
 			$('.'+target).css('bottom', 'calc(53px + '+Math.floor(addTop)+'px)');	
 			// $('.c-limit').css('bottom', 'calc(53px + '+Math.floor(addTop)+'px)');	
 		}
@@ -172,6 +172,8 @@ const fnRanderAll = function(){
 	};
 	if( !isMobile ){
 		const data = nowChart.main == 'cwp' ? nowChart.dataCwp : nowChart.dataFan;
+		// console.log(nowChart.main);
+		// console.log(nowChart.dataCwp);
 		// --
 		fnRander('main', scales_m, data[nowChart.mindex].chart.data, data[nowChart.mindex]);
 	};
@@ -207,7 +209,9 @@ const switchControl = {
 		c2o(){ 
 			$('#lb, #lb-masker').show() },
 		o2c(){ 
-			$('#lb, #lb-masker').hide() }
+			$('#lb, #lb-masker').hide() 
+			$('body').removeClass('is-open')
+		}
 	},
 	"pc": {
 		c2o(){
@@ -323,7 +327,7 @@ $(()=>{
 	})
 
 	// lb ^ 鈕 v
-	$('#lb-cbox').click(function(){
+	const fnShare = function(){
 		if( $('#lb-subtitle span').text().trim() !== '' ){
 			// 不是第一次進場 / canvas 己繪製
 			// clearInterval(lbObj.sid);
@@ -353,6 +357,13 @@ $(()=>{
 		}else{
 			alert('請點擊指定住戶以察看詳細');
 		};
+	}
+	$('body').on('click', '#mb-btn', function(){
+		fnShare();
+	});
+
+	$('#lb-cbox').click(function(){
+		fnShare();
 	});
 
 	// ----------------------------

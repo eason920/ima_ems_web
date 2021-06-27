@@ -39,6 +39,14 @@ $(()=>{
 		$('.sys-bbox').removeClass('is-muted');
 	});
 
+
+	$('#updateColor, #updateThre').click(function(){
+		if( /iphone | ipad | android/i.test(nua) ){
+			console.log('is mb');
+			$('#hamber').removeClass('is-open');
+			$('#mbbox, #nav-masker').hide()
+		}
+	})
 	// ----------------------------
 	// demo v
 	// ----------------------------

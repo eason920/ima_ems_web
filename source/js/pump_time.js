@@ -49,7 +49,7 @@ const fnUpdatePipe = function(group, data){
 	prefix.find('.pipe-item[data-pipe="p"] .pipe-num').attr('data-status', pStatus).css('backgroundColor', pColor).text(pValue);
 	//-
 	const deg = Math.round( 180 * ( pValue / 2 ) / 10 ) * 10;
-	console.log(pValue, deg);
+	// console.log(pValue, deg);
 	prefix.find('.pipe-guide').css('transform', 'rotate('+deg+'deg)');
 	// prefix.find('.pipe-guide').text('aaaaa')
 	//-----
@@ -64,7 +64,7 @@ const fnUpdatePipe = function(group, data){
 const fnUpdate = function(time){
 	setInterval(function(){
 		ii = ii == 1 ? 2 : 1;
-		console.log('ii is ', ii);
+		// console.log('ii is ', ii);
 		$.ajax({
 			url: './data/build01/pump/main_'+ii+'.json',
 			type: 'GET',
@@ -77,6 +77,20 @@ const fnUpdate = function(time){
 					fnUpdateMotor(i, dataMain.group[i].fan, 'fan');
 					fnUpdatePipe(i, dataMain.group[i].pipe);
 				}
+
+				// ----------------------------
+				if( $('#lb').attr('data-open') == 'true' ){ // LB開着才需要更新
+					console.log('%cchart active', 'color:yellow');
+					nowChart.dataCwp = dataMain.group[nowChart.gindex].cwp;
+					nowChart.dataFan = dataMain.group[nowChart.gindex].fan;
+
+					$('.c-box#for-cwp, .c-box#for-fan').html('');
+					$('.c-box#for-cwp').html(fnCItemHtml('cwp',nowChart.dataCwp));
+					$('.c-box#for-fan').html(fnCItemHtml('fan',nowChart.dataFan));
+
+					// chart v
+					fnRanderAll();
+				};
 			}
 		})
 	}, time * 1000 / 40 );

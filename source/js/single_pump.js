@@ -4,6 +4,8 @@ let dataCT = new Object();
 const nua = navigator.userAgent;
 const isMobile = /iphone | ipad | android/i.test(nua);
 
+const build_id = location.href.split('?build_id=')[1].split('&')[0];
+
 let ii = 1
 
 const fnHtmlTitle = function(data, name){
@@ -166,20 +168,22 @@ const fnHtmlPipe = function(data){
 }
 
 $(()=>{
-	console.log('got single_pump.js');
 	$.ajax({
-		url: './data/build01/pump/pump_setting.json',
+		url: './data/'+build_id+'/pump/pump_setting.json',
 		type: 'GET',
 		dataType: 'json',
 		success(res){
 			dataCT = res;
-			console.log(dataCT);
+			fnRenderColor(dataCT.color);
+			setingMinicolor();
+			
 			$.ajax({
-				url: './data/build01/pump/main_'+ii+'.json',
+				url: './data/'+build_id+'/pump/main_'+ii+'.json',
 				type: 'GET',
 				dataType: 'json',
 				success(res){
 					dataMain = res;
+					fnTime(dataMain.data_time);
 					let h = '<div id="mb-btn">省電詳細</div>';
 					dataMain.group.forEach(function(item, i){
 						h+='<div class="block">'
@@ -193,9 +197,16 @@ $(()=>{
 					});
 					$('#wrapper-single').html(h);
 
-					// fnUpdate(dataMain.update);
+					fnUpdate(dataMain.update);
 				}
 			})
 		}
-	})
+	});
+
+	if( isMobile ){
+		$('#hamber').click(function(){
+			$(this).toggleClass('is-open');
+			$('#mbbox, #nav-masker').toggle();
+		});
+	}
 });

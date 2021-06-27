@@ -1,6 +1,7 @@
 const fnRenderColor = function(data){
 	let sys = ''; // 調整用色 SYS LB
 	for( unit in data ){
+		// console.log(unit, 'unit');
 		let nav = ''; // NAV 演示用色
 		data[unit].forEach(function(item){
 			nav += '<div class="status-item" data-status="' + item.status + '">';
@@ -17,7 +18,6 @@ const fnRenderColor = function(data){
 		});
 		
 		// ----------------------------
-		if( unit == 'chiller' ){ unit = 'chillm' };
 		$('.status-'+unit).html(nav); // NAV
 		//
 		if( unit != 'pipe'){ sys += '<hr>'};
@@ -49,18 +49,18 @@ const setingMinicolor = function(){
 };
 
 $(()=>{
-  $('.log-color').click(function(){
-    fnRenderColor(dataColor);
-    setingMinicolor();
-  });
+	$('.log-color').click(function(){
+		fnRenderColor(dataCT.color);
+		setingMinicolor();
+	});
 
 	$('#updateColor').click(function(){
-		dataColor = {
-			chiller: [],
+		dataCT.color = {
 			motor: [],
 			pipe: []
 		};
-		let i=0
+		let i=0;
+
 		$('.sys-citem').each(function(){
 			const status = $(this).attr('data-status');
 			const name = $(this).find('.sys-ctxt').text();
@@ -68,24 +68,20 @@ $(()=>{
 			
 			let key;
 			switch(true){
-				case i <=1:
-					key = 'chiller';
-					break;
-				case i <= 6:
+				case i <= 4:
 					key = 'motor';
 					break;
-				case i > 6:
+				case i > 4:
 					key = 'pipe'
 					break;
 				default:
 			};
 			
-			dataColor[key].push({name, status, color});
+			dataCT.color[key].push({name, status, color});
 			i++
 		});
-
+		console.log('color > ', dataCT.color);
 		// ----------------------------
-		console.log(dataColor);
 		// $.ajax({
 		// 	type: 'POST',
 		// 	url: '',
@@ -95,14 +91,13 @@ $(()=>{
 		// })
 
 		// ----------------------------
-		fnRenderColor(dataColor);
+		fnRenderColor(dataCT.color);
 		setingMinicolor();
 		//-
-		dataMain.data.forEach(function(item, index){
-			fnUpdateChiller(index, 'chiller');
-			fnUpdateMotor(index, 'cwp');
-			fnUpdateMotor(index, 'fan');
-			fnUpdatePipe(index, 'pipe');
-		});
+		for(i=0;i<dataMain.group.length;i++){
+			fnUpdateMotor(i, dataMain.group[i].cwp, 'cwp');
+			fnUpdateMotor(i, dataMain.group[i].fan, 'fan');
+			fnUpdatePipe(i, dataMain.group[i].pipe);
+		}
 	});
 });

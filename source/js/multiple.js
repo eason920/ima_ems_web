@@ -259,7 +259,7 @@ const fnPageLabel = function(){
 	
 	// MIDDLE v
 	for(i=1;i<=dataMain.page_total;i++){
-		console.log('i', i);
+		// console.log('i', i);
 		p+='<a href="multiple.html?page='+i+'" class="mullabel-item'
 		if(i==PAGE){
 			p+=' active';

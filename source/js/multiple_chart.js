@@ -131,7 +131,7 @@ const fnRander = function(target, scales, data, machineData) {
 			const yMax = 60;
 			const percent = original / yMax;
 			const addTop = bottomMax * percent;
-			console.log($('#' + target).siblings(0), machineData.chart);
+			// console.log($('#' + target).siblings(0), machineData.chart);
 			$('.'+target).css('bottom', 'calc(53px + '+Math.floor(addTop)+'px)');	
 			// $('.c-limit').css('bottom', 'calc(53px + '+Math.floor(addTop)+'px)');	
 		}
@@ -208,7 +208,9 @@ const switchControl = {
 		c2o(){ 
 			$('#lb, #lb-masker').show() },
 		o2c(){ 
-			$('#lb, #lb-masker').hide() }
+			$('#lb, #lb-masker').hide() 
+			$('body').removeClass('is-open')
+		}
 	},
 	"pc": {
 		c2o(){
