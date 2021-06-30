@@ -156,7 +156,7 @@ const fnInterval = function(){
 				};
 			}
 		})
-	}, 1000 * dataMain.update /40);
+	}, dataMain.update * 1000);
 }
 
 $(()=>{

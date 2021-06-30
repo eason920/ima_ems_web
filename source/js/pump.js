@@ -197,7 +197,7 @@ $(()=>{
 					});
 					$('#wrapper-single').html(h);
 
-					fnUpdate(dataMain.update);
+					fnInterval();
 				}
 			})
 		}

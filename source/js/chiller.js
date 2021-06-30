@@ -117,7 +117,7 @@ const fnCanvasActive = function(number, floor, show){
 	// 多次性
 	lbObj.sid = setInterval(function(){
 		fnCanvas(number, floor, show);
-	}, 1000 * dataMain.update );
+	}, dataMain.update * 1000 );
 }
 
 const fnRenderBuild = function(data){

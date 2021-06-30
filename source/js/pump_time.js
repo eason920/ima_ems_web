@@ -61,7 +61,7 @@ const fnUpdatePipe = function(group, data){
 	}
 };
 
-const fnUpdate = function(time){
+const fnInterval = function(){
 	setInterval(function(){
 		ii = ii == 1 ? 2 : 1;
 		// console.log('ii is ', ii);
@@ -93,7 +93,7 @@ const fnUpdate = function(time){
 				};
 			}
 		})
-	}, time * 1000 / 40 );
+	}, dataMain.update * 1000 );
 }
 
 $(()=>{

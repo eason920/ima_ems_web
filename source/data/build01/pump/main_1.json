@@ -1,6 +1,6 @@
 {
 	"data_time": "2021/05/22-07:20",
-	"update": 60,
+	"update": 1.5,
 	"build": "中國信托大樓",
 	"total_pc": 399,
 	"group": [
@@ -29,7 +29,7 @@
 				},
 				{
 					"machine": "30HP02",
-					"status": 11,
+					"status": "",
 					"frequency": 35,
 					"chart": {
 						"total_kwh_saved": 122.25,
@@ -44,7 +44,7 @@
 				},
 				{
 					"machine": "15HP",
-					"status": 10,
+					"status": "",
 					"frequency": 0,
 					"chart": {
 						"total_kwh_saved": 123,
@@ -59,7 +59,7 @@
 			"fan": [
 				{
 					"machine": "fan2-g1-1",
-					"status": 11,
+					"status": "",
 					"frequency": 30,
 					"chart": {
 						"total_kwh_saved": 21.1,
@@ -75,7 +75,7 @@
 				{
 					"machine": "fan2-g1-2",
 					"status": 12,
-					"frequency": 31,
+					"frequency": "-",
 					"chart": {
 						"total_kwh_saved": 21.2,
 						"original_kw": 21,
@@ -85,7 +85,7 @@
 				},
 				{
 					"machine": "fan2-g1-3",
-					"status": 11,
+					"status": "",
 					"frequency": 60,
 					"chart": {
 						"total_kwh_saved": 21.3,
@@ -96,7 +96,7 @@
 				},
 				{
 					"machine": "fan2-g1-4",
-					"status": 11,
+					"status": "",
 					"frequency": 60,
 					"chart": {
 						"total_kwh_saved": 21.4,
@@ -110,11 +110,11 @@
 				"in": 33,
 				"out": {
 					"value": 30,
-					"status": 13
+					"status": ""
 				},
 				"p": {
 					"value": 0.6,
-					"status": 14
+					"status": ""
 				}
 			},
 			"switch": [
@@ -139,7 +139,7 @@
 				{
 					"machine": "30HP01",
 					"status": 8,
-					"frequency": 30,
+					"frequency": "-",
 					"chart": {
 						"total_kwh_saved": 211.25,
 						"original_kw": 40,
@@ -153,7 +153,7 @@
 				},
 				{
 					"machine": "30HP02",
-					"status": 9,
+					"status": "",
 					"frequency": 31,
 					"chart": {
 						"total_kwh_saved": 11.25,
@@ -168,7 +168,7 @@
 				},
 				{
 					"machine": "15HP",
-					"status": 11,
+					"status": "",
 					"frequency": 61,
 					"chart": {
 						"total_kwh_saved": 0,
@@ -183,7 +183,7 @@
 			"fan": [
 				{
 					"machine": "fan2-g2-1",
-					"status": 8,
+					"status": "",
 					"frequency": 221,
 					"chart": {
 						"total_kwh_saved": 22.1,
@@ -198,7 +198,7 @@
 				},
 				{
 					"machine": "fan2-g2-2",
-					"status": 8,
+					"status": "",
 					"frequency": 222,
 					"chart": {
 						"total_kwh_saved": 22.2,
@@ -209,7 +209,7 @@
 				},
 				{
 					"machine": "fan2-g2-3",
-					"status": 8,
+					"status": "",
 					"frequency": 223,
 					"chart": {
 						"total_kwh_saved": 22.3,
@@ -224,7 +224,7 @@
 				},
 				{
 					"machine": "fan2-g2-4",
-					"status": 9,
+					"status": "",
 					"frequency": 224,
 					"chart": {
 						"total_kwh_saved": 22.4,
@@ -238,11 +238,11 @@
 				"in": 34,
 				"out": {
 					"value": 33,
-					"status": 14
+					"status": ""
 				},
 				"p": {
 					"value": 0.1,
-					"status": 14
+					"status": ""
 				}
 			},
 			"switch": [
