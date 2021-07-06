@@ -1,0 +1,50 @@
+{
+	"color": {
+		"motor": [
+			{
+				"name": "關機",
+				"status": 8,
+				"color": "#999"
+			},
+			{
+				"name": "開機頻率(低)",
+				"status": 9,
+				"color": "#9B9BEA"
+			},
+			{
+				"name": "開機頻率(中)",
+				"status": 10,
+				"color": "#4B4BEA"
+			},
+			{
+				"name": "開機頻率(高)",
+				"status": 11,
+				"color": "#C1272D"
+      },
+			{
+				"name": "斷訊",
+				"status": 12,
+				"color": "#F7931E"
+			}
+		],
+		"pipe": [
+			{
+				"name": "出水溫、水壓差(低)",
+				"status": 13,
+				"color": "#8CC63F"
+			},
+			{
+				"name": "出水溫、水壓差(高)",
+				"status": 14,
+				"color": "#C1272D"
+			}
+		]
+	},
+  "threshold": {
+		"motor": [31, 61],
+		"pipe": {
+			"out": 34,
+			"p": 0.6
+		}
+	}
+}
