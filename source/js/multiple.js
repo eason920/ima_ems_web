@@ -315,7 +315,7 @@ $(()=>{
 						dataType: 'json',
 						success(res){
 							dataMain = res;
-							fnTime(dataMain.data_time);
+							
 							fnPageLabel();
 
 							// ----------------------------
@@ -324,25 +324,31 @@ $(()=>{
 							let h = '';
 							for( build in dataMain.data ){
 								h+='<div class="build">'
-								h+=	'<div class="build-title">' + dataMain.data[build].build +'</div>'
-								h+=	'<div class="build-body">'
-								// G
-								h+= fnHtmlGroup(build, 'group')
-								// C
-								h+= fnHtmlChiller(build, 'chiller')
-								// // M
-								h+='<div class="col" data-unit="motor">'
-								h+= fnHtmlMotor(build, 'cwp')
-								h+= fnHtmlMotor(build, 'fan')
-								h+='</div>'
-								// // P
-								h+= fnHtmlPipe(build, 'pipe')
-								// // S
-								h+= fnHtmlSwitch(build, 'switch')
-								// // p
-								h+= fnHtmlPhy(build, 'phy')
-								// GCMPSP END
-								h+=	'</div>' // .build-body
+									h+=	'<div class="build-title">' + dataMain.data[build].build +'</div>'
+									// ----------------------------
+									h+=	'<div class="build-body">'
+									// G
+									h+= fnHtmlGroup(build, 'group')
+									// C
+									h+= fnHtmlChiller(build, 'chiller')
+									// // M
+									h+='<div class="col" data-unit="motor">'
+									h+= fnHtmlMotor(build, 'cwp')
+									h+= fnHtmlMotor(build, 'fan')
+									h+='</div>'
+									// // P
+									h+= fnHtmlPipe(build, 'pipe')
+									// // S
+									h+= fnHtmlSwitch(build, 'switch')
+									// // p
+									h+= fnHtmlPhy(build, 'phy')
+									// GCMPSP END
+									h+=	'</div>' // .build-body
+									// ----------------------------
+									h+='<div class="build-time" data-err="false">'
+									h+='<div class="build-time-date">資料更新：<span></span></div>'
+									h+='<b class="build-time-text">網路斷訊或伺服資料錯誤</b>'
+									h+='</div>'
 								h+='</div><br>' // .build
 								// ----------------------------
 								if( Number(build) == dataMain.data.length - 1 ){
@@ -353,6 +359,9 @@ $(()=>{
 								}
 							}
 							$('#wrapper-single').html(h);
+							for( build in dataMain.data ){
+								fnTime(build, dataMain.data[build].data_time);
+							};
 						}
 					}); // ajax main
 				}

@@ -3,8 +3,11 @@
 		img.logo-img(src='./images/logo.png')
 		.logo-title 今時科技股份有限公司
 	#location
-		|案場：
-		span 中國信托大樓
+		if !multiple
+			|案場：
+			span
+		else
+			|案場總覽
 	#nav-mul
 		span 案場總覽
 		#mullabel

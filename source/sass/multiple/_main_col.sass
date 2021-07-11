@@ -5,6 +5,7 @@
 	border-radius: 12px
 	font-size: 14px
 	margin-bottom: 15px
+	position: relative
 
 // ----------------------------
 .build-title
@@ -21,6 +22,28 @@
 .build-body
 	width: calc( 100% - #{$w-btitle})
 	display: flex
+	margin-bottom: 25px
+
+.build-time
+	position: absolute
+	bottom: 0
+	left: 70px
+	right: 0
+	height: 25px
+	display: flex
+	align-items: center
+	padding: 0 9px
+	font-size: 12px
+	border-top: solid 1px $c-border
+	background-color: $c-bg
+	&[data-err="true"]
+		background-color: #FFF9D7
+		color: red
+		.build-time-text
+			display: block
+
+.build-time-text
+	display: none
 
 // ----------------------------
 .col
@@ -156,6 +179,13 @@
 		
 	.build-body
 
+	.build-time-date
+		order: 1
+		margin-right: 15px
+
+	.build-time-text
+		order: 2
+
 	// ----------------------------
 	.col
 
@@ -180,7 +210,16 @@
 	.build-title
 		
 	.build-body
+	
+	.build-time
+		justify-content: flex-end
+		
+	.build-time-date
+		order: 2
+		margin-left: 15px
 
+	.build-time-text
+		order: 1
 	// ----------------------------
 	.col
 

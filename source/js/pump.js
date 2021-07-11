@@ -183,6 +183,7 @@ $(()=>{
 				dataType: 'json',
 				success(res){
 					dataMain = res;
+					$('#location span').text(dataMain.build)
 					if( !dataMain.have_chiller ){ $('.navlabel-item[data-unit="chiller"]').hide(); }
 					fnTime(dataMain.data_time);
 					let h = '<div id="mb-btn">省電詳細</div>';

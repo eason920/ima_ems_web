@@ -121,7 +121,7 @@ const fnUpdatePhy = function(build, from){
 
 const fnInterval = function(){
 	setInterval(function(){
-		fnTime(dataMain.data_time);
+		
 		ii = ii == 1 ? 2:1;
 		$.ajax({
 			type: "GET",
@@ -136,6 +136,9 @@ const fnInterval = function(){
 					fnUpdatePipe(build, 'pipe');
 					fnUpdateSwitch(build, 'switch');
 					fnUpdatePhy(build);
+				};
+				for( build in res.data ){
+					fnTime(build, dataMain.data[build].data_time);
 				};
 				// ----------------------------
 				if( $('#lb').attr('data-open') == 'true' ){ // LB開着才需要更新

@@ -9,7 +9,7 @@ html(lang='en')
 		//-----------------------------
 		script(src='./assets/plugins/jquery/jquery-1.12.4-min.js')
 		script(src='./assets/plugins/chart-js/Chart-2.8.0.min.js')
-		script(src='./js/share_time_check.js')
+		script(src='./js/multiple_time_check.js')
 		//- script(src='./js/share_pump_multiple.js')
 		script(src='./js/multiple_time.js')
 		script(src='./js/multiple.js')
@@ -23,6 +23,7 @@ html(lang='en')
 		script(src='./js/sys_multiple_color.js')
 	//- body.is-open
 	body
+		-var multiple = true
 		include nav
 		include times
 		#content

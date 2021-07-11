@@ -1,11 +1,11 @@
 {
-	"data_time": "2021/05/22-07:20",
 	"update": 1.5,
 	"prev": false,
 	"page_total": 5,
 	"next": 2,
 	"data": [
 		{
+			"data_time": "2021/07/12-17:26",
 			"build": "中國信托大樓",
 			"build_id": "b01",
 			"total_pc": 111.2,
@@ -117,6 +117,7 @@
 			]      
 		},
     {
+			"data_time": "2021/07/12-17:25",
 			"build": "內科Benq大樓",
 			"build_id": "b02",
 			"total_pc": 222.2,
@@ -380,6 +381,7 @@
 			]      
 		},
     {
+			"data_time": "2021/07/12-07:20",
 			"build": "湯城大樓",
 			"build_id": "b03",
 			"total_pc": 333,
@@ -757,6 +759,7 @@
 			]      
 		},
     {
+			"data_time": "2021/07/12-07:20",
 			"build": "林口廣達大樓",
 			"build_id": "b04",
 			"total_pc": 444,
@@ -1204,6 +1207,7 @@
 			]      
 		},
     {
+			"data_time": "2021/07/12-07:20",
 			"build": "文德大樓",
 			"build_id": "b05",
 			"total_pc": 555,
