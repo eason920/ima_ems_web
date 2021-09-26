@@ -67,6 +67,7 @@ $(()=>{
 	});
 
 	$('#updateColor').click(function(){
+		console.log('is chiller color update');
 		dataColor = [];
 		$('.sys-citem').each(function(){
 			const status = $(this).attr('data-status');
@@ -78,13 +79,20 @@ $(()=>{
 
 		// ----------------------------
 		console.log(dataColor);
-		// $.ajax({
-		// 	type: 'POST',
-		// 	url: '',
-		// 	contentType: 'application/json',
-		// 	data: JSON.stringify(data),
-		// 	success(res){}
-		// })
+		const url = apiPrifix + 'api/single_chiller/chill_update/build_id=' + build_id;
+		const data = '{"color":{"chiller":' + JSON.stringify(dataColor) + '}}';
+		console.log('update api is ', url);
+		console.log('data is ', data);
+		$.ajax({
+			type: 'POST',
+			url,
+			data,
+			contentType: 'application/json',
+			dataType: 'json',
+			success(res){
+				console.log(res);
+			}
+		})
 
 		// ----------------------------
 		fnRenderColor(dataColor);

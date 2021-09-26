@@ -1,0 +1,47 @@
+rbox-error-btn
+fnCanvasActive
+fnCanvas
+
+https://dash.ima-ems.com/api/single_chiller/chill_update/build_id=<string:build_id>
+https://dash.ima-ems.com/api/single_chiller/chill_update/build_id=01
+
+update color v (壓成字串)
+{"color":{"chiller":[{"name":"沒有住戶","status":"0","color":"#fff000"},{"name":"關機正常","status":"1","color":"#fff000"},{"name":"開機正常","status":"2","color":"#fff000"},{"name":"開機異常","status":"3","color":"#fff000"},{"name":"關機異常","status":"4","color":"#fff000"},{"name":"斷訊","status":"5","color":"#fff000"}]}}
+
+展開 v
+{
+    "color": {
+        "chiller": [
+            {
+                "name": "沒有住戶",
+                "status": "0",
+                "color": "#ffe205"
+            },
+            {
+                "name": "關機正常",
+                "status": "1",
+                "color": "#f7ff06"
+            },
+            {
+                "name": "開機正常",
+                "status": "2",
+                "color": "#dce304"
+            },
+            {
+                "name": "開機異常",
+                "status": "3",
+                "color": "#fce304"
+            },
+            {
+                "name": "關機異常",
+                "status": "4",
+                "color": "#ffe604"
+            },
+            {
+                "name": "斷訊",
+                "status": "5",
+                "color": "#f3f705"
+            }
+        ]
+    }
+}

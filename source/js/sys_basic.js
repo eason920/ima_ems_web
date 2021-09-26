@@ -19,7 +19,7 @@ $(()=>{
 		$('.sys-login').show();
 	});
 
-	$('.sys-close, .sys-btn').click(function(){
+	$('.sys-close').click(function(){
 		fnHide();
 	})
 
