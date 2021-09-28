@@ -64,12 +64,14 @@ const fnUpdatePipe = function(group, data){
 const fnInterval = function(){
 	setInterval(function(){
 		ii = ii == 1 ? 2 : 1;
-		// console.log('ii is ', ii);
+		console.log('ii is ', ii);
 		$.ajax({
-			url: './data/build01/pump/main_'+ii+'.json',
+			// url: './data/build01/pump/main_'+ii+'.json',
+			url: apiPrifix + 'api/single_pump/build_id=' + build_id,
 			type: 'GET',
 			dataType: 'json',
 			success(res){
+				console.log('in');
 				dataMain = res;
 				// console.log(dataMain.group);
 				for(i=0;i<dataMain.group.length;i++){
@@ -91,6 +93,10 @@ const fnInterval = function(){
 					// chart v
 					fnRanderAll();
 				};
+
+				// --------------------------------
+				console.log('time is ', dataMain.data_time);
+				fnTime(dataMain.data_time);
 			}
 		})
 	}, dataMain.update * 1000 );

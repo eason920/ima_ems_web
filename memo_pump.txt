@@ -1,0 +1,63 @@
+https://dash.ima-ems.com/
+https://dash.ima-ems.com/api/single_pump/pump_setting/build_id=<string:build_id>
+
+https://dash.ima-ems.com/api/single_pump/build_id=<string:build_id>
+
+https://dash.ima-ems.com/api/single_pump/pump_update/build_id=<string:build_id>
+
+// post v
+api/single_chiller/chill_update/build_id=<string:build_id>
+https://dash.ima-ems.com/api/single_chiller/chill_update/build_id=01
+https://dash.ima-ems.com/api/single_pump/pump_update/build_id=01
+
+{
+	"color": {
+		"motor": [{
+				"color": "#999",
+				"name": "關機",
+				"status": 8
+			},
+			{
+				"color": "#9B9BEA",
+				"name": "開機頻率(低)",
+				"status": 9
+			},
+			{
+				"color": "#4B4BEA",
+				"name": "開機頻率(中)",
+				"status": 10
+			},
+			{
+				"color": "#C1272D",
+				"name": "開機頻率(高)",
+				"status": 11
+			},
+			{
+				"color": "#F7931E",
+				"name": "斷訊",
+				"status": 12
+			}
+		],
+		"pipe": [{
+				"color": "#8CC63F",
+				"name": "出水溫、水壓差(低)",
+				"status": 13
+			},
+			{
+				"color": "#C1272D",
+				"name": "出水溫、水壓差(高)",
+				"status": 14
+			}
+		]
+	},
+	"threshold": {
+		"motor": [
+			35,
+			50
+		],
+		"pipe": {
+			"out": 34,
+			"p": 0.6
+		}
+	}
+}

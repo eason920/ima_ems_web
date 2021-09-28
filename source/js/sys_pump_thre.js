@@ -72,14 +72,19 @@ $(()=>{
 			console.log(ary, newData);
 		
 			dataCT.threshold = newData;
-			// $.ajax({
-			// 	type: 'POST',
-			// 	url: '',
-			// 	contentType: 'application/json',
-			// 	data: JSON.stringify(data),
-			// 	success(res){}
-			// })
 
+			$.ajax({
+				type: 'POST',
+				url: apiPrifix + 'api/single_pump/pump_update/build_id=' + build_id,
+				contentType: 'application/json',
+				dataType: 'json',
+				data: JSON.stringify(dataCT),
+				success(res){
+					console.log(res);
+				}
+			})
+
+			fnHide();
 			// VALUE v
 			for(i=0;i<dataMain.group.length;i++){
 				fnUpdateMotor(i, dataMain.group[i].cwp, 'cwp');

@@ -316,6 +316,8 @@ $(()=>{
 		}
 	});
 
+	$('.navlabel-item[data-unit="pump"]').attr('href', 'single_pump.html?build_id=' + build_id);
+
 	// ----------------------------
 	// CHART v
 	// ----------------------------

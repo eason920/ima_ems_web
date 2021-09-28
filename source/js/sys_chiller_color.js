@@ -91,6 +91,7 @@ $(()=>{
 			dataType: 'json',
 			success(res){
 				console.log(res);
+				fnHide();
 			}
 		})
 

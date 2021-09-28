@@ -4,6 +4,7 @@ let dataCT = new Object();
 const nua = navigator.userAgent;
 const isMobile = /iphone | ipad | android/i.test(nua);
 
+const apiPrifix= 'https://dash.ima-ems.com/';
 const build_id = location.href.split('?build_id=')[1].split('&')[0];
 
 let ii = 1
@@ -169,7 +170,8 @@ const fnHtmlPipe = function(data){
 
 $(()=>{
 	$.ajax({
-		url: './data/'+build_id+'/pump/pump_setting.json',
+		// url: './data/'+build_id+'/pump/pump_setting.json',
+		url: apiPrifix + 'api/single_pump/pump_setting/build_id=' + build_id,
 		type: 'GET',
 		dataType: 'json',
 		success(res){
@@ -178,7 +180,8 @@ $(()=>{
 			setingMinicolor();
 			
 			$.ajax({
-				url: './data/'+build_id+'/pump/main_'+ii+'.json',
+				// url: './data/'+build_id+'/pump/main_'+ii+'.json',
+				url: apiPrifix + 'api/single_pump/build_id=' + build_id,
 				type: 'GET',
 				dataType: 'json',
 				success(res){
@@ -204,6 +207,8 @@ $(()=>{
 			})
 		}
 	});
+
+	$('.navlabel-item[data-unit="chiller"]').attr('href', 'single_chiller.html?build_id=' + build_id);
 
 	if( isMobile ){
 		$('#hamber').click(function(){

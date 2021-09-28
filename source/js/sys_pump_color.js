@@ -80,16 +80,20 @@ $(()=>{
 			dataCT.color[key].push({name, status, color});
 			i++
 		});
-		console.log('color > ', dataCT.color);
+		console.log('color > ', dataCT);
 		// ----------------------------
-		// $.ajax({
-		// 	type: 'POST',
-		// 	url: '',
-		// 	contentType: 'application/json',
-		// 	data: JSON.stringify(data),
-		// 	success(res){}
-		// })
+		$.ajax({
+			type: 'POST',
+			url: apiPrifix + 'api/single_pump/pump_update/build_id=' + build_id,
+			contentType: 'application/json',
+			dataType: 'json',
+			data: JSON.stringify(dataCT),
+			success(res){
+				console.log(res);
+			}
+		})
 
+		fnHide();
 		// ----------------------------
 		fnRenderColor(dataCT.color);
 		setingMinicolor();
