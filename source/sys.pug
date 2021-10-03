@@ -41,7 +41,7 @@
 				input.sys-ipt(type='text')
 				.sys-txt 時為水壓差高
 		.sys-bbox
-			.sys-btn 取消
+			.sys-btn(onclick="fnHide();") 取消
 			.sys-btn#updateThre 修改
 
 //-----------------------------
@@ -64,5 +64,5 @@
 				.sys-sbtn 修改
 				input.minicolors-item(type='text' data-control='wheel' value='#f00' readonly)
 		.sys-bbox
-			.sys-btn 取消
+			.sys-btn(onclick="fnHide();") 取消
 			.sys-btn#updateColor 修改

@@ -69,10 +69,13 @@ $(()=>{
 
 	$('#updateThre').click(function(){
 		const index = $(this).attr('data-index');
-		const build_id = $(this).attr('data-build-id');
+		let build_id = $(this).attr('data-build-id');
 
 		if( dataThre[index].build_id == build_id ){
 			console.log(index, build_id);
+			if( build_id.length == 1 ){ build_id = "0" + build_id}
+			console.log('bid is ', build_id);
+
 			let ary = [];
 			$('.sys.sys-area .sys-ipt').each(function(){
 				ary.push( $(this).val() );
@@ -80,24 +83,31 @@ $(()=>{
 
 			// ----------------------------
 			const newData = {
-				"chiller": ary[0],
-				"motor": [ ary[1], ary[2]],
-				"pipe": {
-					"out": ary[3],
-					"p": ary[4]
+				"build_id": build_id,
+				"data": {
+					"chiller": ary[0],
+					"motor": [ ary[1], ary[2]],
+					"pipe": {
+						"out": ary[3],
+						"p": ary[4]
+					}
 				}
 			};
 
 			console.log(ary, newData);
 		
-			dataThre[index].data = newData;
-			// $.ajax({
-			// 	type: 'POST',
-			// 	url: '',
-			// 	contentType: 'application/json',
-			// 	data: JSON.stringify(data),
-			// 	success(res){}
-			// })
+			dataThre[index].data = newData.data;
+
+			$.ajax({
+				type: 'POST',
+				// url: '',
+				url: apiPrifix + 'api/multiple/multiple_update_threshold/build_id=' + nowPage,
+				contentType: 'application/json',
+				data: JSON.stringify(newData),
+				success(res){
+					console.log(res);
+				}
+			})
 
 			// VALUE v
 			fnUpdateChiller(index, 'chiller');
@@ -114,5 +124,7 @@ $(()=>{
 			$('.build:eq('+index+') .col[data-unit="pipe"] .col-limit span:eq(0)').text(ary[3]);
 			$('.build:eq('+index+') .col[data-unit="pipe"] .col-limit span:eq(1)').text(ary[4]);
 		}
+
+		fnHide();
 	})
 })

@@ -125,7 +125,8 @@ const fnInterval = function(){
 		ii = ii == 1 ? 2:1;
 		$.ajax({
 			type: "GET",
-			url: './data/page'+PAGE+'/main_' + ii + '.json',
+			// url: './data/page'+PAGE+'/main_' + ii + '.json',
+			url: apiPrifix + 'api/multiple/page=' + nowPage,
 			dataType: 'json',
 			success(res){
 				dataMain = res;

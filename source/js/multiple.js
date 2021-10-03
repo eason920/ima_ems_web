@@ -2,6 +2,9 @@ let dataMain = new Object();
 let dataColor = new Object();
 let dataThre = new Object()
 
+const apiPrifix= 'https://dash.ima-ems.com/';
+const nowPage = location.href.split('?page=')[1].split('&')[0];
+
 const nua = navigator.userAgent;
 const isMobile = /iphone | ipad | android/i.test(nua);
 
@@ -248,19 +251,27 @@ const fnBalance = function(){
 };
 
 const fnPageLabel = function(){
+	// --------------------------------
+	// -- PREV & NEXT
+	// --------------------------------	
+	// console.log( 'prev ', dataMain.prev );
+	// console.log('now page is ', nowPage );
+	// console.log('total is ', dataMain.total_page);
+	// console.log( 'next ', dataMain.next );
+
 	let p ='';
 	
 	// PREV v
 	if( dataMain.prev == false ){
 		p+='<a href="" class="mullabel-item muted">Prev</a>'
 	}else{
-		p+='<a href="multiple.html?page='+PAGE+'" class="mullabel-item">Prev</a>'
+		p+='<a href="?page='+PAGE+'" class="mullabel-item">Prev</a>'
 	};
 	
 	// MIDDLE v
-	for(i=1;i<=dataMain.page_total;i++){
+	for(i=1;i<=dataMain.total_page;i++){
 		// console.log('i', i);
-		p+='<a href="multiple.html?page='+i+'" class="mullabel-item'
+		p+='<a href="?page='+i+'" class="mullabel-item'
 		if(i==PAGE){
 			p+=' active';
 		}
@@ -271,11 +282,11 @@ const fnPageLabel = function(){
 	if( dataMain.next == false ){
 		p+='<a href="" class="mullabel-item muted">Next</a>'
 	}else{
-		p+='<a href="multiple.html?page='+dataMain.next+'" class="mullabel-item">Next</a>'
+		p+='<a href="?page='+ ( Number(nowPage) + 1 ) +'" class="mullabel-item">Next</a>'
 	};
 
 	$('#mullabel').html(p);
-}
+};
 
 $(()=>{
 	if( location.href.split('page=')[1].split('&')[1] == undefined ){
@@ -289,7 +300,8 @@ $(()=>{
 	// ----------------------------
 	$.ajax({
 		type: 'GET',
-		url: './data/multiple_color.json',
+		// url: './data/multiple_color.json',
+		url: apiPrifix + 'api/multiple/multiple_setting_color',
 		dataType: 'json',
 		success(res){
 			dataColor = res.color;
@@ -301,7 +313,8 @@ $(()=>{
 			// ----------------------------
 			$.ajax({
 				type: 'GET',
-				url: './data/page'+PAGE+'/threshold.json',
+				// url: './data/page'+PAGE+'/threshold.json',
+				url: apiPrifix + 'api/multiple/multiple_setting_threshold/page=' + nowPage,
 				dataType: 'json',
 				success(res){
 					dataThre = res.threshold;
@@ -311,7 +324,8 @@ $(()=>{
 					// ----------------------------
 					$.ajax({
 						type: 'GET',
-						url: './data/page'+PAGE+'/main_1.json',
+						// url: './data/page'+PAGE+'/main_1.json',
+						url: apiPrifix + 'api/multiple/page=' + nowPage,
 						dataType: 'json',
 						success(res){
 							dataMain = res;

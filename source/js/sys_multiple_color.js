@@ -85,14 +85,18 @@ $(()=>{
 		});
 
 		// ----------------------------
-		console.log(dataColor);
-		// $.ajax({
-		// 	type: 'POST',
-		// 	url: '',
-		// 	contentType: 'application/json',
-		// 	data: JSON.stringify(data),
-		// 	success(res){}
-		// })
+		const finalObj = {color: dataColor}
+		console.log(finalObj);
+		$.ajax({
+			type: 'POST',
+			// url: '',
+			url: apiPrifix + 'api/multiple/multiple_update_color',
+			contentType: 'application/json',
+			data: JSON.stringify(finalObj),
+			success(res){
+				console.log(res);
+			}
+		})
 
 		// ----------------------------
 		fnRenderColor(dataColor);
@@ -104,5 +108,7 @@ $(()=>{
 			fnUpdateMotor(index, 'fan');
 			fnUpdatePipe(index, 'pipe');
 		});
+
+		fnHide();
 	});
 });
