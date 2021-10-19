@@ -1,0 +1,59 @@
+{
+	"threshold": [
+		{
+			"build_id": "b01",
+			"data": {
+				"chiller": 5,
+				"motor": [31, 61],
+				"pipe": {
+					"out": 31,
+					"p": 0.6
+				}
+			}
+		},
+		{
+      "build_id": "b02", 
+      "data": {
+				"chiller": 10,
+				"motor": [32, 62],
+				"pipe": {
+					"out": 32,
+					"p": 0.6
+				}
+			}
+    },
+		{
+      "build_id": "b03", 
+      "data": {
+				"chiller": 15,
+				"motor": [33, 63],
+				"pipe": {
+					"out": 33,
+					"p": 0.6
+				}
+			}
+    },
+		{
+      "build_id": "b04", 
+      "data": {
+				"chiller": 20,
+				"motor": [34, 64],
+				"pipe": {
+					"out": 34,
+					"p": 0.6
+				}
+			}
+    },
+		{
+      "build_id": "b05", 
+      "data": {
+				"chiller": 25,
+				"motor": [35, 65],
+				"pipe": {
+					"out": 35,
+					"p": 0.6
+				}
+			}
+    }
+	]
+}

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mutiple</title>
+    <link href="./css/multiple.css" rel="stylesheet">
+    <script src="./assets/plugins/jquery/jquery-1.12.4-min.js"></script>
+    <script src="./assets/plugins/chart-js/Chart-2.8.0.min.js"></script>
+    <script src="./js/multiple_time_check.js"></script>
+    <script src="./js/multiple_time.js"></script>
+    <script src="./js/multiple.js"></script>
+    <script src="./js/multiple_chart.js"></script>
+    <link href="./assets/plugins/minicolors/jquery.minicolors.css" rel="stylesheet">
+    <script src="./assets/plugins/minicolors/jquery.minicolors.js"></script>
+    <script src="./js/sys_basic.js"></script>
+    <script src="./js/sys_multiple.js"></script>
+    <script src="./js/sys_multiple_thre.js"></script>
+    <script src="./js/sys_multiple_color.js"></script>
+  </head>
+  <body>
+    <div id="nav">
+      <div id="logo"><img class="logo-img" src="./images/logo.png">
+        <div class="logo-title">今時科技股份有限公司</div>
+      </div>
+      <div id="location">案場總覽
+      </div>
+      <div id="nav-mul"><span>案場總覽</span>
+        <div id="mullabel"></div>
+      </div>
+      <div id="hamber">
+        <div class="hamber-line is-t"> </div>
+        <div class="hamber-line is-m"></div>
+        <div class="hamber-line is-b"></div>
+      </div>
+      <div id="mbbox">
+        <div id="navlabel"><a class="navlabel-item" data-unit="chiller" href="./single_chiller.html?build_id=build01&amp;hh=17&amp;mm=28">冰機狀態</a>
+          <div class="navlabel-item active" data-unit="pump">水系統狀態</div>
+        </div>
+        <div id="statusbox">
+          <div class="status-chillm status-box">
+            <div class="status-item" data-status="0">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">1</div>
+            </div>
+            <div class="status-item" data-status="1">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">2</div>
+            </div>
+          </div>
+          <div class="status-chill status-box"></div>
+          <div class="status-motor status-box">
+            <div class="status-item" data-status="1">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">1</div>
+            </div>
+            <div class="status-item" data-status="2">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">2</div>
+            </div>
+            <div class="status-item" data-status="3">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">3</div>
+            </div>
+            <div class="status-item" data-status="4">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">4</div>
+            </div>
+            <div class="status-item" data-status="5">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">5</div>
+            </div>
+          </div>
+          <div class="status-pipe status-box">
+            <div class="status-item" data-status="0">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">pipe 1</div>
+            </div>
+            <div class="status-item" data-status="1">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">pipe 2</div>
+            </div>
+            <div class="status-item" data-status="0">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">pipe 1</div>
+            </div>
+            <div class="status-item" data-status="1">
+              <div class="status-color" style="background-color: greenyellow"></div>
+              <div class="status-txt">pipe 2</div>
+            </div>
+          </div>
+        </div>
+        <div id="log">
+          <div class="log-msg">
+            <div class="log-title">使用者：</div>
+            <div class="log-acc">訪客訪客訪客訪客</div>
+          </div>
+          <div class="log-btnbox">
+            <div class="log-in log-btn">登入</div>
+            <div class="log-outbox">
+              <div class="log-color log-btn">調整用色</div>
+              <div class="log-area log-btn">調整變頻器區間</div>
+              <div class="log-out log-btn">登出</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="nav-masker"></div>
+    <div id="times">
+      <div id="times-now">資料更新時間：<span></span></div>
+      <div id="times-err">網路斷訊或伺服資料錯誤</div>
+    </div>
+    <div id="content">
+      <div id="wrapper-single"></div>
+    </div>
+    <div id="sys-masker"> </div>
+    <div class="sys sys-login">
+      <div class="sys-title">登入
+        <div class="sys-close">╳</div>
+      </div>
+      <div class="sys-box">
+        <div class="sys-item">
+          <div class="sys-txt">帳號</div>
+          <input class="sys-ipt" id="loginAcc" type="text" style="width: 160px">
+        </div>
+        <div class="sys-item">
+          <div class="sys-txt">密碼</div>
+          <input class="sys-ipt" id="loginPW" type="password" style="width: 160px">
+        </div><br>
+        <div class="sys-btn">登入</div>
+      </div>
+    </div>
+    <div class="sys sys-area">
+      <div class="sys-title">交界-中國信托大樓
+        <div class="sys-close">╳</div>
+      </div>
+      <div class="sys-box">
+        <div class="sys-ibox">
+          <div class="sys-item">
+            <div class="sys-txt">數據逹</div>
+            <input class="sys-ipt" type="text">
+            <div class="sys-txt">時為開機中</div>
+          </div>
+          <div class="sys-item">
+            <div class="sys-txt">數據逹</div>
+            <input class="sys-ipt" type="text">
+            <div class="sys-txt">時為開機高</div>
+          </div>
+          <hr>
+          <div class="sys-item">
+            <div class="sys-txt">數據逹</div>
+            <input class="sys-ipt" type="text">
+            <div class="sys-txt">時為出水溫高</div>
+          </div>
+          <div class="sys-item">
+            <div class="sys-txt">數據逹</div>
+            <input class="sys-ipt" type="text">
+            <div class="sys-txt">時為水壓差高</div>
+          </div>
+        </div>
+        <div class="sys-bbox">
+          <div class="sys-btn" onclick="fnHide();">取消</div>
+          <div class="sys-btn" id="updateThre">修改</div>
+        </div>
+      </div>
+    </div>
+    <div class="sys sys-color">
+      <div class="sys-title">多案場色彩調整
+        <div class="sys-close">╳</div>
+      </div>
+      <div class="sys-box is-color">
+        <div class="sys-cbox">
+          <div class="sys-citem"> 
+            <div class="sys-ctxt">(水)開機中(41~59) </div>
+            <div class="sys-sbtn">修改</div>
+            <input class="minicolors-item" type="text" data-control="wheel" value="#f00" readonly>
+          </div>
+          <hr>
+          <div class="sys-citem"> 
+            <div class="sys-ctxt">(水)開機中(41~59) </div>
+            <div class="sys-sbtn">修改</div>
+            <input class="minicolors-item" type="text" data-control="wheel" value="#f00" readonly>
+          </div>
+        </div>
+        <div class="sys-bbox">
+          <div class="sys-btn" onclick="fnHide();">取消</div>
+          <div class="sys-btn" id="updateColor">修改</div>
+        </div>
+      </div>
+    </div>
+    <div id="lb-masker"> </div>
+    <div id="lb" data-open="false">
+      <div id="lb-cbox"><span>╳</span><img id="lb-close" src="./images/lb_close.png"><img id="lb-open" src="./images/lb_open.png"></div>
+      <div id="lb-content">
+        <div id="lb-lr">
+          <div id="lb-left">
+            <div id="lb-title">變頻器省電表</div>
+            <div id="lb-build">案場：<span>中國信托大樓</span></div>
+            <div id="lb-subtitle">今日總耗電量：<span> </span>KW</div>
+            <div id="lb-label">
+              <div class="lblabel-item active">客梯側</div>
+              <div class="lblabel-item">貨梯側</div>
+              <div class="lblabel-item">第三側</div>
+            </div>
+            <div id="c-all">
+              <div class="c-all-item"> 
+                <div class="c-all-title">水泵浦</div>
+                <div class="c-box" id="for-cwp">
+                  <div class="c-item">
+                    <div class="c-mc">
+                      <div class="c-machine">
+                         30HP01<span>原始耗電：47 KW</span></div>
+                      <div class="c-c">
+                        <div class="c-box">
+                          <div class="c-limit"></div>
+                          <canvas id="cwp1"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="c-msg">
+                      <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                      <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                    </div>
+                  </div>
+                  <div class="c-item">
+                    <div class="c-mc">
+                      <div class="c-machine">
+                         30HP01<span>原始耗電：47 KW</span></div>
+                      <div class="c-c">
+                        <div class="c-box">
+                          <div class="c-limit"></div>
+                          <canvas id="cwp2"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="c-msg">
+                      <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                      <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                    </div>
+                  </div>
+                  <div class="c-item">
+                    <div class="c-mc">
+                      <div class="c-machine">30HP01<span>原始耗電：47 KW</span></div>
+                      <div class="c-c">
+                        <div class="c-box">
+                          <div class="c-limit"></div>
+                          <canvas id="cwp3"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="c-msg">
+                      <div class="c-msg-item">耗電 <span>30</span>KW     </div>
+                      <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="c-all-item"> 
+                <div class="c-all-title">水塔風扇</div>
+                <div class="c-box" id="for-fan">
+                  <div class="c-item">
+                    <div class="c-mc">
+                      <div class="c-machine">Tower01<span>原始耗電：47 KW</span></div>
+                      <div class="c-c">
+                        <div class="c-box">
+                          <div class="c-limit"></div>
+                          <canvas id="fan1"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="c-msg">
+                      <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                      <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                    </div>
+                  </div>
+                  <div class="c-item">
+                    <div class="c-mc">
+                      <div class="c-machine">Tower01<span>原始耗電：47 KW</span></div>
+                      <div class="c-c">
+                        <div class="c-box">
+                          <div class="c-limit"></div>
+                          <canvas id="fan2"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="c-msg">
+                      <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                      <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                    </div>
+                  </div>
+                  <div class="c-item">
+                    <div class="c-mc">
+                      <div class="c-machine">Tower01<span>原始耗電：47 KW</span></div>
+                      <div class="c-c">
+                        <div class="c-box">
+                          <div class="c-limit"></div>
+                          <canvas id="fan3"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="c-msg">
+                      <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                      <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="lb-right">
+            <div class="lb-title"><span data-span="show_name"></span><span data-span="motor"></span>：<span data-span="machine">水泵浦 30HP-1</span></div>
+            <div class="lb-subtitle">原始耗電：<span data-span="original_kw">47</span>當前耗電：<span data-span="current_kw">30</span>至目前為止節能度數：<span data-span="total_kwh_saved">11.25</span></div>
+            <div class="canvas-box">
+              <div class="canvas-basic">
+                <div class="canvas-limit"></div>
+                <canvas id="main"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
