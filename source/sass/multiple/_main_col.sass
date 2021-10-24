@@ -48,6 +48,7 @@
 // ----------------------------
 .col
 	display: flex
+	justify-content: space-between
 	border-right: solid 4px $c-border
 	position: relative
 	background:
@@ -64,7 +65,7 @@
 			// border: none
 
 	&[data-unit='pipe']
-		width: 214px
+		width: 266px
 		.col-item
 			min-width: 62px
 
@@ -90,6 +91,7 @@
 				padding-right: 12px
 
 .col-item
+	width: 100%
 	&:last-child
 		.col-row, .col-title
 			// border-right: none

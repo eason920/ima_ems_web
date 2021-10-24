@@ -201,8 +201,8 @@ const fnRenderBuild = function(data){
 		html += '</div>'// .build-row
 	}
 	$('#build').html(html);
-	if( status3 == '' ){ status3 = '(無關機異常)'}
-	if( status4 == '' ){ status4 = '(無開機異常)'}
+	if( status3 == '' ){ status3 = '(無開機異常)'}
+	if( status4 == '' ){ status4 = '(無關機異常)'}
 	$('.errbox[data-status=4] .rbox-error').html(status4);
 	$('.errbox[data-status=3] .rbox-error').html(status3);
 };
@@ -238,7 +238,7 @@ const fnIntervalBuild = function(){
 
 				fnRenderBuild(dataMain); // < 需要計數的都往此 fn 下方寫
 				//-
-				$('.is-chill-total').text(sum.total - sum.s0 - sum.s1 );
+				$('.is-chill-total').text(sum.total - sum.s0);
 				$('.is-chill-err-total').text(sum.s3 + sum.s4);
 				
 				// 右上 v
@@ -289,7 +289,7 @@ $(()=>{
 					$('.rbox-psyitem.is-wet span').text(dataMain.physical.wet);
 					fnRenderBuild(dataMain); // < 需要計數的都往此 fn 下方寫
 					//-
-					$('.is-chill-total').text(sum.total - sum.s0 - sum.s1 - sum.s4);
+					$('.is-chill-total').text(sum.total - sum.s0);
 					$('.is-chill-err-total').text(sum.s3 + sum.s4);
 					
 					// time v
