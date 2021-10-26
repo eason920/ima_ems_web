@@ -99,10 +99,13 @@ $(()=>{
 		
 			dataThre[index].data = newData.data;
 
+			const url = apiPrifix + 'api/multiple/multiple_update_threshold/build_id=' + build_id;
+			console.log('url >>>', url);
+			// console.log('>>>', index);
 			$.ajax({
 				type: 'POST',
 				// url: '',
-				url: apiPrifix + 'api/multiple/multiple_update_threshold/build_id=' + nowPage,
+				url,
 				contentType: 'application/json',
 				data: JSON.stringify(newData),
 				// data: newData,
