@@ -58,6 +58,7 @@ $(()=>{
 					h+='<input class="sys-ipt" type="text" value="'+data[unit].p+'">'
 					h+='<div class="sys-txt">時為水壓差(高)</div>'
 				h+='</div>'// item
+				h+='<hr>'
 			}
 		};
 		$(target_parent).find('.sys-ibox').html(h);
@@ -85,16 +86,16 @@ $(()=>{
 			const newData = {
 				"build_id": build_id,
 				"data": {
-					"chiller": ary[0],
-					"motor": [ ary[1], ary[2]],
+					"motor": [ ary[0], ary[1]],
 					"pipe": {
-						"out": ary[3],
-						"p": ary[4]
-					}
+						"out": ary[2],
+						"p": ary[3]
+					},
+					"chiller": ary[4]
 				}
 			};
 
-			console.log(ary, newData);
+			console.log(ary, 'new date 98>',newData, JSON.stringify(newData));
 		
 			dataThre[index].data = newData.data;
 
@@ -104,11 +105,12 @@ $(()=>{
 				url: apiPrifix + 'api/multiple/multiple_update_threshold/build_id=' + nowPage,
 				contentType: 'application/json',
 				data: JSON.stringify(newData),
+				// data: newData,
 				success(res){
 					console.log(res);
 				}
 			})
-
+			
 			// VALUE v
 			fnUpdateChiller(index, 'chiller');
 			fnUpdateMotor(index, 'cwp');
@@ -118,11 +120,11 @@ $(()=>{
 			fnUpdatePhy(index);
 
 			// LIMIT v
-			$('.build:eq('+index+') .col[data-unit="chiller"] .col-limit span').text(ary[0]);
-			$('.build:eq('+index+') .col[data-unit="motor"] .col-limit span:eq(0)').text(ary[1]);
-			$('.build:eq('+index+') .col[data-unit="motor"] .col-limit span:eq(1)').text(ary[2]);
-			$('.build:eq('+index+') .col[data-unit="pipe"] .col-limit span:eq(0)').text(ary[3]);
-			$('.build:eq('+index+') .col[data-unit="pipe"] .col-limit span:eq(1)').text(ary[4]);
+			$('.build:eq('+index+') .col[data-unit="chiller"] .col-limit span').text(newData.data.chiller);
+			$('.build:eq('+index+') .col[data-unit="motor"] .col-limit span:eq(0)').text(newData.data.motor[0]);
+			$('.build:eq('+index+') .col[data-unit="motor"] .col-limit span:eq(1)').text(newData.data.motor[1]);
+			$('.build:eq('+index+') .col[data-unit="pipe"] .col-limit span:eq(0)').text(newData.data.pipe.out);
+			$('.build:eq('+index+') .col[data-unit="pipe"] .col-limit span:eq(1)').text(newData.data.pipe.p);
 		}
 
 		fnHide();

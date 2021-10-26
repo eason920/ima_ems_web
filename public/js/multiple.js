@@ -265,7 +265,7 @@ const fnPageLabel = function(){
 	if( dataMain.prev == false ){
 		p+='<a href="" class="mullabel-item muted">Prev</a>'
 	}else{
-		p+='<a href="?page='+ ( Number(PAGE) - 1 )+'" class="mullabel-item">Prev</a>'
+		p+='<a href="?page='+PAGE+'" class="mullabel-item">Prev</a>'
 	};
 	
 	// MIDDLE v
