@@ -1,0 +1,9 @@
+show login btn (before login)
+$('.sys-login, #sys-masker').show();
+$('.log-in').css("display","flex")
+$('.log-color, .log-area, .log-out').hide()
+
+show logout btn (after login)
+$('.log-in, .sys-login, #sys-masker').hide()
+$('.log-msg, .log-out, .log-color, .log-area').css('display','inline-flex')
+
