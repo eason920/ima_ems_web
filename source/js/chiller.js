@@ -255,296 +255,252 @@ const fnIntervalBuild = function(){
 };
 
 $(()=>{
-	// ----------------------------
-	// NAV STATUS ITEM v
-	// ----------------------------
-	$.ajax({
-		type: 'GET',
-		url: API.color,
-		dataType: 'json',
-		success: function(res){
-			// console.log(res.color);
-			// console.log(res.color.chiller.splice(0, 6) );
-			dataColor = res.color.chiller.splice(0,6);
-
-			// ----------------------------
-			// BUILD v
-			// ----------------------------
-			$.ajax({
-				type: 'GET',
-				url: API.main,
-				dataType: 'json',
-				success: function(res){
-					// console.log( res.status);
-					// for( a in res.status ){
-					// 	const floor = Number(a.replace('f', ''))
-					// 	console.log(floor);
-					// }
-
-					dataMain = res;
-
-					// structure v
-					$('#location span').text(dataMain.build);
-					$('.rbox-psyitem.is-dry span').text(dataMain.physical.dry);
-					$('.rbox-psyitem.is-wet span').text(dataMain.physical.wet);
-					fnRenderBuild(dataMain); // < 需要計數的都往此 fn 下方寫
-					//-
-					$('.is-chill-total').text(sum.total - sum.s0);
-					$('.is-chill-err-total').text(sum.s3 + sum.s4);
-					
-					// time v
-					fnTime(dataMain.data_time);
-
-					// MINICOLORS SETTINGS v
-					fnRenderColor(dataColor);
-					setingMinicolor();
-					
-					// interval v
-					fnIntervalBuild();
-
-					// UI v
-					// const errH0 = $('#left').innerHeight();
-					// const errH1 = $('.right-title').outerHeight(true);
-					// const errH2 = $('.rbox-top.is-psy').innerHeight();
-					// const errH3 = $('.rbox.is-status').height();
-					// const errH4 = $('.rbox-sum').height();
-					// const errH = 'calc(' + errH0 + 'px - ' + errH1 * 2 + 'px - ' + errH2 + 'px - ' + errH3 +'px - ' + errH4 + 'px)';
-					// console.log(errH, 'errh');
-					// $('.rbox-top.is-err').css('height', errH)
-				}
-			});
-		}
-	});
-
-	$('.navlabel-item[data-unit="pump"]').attr('href', 'single_pump.html?build_id=' + build_id);
-
-	// ----------------------------
-	// CHART v
-	// ----------------------------
-	Chart.plugins.register({
-		afterDatasetsDraw: function(chartInstance, easing) {
-			// To only draw at the end of animation, check for easing === 1
-			var ctx = chartInstance.chart.ctx;
-			// console.log(chartInstance.chart);
-			chartInstance.data.datasets.forEach(function(dataset, i) {
-				var meta = chartInstance.getDatasetMeta(i);
-				if (!meta.hidden ) {
-					meta.data.forEach(function(element, index) {
-						// console.log(element._chart);
-						// Draw the text in black, with the specified font
-						// nor > err
-						const area = meta.data[index]._chart.config.data.datasets[0].backgroundColor[0] == color_nor ? 40 : 20
-						// less > more
-						let padding = 5;
-						let color = '#000';
-						if( dataset.data[index].toString() > area ){
-							padding = -20;
-							color = '#fff';
-						}
-						// const padding =  ? -20 : 5;
-						ctx.fillStyle = color;
-						var fontSize = 13;
-						var fontStyle = 'normal';
-						var fontFamily = 'Helvetica Neue';
-						ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
-						// Just naively convert to string for now
-						var dataString = dataset.data[index].toString();
-						// Make sure alignment settings are correct
-						ctx.textAlign = 'center';
-						ctx.textBaseline = 'middle';
-						var position = element.tooltipPosition();
-						// if( dataset.data[index].toString() != 0 ){
-							
-							ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
-						// }
-					});
-				}
-			});
-		}
-	});
-
-	// ----------------------------
-	// LB v
-	// ----------------------------
-
-
-	$('#lb-cbox').click(function(){
-		if( $('#lb-subtitle span').text() !== '' ){
-			// 不是第一次進場 / canvas 己繪製
-			clearInterval(lbObj.sid);
-			const open = $('#lb').attr('data-open');
-			if( open == 'false'){
-				// c2o
-				if( isMobile ){
-					switchControl.c2o();
-					switchControl.mb.c2o();
-				}else{
-					switchControl.c2o();
-					switchControl.pc.c2o();
-				};
-
-				// ----------------------------
-				fnCanvasActive(lbObj.number, lbObj.floor, lbObj.show);
-
-			}else{
-				// o2c
-				lbObj.openedId = 'reset';
-				if( isMobile ){
-					switchControl.o2c();
-					switchControl.mb.o2c();
-				}else{
-					switchControl.o2c();
-					switchControl.pc.o2c();
-				};
-			};
+	const fn = ()=> {
+		const IMSCK = document.cookie.replace(/(?:(?:^|.*;\s*)IMSgtCK\s*=\s*([^;]*).*$)|^.*$/, '$1');
+		if( IMSCK !== "true" ){
+			console.log('no login');
 		}else{
-			alert('請點擊指定住戶以察看詳細');
-		};
-	});
-
-	$('body').on('click', '.build-item, .rbox-error-btn', function(){
-		lbObj.floor = $(this).attr('data-floor');
-		lbObj.show = $(this).attr('data-show');
-		if( lbObj.openedId != lbObj.floor + lbObj.show ){
-			clearInterval(lbObj.sid);
-			lbObj.openedId = lbObj.floor + lbObj.show;
-			console.log('different btn');
-			const status = $(this).attr('data-status');
-			if( status != 0 ){
-				// 非空戶 v
-				if( isMobile ){
-					switchControl.c2o();
-					switchControl.mb.c2o();
-				}else{
-					switchControl.c2o();
-					switchControl.pc.c2o();
-				};
-
-				// ----------------------------
-				lbObj.number = $(this).attr('data-number');
-				fnCanvasActive(lbObj.number, lbObj.floor, lbObj.show);
-
-			}else{
-				// 空戶，不作用 v
-				if( isMobile ){
-					switchControl.o2c();
-					switchControl.mb.o2c();
-				}else{
-					switchControl.o2c();
-					switchControl.pc.o2c();
-				};
-			}
-		}else{
-			console.log('same btn');
+			console.log('login, and stop');
+			clearInterval(sid);
+			startAjax();
 		}
-	});
-
-	$('.build-house').click(function(){
-		if( isMobile ){
-			$('#lb, #lb-masker').hide();
-		}else{
-			$('#lb').attr('data-status', 1).removeAttr('style');
-		}
-	});
-
-	// ---------------------------- 
-	// HAMBER v
-	// ----------------------------
-	if( isMobile ){
-		$('#hamber').click(function(){
-			$(this).toggleClass('is-open');
-			$('#mbbox, #nav-masker').toggle();
-		});
 	}
 
-	// --------------------------------
-	// -- 0920 check api
-	// --------------------------------
-	// $('.sys-btn').click(function(){
-	$('.sys-btn696969').click(function(){
-		console.log('got');
-		// const url = apiPrifix + 'api/user/login';
-		const url = 'https://dash.ima-ems.com/api/user/login';
-		const email = $('#loginAcc').val();
-		const password = $('#loginPW').val();
-		// const data = {
-		// 	email,
-		// 	password
-		// }
-		const data = JSON.stringify({email,password});
-		console.log('api is ', url);
-		console.log('send data is ', data);
-		$.ajax({
-			type: 'POST',
-			url,
-			data,
-			contentType: 'application/json',
-			dataType: 'json',
-			success: function(res){
-				console.log(res);
-				// $.ajax({
-				// 	type: 'GET',
-				// 	url: 'https://dash.ima-ems.com/api/single_chiller/build_id=01',
-				// 	dataType: 'json',
-				// 	success(res){
-				// 		console.log('build single 01 is', res);
-				// 	},
-				// 	error(err){
-				// 		console.log('err is ', err);
-				// 	}
-				// });
-			},
-			error: function(err){
-				console.log(err);
-			}
-		});
+	let sid = setInterval(fn, 500);
 
-		// $.ajax({
-		// 	type:"POST",
-		// 	url:"./2020/api/Wschedule.asp",
-		// 	data:{
-		// 		dt_id: viewWeekId
-		// 	},
-		// 	dataType:"json",
-	})
 	
-	// $('body').on('click', '.sys-title', function(){
-	$('.sys-title').click(function(){
-		console.log('got sys-title 2');
-		// $.ajax({
-		// 	type: 'POST',
-		// 	url: 'https://dash.ima-ems.com/api/single_chiller/build_id=01',
-		// 	contentType: 'application/json',
-		// 	dataType: 'json',
-		// 	success(res){
-		// 		console.log('build single 01 is', res);
-		// 	},
-		// 	error(err){
-		// 		console.log(err);
-		// 	}
-		// });
-		// 401
+	const startAjax = ()=>{
+		// ----------------------------
+		// NAV STATUS ITEM v
+		// ----------------------------
 		$.ajax({
 			type: 'GET',
-			url: 'https://dash.ima-ems.com/api/single_chiller/build_id=01',
+			url: API.color,
 			dataType: 'json',
-			success(res){
-				console.log('build single 01 is', res);
-			},
-			error(err){
-				console.log('err is ', err);
+			success: function(res){
+				// console.log(res.color);
+				// console.log(res.color.chiller.splice(0, 6) );
+				dataColor = res.color.chiller.splice(0,6);
+
+				// ----------------------------
+				// BUILD v
+				// ----------------------------
+				$.ajax({
+					type: 'GET',
+					url: API.main,
+					dataType: 'json',
+					success: function(res){
+						// console.log( res.status);
+						// for( a in res.status ){
+						// 	const floor = Number(a.replace('f', ''))
+						// 	console.log(floor);
+						// }
+
+						dataMain = res;
+
+						// structure v
+						$('#location span').text(dataMain.build);
+						$('.rbox-psyitem.is-dry span').text(dataMain.physical.dry);
+						$('.rbox-psyitem.is-wet span').text(dataMain.physical.wet);
+						fnRenderBuild(dataMain); // < 需要計數的都往此 fn 下方寫
+						//-
+						$('.is-chill-total').text(sum.total - sum.s0);
+						$('.is-chill-err-total').text(sum.s3 + sum.s4);
+						
+						// time v
+						fnTime(dataMain.data_time);
+
+						// MINICOLORS SETTINGS v
+						fnRenderColor(dataColor);
+						setingMinicolor();
+						
+						// interval v
+						fnIntervalBuild();
+
+						// UI v
+						// const errH0 = $('#left').innerHeight();
+						// const errH1 = $('.right-title').outerHeight(true);
+						// const errH2 = $('.rbox-top.is-psy').innerHeight();
+						// const errH3 = $('.rbox.is-status').height();
+						// const errH4 = $('.rbox-sum').height();
+						// const errH = 'calc(' + errH0 + 'px - ' + errH1 * 2 + 'px - ' + errH2 + 'px - ' + errH3 +'px - ' + errH4 + 'px)';
+						// console.log(errH, 'errh');
+						// $('.rbox-top.is-err').css('height', errH)
+					}
+				});
 			}
 		});
-	})
+
+		$('.navlabel-item[data-unit="pump"]').attr('href', 'single_pump.html?build_id=' + build_id);
+
+		// ----------------------------
+		// CHART v
+		// ----------------------------
+		Chart.plugins.register({
+			afterDatasetsDraw: function(chartInstance, easing) {
+				// To only draw at the end of animation, check for easing === 1
+				var ctx = chartInstance.chart.ctx;
+				// console.log(chartInstance.chart);
+				chartInstance.data.datasets.forEach(function(dataset, i) {
+					var meta = chartInstance.getDatasetMeta(i);
+					if (!meta.hidden ) {
+						meta.data.forEach(function(element, index) {
+							// console.log(element._chart);
+							// Draw the text in black, with the specified font
+							// nor > err
+							const area = meta.data[index]._chart.config.data.datasets[0].backgroundColor[0] == color_nor ? 40 : 20
+							// less > more
+							let padding = 5;
+							let color = '#000';
+							if( dataset.data[index].toString() > area ){
+								padding = -20;
+								color = '#fff';
+							}
+							// const padding =  ? -20 : 5;
+							ctx.fillStyle = color;
+							var fontSize = 13;
+							var fontStyle = 'normal';
+							var fontFamily = 'Helvetica Neue';
+							ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+							// Just naively convert to string for now
+							var dataString = dataset.data[index].toString();
+							// Make sure alignment settings are correct
+							ctx.textAlign = 'center';
+							ctx.textBaseline = 'middle';
+							var position = element.tooltipPosition();
+							// if( dataset.data[index].toString() != 0 ){
+								
+								ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+							// }
+						});
+					}
+				});
+			}
+		});
+
+		// ----------------------------
+		// LB v
+		// ----------------------------
+
+
+		$('#lb-cbox').click(function(){
+			if( $('#lb-subtitle span').text() !== '' ){
+				// 不是第一次進場 / canvas 己繪製
+				clearInterval(lbObj.sid);
+				const open = $('#lb').attr('data-open');
+				if( open == 'false'){
+					// c2o
+					if( isMobile ){
+						switchControl.c2o();
+						switchControl.mb.c2o();
+					}else{
+						switchControl.c2o();
+						switchControl.pc.c2o();
+					};
+
+					// ----------------------------
+					fnCanvasActive(lbObj.number, lbObj.floor, lbObj.show);
+
+				}else{
+					// o2c
+					lbObj.openedId = 'reset';
+					if( isMobile ){
+						switchControl.o2c();
+						switchControl.mb.o2c();
+					}else{
+						switchControl.o2c();
+						switchControl.pc.o2c();
+					};
+				};
+			}else{
+				alert('請點擊指定住戶以察看詳細');
+			};
+		});
+
+		$('body').on('click', '.build-item, .rbox-error-btn', function(){
+			lbObj.floor = $(this).attr('data-floor');
+			lbObj.show = $(this).attr('data-show');
+			if( lbObj.openedId != lbObj.floor + lbObj.show ){
+				clearInterval(lbObj.sid);
+				lbObj.openedId = lbObj.floor + lbObj.show;
+				console.log('different btn');
+				const status = $(this).attr('data-status');
+				if( status != 0 ){
+					// 非空戶 v
+					if( isMobile ){
+						switchControl.c2o();
+						switchControl.mb.c2o();
+					}else{
+						switchControl.c2o();
+						switchControl.pc.c2o();
+					};
+
+					// ----------------------------
+					lbObj.number = $(this).attr('data-number');
+					fnCanvasActive(lbObj.number, lbObj.floor, lbObj.show);
+
+				}else{
+					// 空戶，不作用 v
+					if( isMobile ){
+						switchControl.o2c();
+						switchControl.mb.o2c();
+					}else{
+						switchControl.o2c();
+						switchControl.pc.o2c();
+					};
+				}
+			}else{
+				console.log('same btn');
+			}
+		});
+
+		$('.build-house').click(function(){
+			if( isMobile ){
+				$('#lb, #lb-masker').hide();
+			}else{
+				$('#lb').attr('data-status', 1).removeAttr('style');
+			}
+		});
+
+		// ---------------------------- 
+		// HAMBER v
+		// ----------------------------
+		if( isMobile ){
+			$('#hamber').click(function(){
+				$(this).toggleClass('is-open');
+				$('#mbbox, #nav-masker').toggle();
+			});
+		}
+
+		
+		// $('body').on('click', '.sys-title', function(){
+		$('.sys-title').click(function(){
+			console.log('got sys-title 2');
+			// $.ajax({
+			// 	type: 'POST',
+			// 	url: 'https://dash.ima-ems.com/api/single_chiller/build_id=01',
+			// 	contentType: 'application/json',
+			// 	dataType: 'json',
+			// 	success(res){
+			// 		console.log('build single 01 is', res);
+			// 	},
+			// 	error(err){
+			// 		console.log(err);
+			// 	}
+			// });
+			// 401
+			$.ajax({
+				type: 'GET',
+				url: 'https://dash.ima-ems.com/api/single_chiller/build_id=01',
+				dataType: 'json',
+				success(res){
+					console.log('build single 01 is', res);
+				},
+				error(err){
+					console.log('err is ', err);
+				}
+			});
+		})
+
+	}
 })
-
-//https://dash.ima-ems.com/api/single_chiller/build_id=01
-
-
-
-// https://dash.ima-ems.com/
-// testuser@ima-ems.com
-// ima42838254
-
-// https://dash.ima-ems.com/api/user/login
-// https://dash.ima-ems.com/api/user/login

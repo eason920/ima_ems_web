@@ -181,102 +181,68 @@ const promiseSetTimeout = function(status){
 }
 
 $(()=>{
-	// promiseSetTimeout(true)
-	// 	.then(function(res){
-	// 		console.log(1);
-	// 		$.ajax({
-	// 			// url: './data/'+build_id+'/pump/pump_setting.json',
-	// 			url: apiPrifix + 'api/single_pump/pump_setting/build_id=' + build_id,
-	// 			type: 'GET',
-	// 			dataType: 'json',
-	// 			success(res){
-	// 				console.log(2);
-	// 				dataCT = res;
-	// 				fnRenderColor(dataCT.color);
-	// 				setingMinicolor();
-	// 				// return promiseSetTimeout(true)
-	// 			}
-	// 		});
-	// 	})
-	// 	.then(function(res){
-	// 		console.log(3);
-	// 		$.ajax({
-	// 			// url: './data/'+build_id+'/pump/main_'+ii+'.json',
-	// 			url: apiPrifix + 'api/single_pump/build_id=' + build_id,
-	// 			type: 'GET',
-	// 			dataType: 'json',
-	// 			success(res){
-	// 				dataMain = res;
-	// 				$('#location span').text(dataMain.build)
-	// 				if( !dataMain.have_chiller ){ $('.navlabel-item[data-unit="chiller"]').hide(); }
-	// 				fnTime(dataMain.data_time);
-	// 				let h = '<div id="mb-btn">省電詳細</div>';
-	// 				dataMain.group.forEach(function(item, i){
-	// 					h+='<div class="block">'
-	// 						h+=fnHtmlTitle(item.switch, item.show_name);
-	// 						h+='<div class="card">'
-	// 							h+=fnHtmlCwp(item.cwp, i);
-	// 							h+=fnHtmlFan(item.fan, i);
-	// 							h+=fnHtmlPipe(item.pipe);
-	// 						h+='</div>' // card
-	// 					h+='</div>' // block
-	// 				});
-	// 				$('#wrapper-single').html(h);
-
-	// 				fnInterval();
-	// 			}
-	// 		})
-
-
-
-	// 	})
-	$.ajax({
-		// url: './data/'+build_id+'/pump/pump_setting.json',
-		url: apiPrifix + 'api/single_pump/pump_setting/build_id=' + build_id,
-		type: 'GET',
-		dataType: 'json',
-		success(res){
-			console.log(1);
-			dataCT = res;
-			fnRenderColor(dataCT.color);
-			setingMinicolor();
-			
-			$.ajax({
-				// url: './data/'+build_id+'/pump/main_'+ii+'.json',
-				url: apiPrifix + 'api/single_pump/build_id=' + build_id,
-				type: 'GET',
-				dataType: 'json',
-				success(res){
-					console.log(2);
-					dataMain = res;
-					$('#location span').text(dataMain.build)
-					if( !dataMain.have_chiller ){ $('.navlabel-item[data-unit="chiller"]').hide(); }
-					fnTime(dataMain.data_time);
-					let h = '<div id="mb-btn">省電詳細</div>';
-					dataMain.group.forEach(function(item, i){
-						h+='<div class="block">'
-							h+=fnHtmlTitle(item.switch, item.show_name);
-							h+='<div class="card">'
-								h+=fnHtmlCwp(item.cwp, i);
-								h+=fnHtmlFan(item.fan, i);
-								h+=fnHtmlPipe(item.pipe);
-							h+='</div>' // card
-						h+='</div>' // block
-					});
-					$('#wrapper-single').html(h);
-
-					fnInterval();
-				}
-			})
+	const fn = ()=> {
+		const IMSCK = document.cookie.replace(/(?:(?:^|.*;\s*)IMSgtCK\s*=\s*([^;]*).*$)|^.*$/, '$1');
+		if( IMSCK !== "true" ){
+			console.log('no login');
+		}else{
+			console.log('login, and stop');
+			clearInterval(sid);
+			startAjax();
 		}
-	});
-
-	$('.navlabel-item[data-unit="chiller"]').attr('href', 'single_chiller.html?build_id=' + build_id);
-
-	if( isMobile ){
-		$('#hamber').click(function(){
-			$(this).toggleClass('is-open');
-			$('#mbbox, #nav-masker').toggle();
-		});
 	}
+
+	let sid = setInterval(fn, 500);
+
+	const startAjax = ()=>{
+		$.ajax({
+			// url: './data/'+build_id+'/pump/pump_setting.json',
+			url: apiPrifix + 'api/single_pump/pump_setting/build_id=' + build_id,
+			type: 'GET',
+			dataType: 'json',
+			success(res){
+				console.log(1);
+				dataCT = res;
+				fnRenderColor(dataCT.color);
+				setingMinicolor();
+				
+				$.ajax({
+					// url: './data/'+build_id+'/pump/main_'+ii+'.json',
+					url: apiPrifix + 'api/single_pump/build_id=' + build_id,
+					type: 'GET',
+					dataType: 'json',
+					success(res){
+						console.log(2);
+						dataMain = res;
+						$('#location span').text(dataMain.build)
+						if( !dataMain.have_chiller ){ $('.navlabel-item[data-unit="chiller"]').hide(); }
+						fnTime(dataMain.data_time);
+						let h = '<div id="mb-btn">省電詳細</div>';
+						dataMain.group.forEach(function(item, i){
+							h+='<div class="block">'
+								h+=fnHtmlTitle(item.switch, item.show_name);
+								h+='<div class="card">'
+									h+=fnHtmlCwp(item.cwp, i);
+									h+=fnHtmlFan(item.fan, i);
+									h+=fnHtmlPipe(item.pipe);
+								h+='</div>' // card
+							h+='</div>' // block
+						});
+						$('#wrapper-single').html(h);
+
+						fnInterval();
+					}
+				})
+			}
+		});
+
+		$('.navlabel-item[data-unit="chiller"]').attr('href', 'single_chiller.html?build_id=' + build_id);
+
+		if( isMobile ){
+			$('#hamber').click(function(){
+				$(this).toggleClass('is-open');
+				$('#mbbox, #nav-masker').toggle();
+			});
+		}
+	};
 });

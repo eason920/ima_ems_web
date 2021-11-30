@@ -7,3 +7,9 @@ show logout btn (after login)
 $('.log-in, .sys-login, #sys-masker').hide()
 $('.log-msg, .log-out, .log-color, .log-area').css('display','inline-flex')
 
+-----------------------------------------
+-----------------------------------------
+https://dash.ima-ems.com/
+https://dash.ima-ems.com/api/user/login
+testuser@ima-ems.com
+ima42838254

@@ -289,107 +289,122 @@ const fnPageLabel = function(){
 };
 
 $(()=>{
-	if( location.href.split('page=')[1].split('&')[1] == undefined ){
-		PAGE = location.href.split('page=')[1];
-	}else{
-		PAGE = location.href.split('page=')[1].split('&')[0];
-	};
-
-	// ----------------------------
-	// COLOR v
-	// ----------------------------
-	$.ajax({
-		type: 'GET',
-		// url: './data/multiple_color.json',
-		url: apiPrifix + 'api/multiple/multiple_setting_color',
-		dataType: 'json',
-		success(res){
-			dataColor = res.color;
-			fnRenderColor(dataColor);
-			setingMinicolor();
-
-			// ----------------------------
-			// THRESHOLD v
-			// ----------------------------
-			$.ajax({
-				type: 'GET',
-				// url: './data/page'+PAGE+'/threshold.json',
-				url: apiPrifix + 'api/multiple/multiple_setting_threshold/page=' + nowPage,
-				dataType: 'json',
-				success(res){
-					dataThre = res.threshold;
-
-					// ----------------------------
-					// BUILD v
-					// ----------------------------
-					$.ajax({
-						type: 'GET',
-						// url: './data/page'+PAGE+'/main_1.json',
-						url: apiPrifix + 'api/multiple/page=' + nowPage,
-						dataType: 'json',
-						success(res){
-							dataMain = res;
-							
-							fnPageLabel();
-
-							// ----------------------------
-							// START v
-							// ----------------------------
-							let h = '';
-							for( build in dataMain.data ){
-								h+='<div class="build">'
-									h+=	'<div class="build-title">' + dataMain.data[build].build +'</div>'
-									// ----------------------------
-									h+=	'<div class="build-body">'
-									// G
-									h+= fnHtmlGroup(build, 'group')
-									// C
-									h+= fnHtmlChiller(build, 'chiller')
-									// // M
-									h+='<div class="col" data-unit="motor">'
-									h+= fnHtmlMotor(build, 'cwp')
-									h+= fnHtmlMotor(build, 'fan')
-									h+='</div>'
-									// // P
-									h+= fnHtmlPipe(build, 'pipe')
-									// // S
-									h+= fnHtmlSwitch(build, 'switch')
-									// // p
-									h+= fnHtmlPhy(build, 'phy')
-									// GCMPSP END
-									h+=	'</div>' // .build-body
-									// ----------------------------
-									h+='<div class="build-time" data-err="false">'
-									h+='<div class="build-time-date">資料更新：<span></span></div>'
-									h+='<b class="build-time-text">網路斷訊或伺服資料錯誤</b>'
-									h+='</div>'
-								h+='</div><br>' // .build
-								// ----------------------------
-								if( Number(build) == dataMain.data.length - 1 ){
-									setTimeout(function(){
-										fnBalance();
-									}, 0);
-									fnInterval();
-								}
-							}
-							$('#wrapper-single').html(h);
-							for( build in dataMain.data ){
-								fnTime(build, dataMain.data[build].data_time);
-							};
-						}
-					}); // ajax main
-				}
-			}); // ajax threshold
+	const fn = ()=> {
+		const IMSCK = document.cookie.replace(/(?:(?:^|.*;\s*)IMSgtCK\s*=\s*([^;]*).*$)|^.*$/, '$1');
+		if( IMSCK !== "true" ){
+			console.log('no login');
+		}else{
+			console.log('login, and stop');
+			clearInterval(sid);
+			startAjax();
 		}
-	}); // ajax color
-
-	// ----------------------------
-	// HAMBER v
-	// ----------------------------
-	if( isMobile ){
-		$('#hamber').click(function(){
-			$(this).toggleClass('is-open');
-			$('#mbbox, #nav-masker').toggle();
-		});
 	}
+
+	let sid = setInterval(fn, 500);
+
+	const startAjax = ()=>{
+		if( location.href.split('page=')[1].split('&')[1] == undefined ){
+			PAGE = location.href.split('page=')[1];
+		}else{
+			PAGE = location.href.split('page=')[1].split('&')[0];
+		};
+
+		// ----------------------------
+		// COLOR v
+		// ----------------------------
+		$.ajax({
+			type: 'GET',
+			// url: './data/multiple_color.json',
+			url: apiPrifix + 'api/multiple/multiple_setting_color',
+			dataType: 'json',
+			success(res){
+				dataColor = res.color;
+				fnRenderColor(dataColor);
+				setingMinicolor();
+
+				// ----------------------------
+				// THRESHOLD v
+				// ----------------------------
+				$.ajax({
+					type: 'GET',
+					// url: './data/page'+PAGE+'/threshold.json',
+					url: apiPrifix + 'api/multiple/multiple_setting_threshold/page=' + nowPage,
+					dataType: 'json',
+					success(res){
+						dataThre = res.threshold;
+
+						// ----------------------------
+						// BUILD v
+						// ----------------------------
+						$.ajax({
+							type: 'GET',
+							// url: './data/page'+PAGE+'/main_1.json',
+							url: apiPrifix + 'api/multiple/page=' + nowPage,
+							dataType: 'json',
+							success(res){
+								dataMain = res;
+								
+								fnPageLabel();
+
+								// ----------------------------
+								// START v
+								// ----------------------------
+								let h = '';
+								for( build in dataMain.data ){
+									h+='<div class="build">'
+										h+=	'<div class="build-title">' + dataMain.data[build].build +'</div>'
+										// ----------------------------
+										h+=	'<div class="build-body">'
+										// G
+										h+= fnHtmlGroup(build, 'group')
+										// C
+										h+= fnHtmlChiller(build, 'chiller')
+										// // M
+										h+='<div class="col" data-unit="motor">'
+										h+= fnHtmlMotor(build, 'cwp')
+										h+= fnHtmlMotor(build, 'fan')
+										h+='</div>'
+										// // P
+										h+= fnHtmlPipe(build, 'pipe')
+										// // S
+										h+= fnHtmlSwitch(build, 'switch')
+										// // p
+										h+= fnHtmlPhy(build, 'phy')
+										// GCMPSP END
+										h+=	'</div>' // .build-body
+										// ----------------------------
+										h+='<div class="build-time" data-err="false">'
+										h+='<div class="build-time-date">資料更新：<span></span></div>'
+										h+='<b class="build-time-text">網路斷訊或伺服資料錯誤</b>'
+										h+='</div>'
+									h+='</div><br>' // .build
+									// ----------------------------
+									if( Number(build) == dataMain.data.length - 1 ){
+										setTimeout(function(){
+											fnBalance();
+										}, 0);
+										fnInterval();
+									}
+								}
+								$('#wrapper-single').html(h);
+								for( build in dataMain.data ){
+									fnTime(build, dataMain.data[build].data_time);
+								};
+							}
+						}); // ajax main
+					}
+				}); // ajax threshold
+			}
+		}); // ajax color
+
+		// ----------------------------
+		// HAMBER v
+		// ----------------------------
+		if( isMobile ){
+			$('#hamber').click(function(){
+				$(this).toggleClass('is-open');
+				$('#mbbox, #nav-masker').toggle();
+			});
+		}
+	};
 })

@@ -402,7 +402,7 @@ body {
     font-size: 13px;
   }
 }
-.log-in, .status-motor, .status-chillm, .status-pipe,
+.status-motor, .status-chillm, .status-pipe,
 .log-area {
   display: none;
 }
@@ -997,7 +997,7 @@ body {
   left: 0;
   margin: auto;
   z-index: 7;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.97);
 }
 
 .sys {

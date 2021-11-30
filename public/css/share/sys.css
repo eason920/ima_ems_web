@@ -1,6 +1,6 @@
 /*
 Error: Undefined variable: "$bp-narrow".
-        on line 214 of F:/ima_ems_web/source/sass/share/sys.sass
+        on line 214 of F:/_IMA_EMS/source/sass/share/sys.sass
 
 209: 
 210: // .minicolors-panel
@@ -14,7 +14,7 @@ Error: Undefined variable: "$bp-narrow".
 218: 		z-index: 11
 
 Backtrace:
-F:/ima_ems_web/source/sass/share/sys.sass:214
+F:/_IMA_EMS/source/sass/share/sys.sass:214
 E:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.4.25/lib/sass/script/tree/variable.rb:49:in `_perform'
 E:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.4.25/lib/sass/script/tree/node.rb:58:in `perform'
 E:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.4.25/lib/sass/tree/visitors/perform.rb:543:in `block in run_interp_no_strip'
@@ -60,4 +60,4 @@ E:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.4.25/vendor/listen/lib/listen/adap
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$bp-narrow\".\A         on line 214 of F:/ima_ems_web/source/sass/share/sys.sass\A \A 209: \A 210: // .minicolors-panel\A 211: // 	top: 55px!important\A 212: // 	right: 15px\A 213: \A 214: @media screen and (max-width: $bp-narrow)\A 215:   \A 216: @media screen and (min-width: $bp-wide)\A 217: 	#sys-masker, .sys\A 218: 		z-index: 11"; }
+  content: "Error: Undefined variable: \"$bp-narrow\".\A         on line 214 of F:/_IMA_EMS/source/sass/share/sys.sass\A \A 209: \A 210: // .minicolors-panel\A 211: // 	top: 55px!important\A 212: // 	right: 15px\A 213: \A 214: @media screen and (max-width: $bp-narrow)\A 215:   \A 216: @media screen and (min-width: $bp-wide)\A 217: 	#sys-masker, .sys\A 218: 		z-index: 11"; }
