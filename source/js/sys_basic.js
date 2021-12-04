@@ -6,11 +6,13 @@ const loginFalseUI = ()=>{
 	$('.sys-login, #sys-masker').show();
 	$('.log-in').css("display","flex")
 	$('.log-color, .log-area, .log-out').hide()
+	$('.log-acc').text('');
 };
 
-const loginTrueUI = ()=> {
+const loginTrueUI = (name)=> {
 	$('.log-in, .sys-login, #sys-masker').hide()
 	$('.log-msg, .log-out, .log-color, .log-area').css('display','inline-flex');
+	$('.log-acc').text(name);
 }
 
 $(()=>{
@@ -18,12 +20,11 @@ $(()=>{
 	const IMSCK = document.cookie.replace(/(?:(?:^|.*;\s*)IMSgtCK\s*=\s*([^;]*).*$)|^.*$/, '$1');
 	console.log('cookie is ', IMSCK, IMSCK === "true");
 	
-	IMSCK === "true" ? loginTrueUI() : loginFalseUI();
-	// if( IMSCK === "true" ){
-	// 	loginTrueUI();
-	// }else{
-	// 	loginFalseUI();
-	// }
+	if( IMSCK === "true" ){
+		loginTrueUI(document.cookie.replace(/(?:(?:^|.*;\s*)IMSgtN\s*=\s*([^;]*).*$)|^.*$/, '$1'));
+	}else{
+		loginFalseUI();
+	}
 
 	$('#sys-btn-login').click(function(){
 		const url = 'https://dash.ima-ems.com/api/user/login';
@@ -39,9 +40,11 @@ $(()=>{
 			dataType: 'json',
 			success: function(res){
 				console.log('success is ', res);
-				loginTrueUI();
+				const name = res.name;
 				const expired = new Date().getTime() + (1000 * 60 * 60 * -8) + (1000 * 10 * 360 * 3) // 1000 = 0:01 // 8 為時差
 				document.cookie = `IMSgtCK=true;expires=${new Date(expired)}`
+				document.cookie = `IMSgtN=${name};expires=${new Date(expired)}`
+				loginTrueUI(name);
 			},
 			error: function(err){
 				console.log('error is ', err);
@@ -70,6 +73,7 @@ $(()=>{
 	$('.log-out').click(()=>{
 		// loginFalseUI();
 		document.cookie = `IMSgtCK=false;expires=Thu, 21 Aug 2014 20:00:00 UTC`
+		document.cookie = `IMSgtN=;expires=Thu, 21 Aug 2014 20:00:00 UTC`
 		location.reload();
 	})
 

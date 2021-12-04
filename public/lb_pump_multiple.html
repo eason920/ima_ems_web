@@ -1,0 +1,132 @@
+
+<div id="lb-masker"> </div>
+<div id="lb" data-open="false">
+  <div id="lb-cbox"><span>╳</span><img id="lb-close" src="./images/lb_close.png"/><img id="lb-open" src="./images/lb_open.png"/></div>
+  <div id="lb-content">
+    <div id="lb-lr">
+      <div id="lb-left">
+        <div id="lb-title">變頻器省電表</div>
+        <div id="lb-subtitle">今日總耗電量：<span> </span>KW</div>
+        <div id="lb-label">
+          <div class="lblabel-item active">客梯側</div>
+          <div class="lblabel-item">貨梯側</div>
+          <div class="lblabel-item">第三側</div>
+        </div>
+        <div id="c-all">
+          <div class="c-all-item"> 
+            <div class="c-all-title">水泵浦</div>
+            <div class="c-box" id="for-cwp">
+              <div class="c-item">
+                <div class="c-mc">
+                  <div class="c-machine">
+                     30HP01<span>原始耗電：47 KW</span></div>
+                  <div class="c-c">
+                    <div class="c-box">
+                      <div class="c-limit"></div>
+                      <canvas id="cwp1"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-msg">
+                  <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                  <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                </div>
+              </div>
+              <div class="c-item">
+                <div class="c-mc">
+                  <div class="c-machine">
+                     30HP01<span>原始耗電：47 KW</span></div>
+                  <div class="c-c">
+                    <div class="c-box">
+                      <div class="c-limit"></div>
+                      <canvas id="cwp2"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-msg">
+                  <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                  <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                </div>
+              </div>
+              <div class="c-item">
+                <div class="c-mc">
+                  <div class="c-machine">30HP01<span>原始耗電：47 KW</span></div>
+                  <div class="c-c">
+                    <div class="c-box">
+                      <div class="c-limit"></div>
+                      <canvas id="cwp3"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-msg">
+                  <div class="c-msg-item">耗電 <span>30</span>KW     </div>
+                  <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="c-all-item"> 
+            <div class="c-all-title">水塔風扇</div>
+            <div class="c-box" id="for-fan">
+              <div class="c-item">
+                <div class="c-mc">
+                  <div class="c-machine">Tower01<span>原始耗電：47 KW</span></div>
+                  <div class="c-c">
+                    <div class="c-box">
+                      <div class="c-limit"></div>
+                      <canvas id="fan1"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-msg">
+                  <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                  <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                </div>
+              </div>
+              <div class="c-item">
+                <div class="c-mc">
+                  <div class="c-machine">Tower01<span>原始耗電：47 KW</span></div>
+                  <div class="c-c">
+                    <div class="c-box">
+                      <div class="c-limit"></div>
+                      <canvas id="fan2"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-msg">
+                  <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                  <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                </div>
+              </div>
+              <div class="c-item">
+                <div class="c-mc">
+                  <div class="c-machine">Tower01<span>原始耗電：47 KW</span></div>
+                  <div class="c-c">
+                    <div class="c-box">
+                      <div class="c-limit"></div>
+                      <canvas id="fan3"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-msg">
+                  <div class="c-msg-item">耗電 <span>30</span>KW    </div>
+                  <div class="c-msg-item">節能 <span>11.25</span>KWh</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="lb-right">
+        <div class="lb-title"><span data-span="show_name"></span><span data-span="motor"></span>：<span data-span="machine">水泵浦 30HP-1</span></div>
+        <div class="lb-subtitle">原始耗電：<span data-span="original_kw">47</span>當前耗電：<span data-span="current_kw">30</span>至目前為止節能度數：<span data-span="total_kwh_saved">11.25</span></div>
+        <div class="canvas-box">
+          <div class="canvas-basic">
+            <div class="canvas-limit"></div>
+            <canvas id="main"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

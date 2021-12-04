@@ -1,0 +1,261 @@
+{
+  "have_chiller": true,
+	"data_time": "2021/05/22-07:20",
+	"update": 1.5,
+	"build": "中國信托大樓",
+	"total_pc": 399,
+	"group": [
+    {
+      "show_name": "客梯側",
+      "id": "g0",
+      "chiller": {
+        "normal": 20,
+        "alarm": 0
+      },
+      "cwp": [
+        {
+          "machine": "30HP01",
+          "status": "",
+          "frequency": 0,
+          "chart": {
+            "total_kwh_saved": 11.25,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": [
+							31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+							45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+							40, 37, 33, 35, 35, 35, 47, 35, 32
+						]
+          }
+        },
+        {
+          "machine": "30HP02",
+          "status": "",
+          "frequency": 61,
+          "chart": {
+            "total_kwh_saved": 11.25,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": [
+              0,0,0,0,0,0,0,0,0,0,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+              45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+              40, 37, 33, 35, 35, 35, 47, 35
+            ]
+          }
+        },
+        {
+          "machine": "15HP",
+          "status": 12,
+          "frequency": "-",
+          "chart": {
+            "total_kwh_saved": 0,
+            "original_kw": 21,
+            "current_kw": 0,
+            "data": [
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+            ]
+          }
+        }
+      ],
+      "fan": [
+        {
+          "machine": "fan2-g1-1",
+          "status": 8,
+          "frequency": "-",
+          "chart": {
+            "total_kwh_saved": 21.2,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": [
+              0,0,20,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+              45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+              40, 37, 33, 35, 35, 35, 47, 35
+            ]
+          }
+        },
+        {
+          "machine": "fan2-g1-2",
+          "status": 12,
+          "frequency": "-",
+          "chart": {
+            "total_kwh_saved": 21.3,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": []
+          }
+        },
+        {
+          "machine": "fan2-g1-3",
+          "status": "",
+          "frequency": 214,
+          "chart": {
+            "total_kwh_saved": 21.4,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": []
+          }
+        },
+        {
+          "machine": "fan2-g1-4",
+          "status": "",
+          "frequency": 215,
+          "chart": {
+            "total_kwh_saved": 21.5,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": []
+          }
+        }
+      ],
+      "pipe": {
+        "in": 35.33,
+        "out": {
+          "value": 34,
+          "status": ""
+        },
+        "p": {
+          "value": 0.45,
+          "status": ""
+        }
+      },
+      "switch": [
+        {
+          "machine": "",
+          "status": ""
+        },
+        {
+          "machine": "",
+          "status": ""
+        }
+      ]
+    },
+    {
+      "show_name": "貨梯側",
+      "id": "g1",
+      "chiller": {
+        "normal": 21,
+        "alarm": 1
+      },
+      "cwp": [
+        {
+          "machine": "30HP01",
+          "status": 8,
+          "frequency": "-",
+          "chart": {
+            "total_kwh_saved": 11.25,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": [
+              31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+              45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+              40, 37, 33, 35, 35, 35, 47, 35
+            ]
+          }
+        },
+        {
+          "machine": "30HP02",
+          "status": "",
+          "frequency": 30,
+          "chart": {
+            "total_kwh_saved": 11.25,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": [
+              31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+              45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+              40, 37, 33, 35, 35, 35, 47, 35
+            ]
+          }
+        },
+        {
+          "machine": "15HP",
+          "status": "",
+          "frequency": 31,
+          "chart": {
+            "total_kwh_saved": 0,
+            "original_kw": 21,
+            "current_kw": 0,
+            "data": [
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+            ]
+          }
+        }
+      ],
+      "fan": [
+        {
+          "machine": "fan2-g2-1",
+          "status": "",
+          "frequency": 222,
+          "chart": {
+            "total_kwh_saved": 22.2,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": [
+              45,40,42,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+              45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+              40, 37, 33, 35, 35, 35, 47, 35
+            ]
+          }
+        },
+        {
+          "machine": "fan2-g2-2",
+          "status": "",
+          "frequency": 223,
+          "chart": {
+            "total_kwh_saved": 22.3,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": []
+          }
+        },
+        {
+          "machine": "fan2-g2-3",
+          "status": "",
+          "frequency": 224,
+          "chart": {
+            "total_kwh_saved": 22.4,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": [
+              0,20,55,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+              45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+              40, 37, 33, 35, 35, 35, 47, 35
+            ]
+          }
+        },
+        {
+          "machine": "fan2-g2-4",
+          "status": "",
+          "frequency": 225,
+          "chart": {
+            "total_kwh_saved": 22.5,
+            "original_kw": 21,
+            "current_kw": 20.12,
+            "data": []
+          }
+        }
+      ],
+      "pipe": {
+        "in": 22.44,
+        "out": {
+          "value": 33,
+          "status": ""
+        },
+        "p": {
+          "value": 0.6,
+          "status": ""
+        }
+      },
+      "switch": [
+        {
+          "machine": "40HP1",
+          "status": "auto"
+        },
+        {
+          "machine": "40HP2",
+          "status": "man"
+        }
+      ]
+    }
+  ]
+}

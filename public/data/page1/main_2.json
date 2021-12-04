@@ -1,0 +1,1767 @@
+{
+	"update": 1.5,
+	"prev": false,
+	"page_total": 5,
+	"next": 2,
+	"data": [
+		{
+			"data_time": "2021/07/12-17:26",
+			"build": "中國信托大樓",
+			"build_id": "b01",
+			"total_pc": 111.2,
+			"physical": {
+				"dry": 11.11,
+				"wet": 11.11
+			},
+			"group": [
+				{
+					"show_name": "中央側",
+					"id": "g0",
+					"chiller": {
+						"normal": 11,
+						"alarm": 1
+					},
+					"cwp": [
+						{
+							"machine": "11HP01",
+							"status": "",
+							"frequency": 111,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35, 32
+								]
+							}
+						},
+						{
+							"machine": "12HP02",
+							"status": "",
+							"frequency": 112,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "fan1-g1-1",
+							"status": "",
+							"frequency": 112,
+							"chart": {
+								"total_kwh_saved": 11.2,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "fan1-g1-2",
+							"status": "",
+							"frequency": 113,
+							"chart": {
+								"total_kwh_saved": 11.3,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "fan1-g1-3",
+							"status": "",
+							"frequency": 114,
+							"chart": {
+								"total_kwh_saved": 11.4,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 11,
+						"out": {
+							"value": 11,
+							"status": ""
+						},
+						"p": {
+							"value": 0.11,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "233HP1",
+							"status": "auto"
+						},
+						{
+							"machine": "233HP2",
+							"status": "auto"
+						},
+						{
+							"machine": "233HP3",
+							"status": "auto"
+						}
+					]
+				}
+			]      
+		},
+    {
+			"data_time": "2021/07/12-17:25",
+			"build": "內科Benq大樓",
+			"build_id": "b02",
+			"total_pc": 222.2,
+			"physical": {
+				"dry": 22.22,
+				"wet": 22.22
+			},
+			"group": [
+				{
+					"show_name": "客梯側",
+					"id": "g0",
+					"chiller": {
+						"normal": 20,
+						"alarm": 0
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 211,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									0,0,0,0,0,5,10,15,20,25,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 212,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 213,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "fan2-g1-1",
+							"status": "",
+							"frequency": 212,
+							"chart": {
+								"total_kwh_saved": 21.2,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									0,0,20,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "fan2-g1-2",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 21.3,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "fan2-g1-3",
+							"status": "",
+							"frequency": 214,
+							"chart": {
+								"total_kwh_saved": 21.4,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "fan2-g1-4",
+							"status": "",
+							"frequency": 215,
+							"chart": {
+								"total_kwh_saved": 21.5,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 21,
+						"out": {
+							"value": 21,
+							"status": ""
+						},
+						"p": {
+							"value": 0.21,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "",
+							"status": ""
+						},
+						{
+							"machine": "",
+							"status": ""
+						}
+					]
+				},
+        {
+					"show_name": "貨梯側",
+					"id": "g1",
+					"chiller": {
+						"normal": 21,
+						"alarm": 1
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 221,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 222,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 223,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "fan2-g2-1",
+							"status": 8,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 22.2,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									45,40,42,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "fan2-g2-2",
+							"status": 8,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 22.3,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "fan2-g2-3",
+							"status": 8,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 22.4,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									0,20,55,31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "fan2-g2-4",
+							"status": "",
+							"frequency": 225,
+							"chart": {
+								"total_kwh_saved": 22.5,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 22,
+						"out": {
+							"value": 22,
+							"status": ""
+						},
+						"p": {
+							"value": 0.22,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "40HP1",
+							"status": "auto"
+						},
+						{
+							"machine": "40HP2",
+							"status": "auto"
+						}
+					]
+				}
+			]      
+		},
+    {
+			"data_time": "2021/07/12-07:20",
+			"build": "湯城大樓",
+			"build_id": "b03",
+			"total_pc": 333,
+			"physical": {
+				"dry": 33.33,
+				"wet": 33.33
+			},
+			"group": [
+				{
+					"show_name": "A側",
+					"id": "g0",
+					"chiller": {
+						"normal": 30,
+						"alarm": 0
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 311,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 312,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 313,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						},
+						{
+							"machine": "15HP2",
+							"status": "",
+							"frequency": 314,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 31,
+						"out": {
+							"value": 31,
+							"status": ""
+						},
+						"p": {
+							"value": 0.31,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "40HP1",
+							"status": "auto"
+						},
+						{
+							"machine": "40HP2",
+							"status": "auto"
+						}
+					]
+				},
+        {
+					"show_name": "B側",
+					"id": "g1",
+					"chiller": {
+						"normal": 31,
+						"alarm": 1
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 321,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 322,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 323,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						},
+						{
+							"machine": "15HP2",
+							"status": "",
+							"frequency": 324,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 32,
+						"out": {
+							"value": 32,
+							"status": ""
+						},
+						"p": {
+							"value": 0.32,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "",
+							"status": ""
+						},
+						{
+							"machine": "",
+							"status": ""
+						}
+					]
+				},
+        {
+					"show_name": "C側",
+					"id": "g2",
+					"chiller": {
+						"normal": 32,
+						"alarm": 2
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 331,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 332,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 333,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						},
+						{
+							"machine": "15HP2",
+							"status": "",
+							"frequency": 334,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 33,
+						"out": {
+							"value": 33,
+							"status": ""
+						},
+						"p": {
+							"value": 0.33,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "40HP1",
+							"status": "auto"
+						},
+						{
+							"machine": "40HP2",
+							"status": "auto"
+						}
+					]
+				}
+			]      
+		},
+    {
+			"data_time": "2021/07/12-07:20",
+			"build": "林口廣達大樓",
+			"build_id": "b04",
+			"total_pc": 444,
+			"physical": {
+				"dry": 44.44,
+				"wet": 44.44
+			},
+			"group": [
+				{
+					"show_name": "41側",
+					"id": "g0",
+					"chiller": {
+						"normal": 40,
+						"alarm": 0
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 411,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 412,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 413,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 41,
+						"out": {
+							"value": 41,
+							"status": ""
+						},
+						"p": {
+							"value": 0.41,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "40HP1",
+							"status": "auto"
+						},
+						{
+							"machine": "40HP2",
+							"status": "auto"
+						}
+					]
+				},
+        {
+					"show_name": "42側",
+					"id": "g1",
+					"chiller": {
+						"normal": 41,
+						"alarm": 1
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 421,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 422,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 423,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 8,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 42,
+						"out": {
+							"value": 42,
+							"status": ""
+						},
+						"p": {
+							"value": 0.42,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "",
+							"status": ""
+						},
+						{
+							"machine": "",
+							"status": ""
+						}
+					]
+				},
+        {
+					"show_name": "43側",
+					"id": "g2",
+					"chiller": {
+						"normal": 42,
+						"alarm": 2
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 431,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 432,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 433,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 43,
+						"out": {
+							"value": 43,
+							"status": ""
+						},
+						"p": {
+							"value": 0.43,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "40HP1",
+							"status": "auto"
+						},
+						{
+							"machine": "40HP2",
+							"status": "auto"
+						}
+					]
+				},
+        {
+					"show_name": "44側",
+					"id": "g3",
+					"chiller": {
+						"normal": 43,
+						"alarm": 3
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 441,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 442,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 443,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 40,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 44,
+						"out": {
+							"value": 44,
+							"status": ""
+						},
+						"p": {
+							"value": 0.44,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "",
+							"status": ""
+						},
+						{
+							"machine": "",
+							"status": ""
+						}
+					]
+				}
+			]      
+		},
+    {
+			"data_time": "2021/07/12-07:20",
+			"build": "文德大樓",
+			"build_id": "b05",
+			"total_pc": 555,
+			"physical": {
+				"dry": 55.55,
+				"wet": 55.55
+			},
+			"group": [
+				{
+					"show_name": "甲側",
+					"id": "g0",
+					"chiller": {
+						"normal": 50,
+						"alarm": 0
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": 8,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 52,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 53,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 15,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 51,
+						"out": {
+							"value": 51,
+							"status": ""
+						},
+						"p": {
+							"value": 0.51,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "40HP1",
+							"status": "auto"
+						},
+						{
+							"machine": "40HP2",
+							"status": "auto"
+						}
+					]
+				},
+        {
+					"show_name": "乙側",
+					"id": "g1",
+					"chiller": {
+						"normal": 51,
+						"alarm": 1
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": 8,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 0,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 51,
+						"out": {
+							"value": 51,
+							"status": ""
+						},
+						"p": {
+							"value": 0.52,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "40HP1",
+							"status": "auto"
+						},
+						{
+							"machine": "40HP2",
+							"status": "auto"
+						}
+					]
+				},
+        {
+					"show_name": "丙側",
+					"id": "g2",
+					"chiller": {
+						"normal": 52,
+						"alarm": 2
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": 8,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 22,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 33,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 44,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": 8,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 53,
+						"out": {
+							"value": 53,
+							"status": ""
+						},
+						"p": {
+							"value": 0.53,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "",
+							"status": ""
+						},
+						{
+							"machine": "",
+							"status": ""
+						}
+					]
+				},
+        {
+					"show_name": "丁側",
+					"id": "g3",
+					"chiller": {
+						"normal": 53,
+						"alarm": 3
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 0,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 54,
+						"out": {
+							"value": 54,
+							"status": ""
+						},
+						"p": {
+							"value": 0.54,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "",
+							"status": ""
+						},
+						{
+							"machine": "",
+							"status": ""
+						}
+					]
+				},
+        {
+					"show_name": "戊側",
+					"id": "g4",
+					"chiller": {
+						"normal": 54,
+						"alarm": 4
+					},
+					"cwp": [
+						{
+							"machine": "30HP01",
+							"status": 8,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "30HP02",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": [
+									31, 35, 32, 45, 37, 30, 31, 35, 32, 30, 31, 35, 32,
+									45, 37, 30, 31, 35, 32, 45, 37, 30, 30, 31, 35, 32,
+									40, 37, 33, 35, 35, 35, 47, 35
+								]
+							}
+						},
+						{
+							"machine": "15HP",
+							"status": "",
+							"frequency": 0,
+							"chart": {
+								"total_kwh_saved": 0,
+								"original_kw": 21,
+								"current_kw": 0,
+								"data": [
+									0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+								]
+							}
+						}
+					],
+					"fan": [
+						{
+							"machine": "tower01",
+							"status": "",
+							"frequency": 35,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower02",
+							"status": 12,
+							"frequency": "-",
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						},
+						{
+							"machine": "tower03",
+							"status": "",
+							"frequency": 60,
+							"chart": {
+								"total_kwh_saved": 11.25,
+								"original_kw": 21,
+								"current_kw": 20.12,
+								"data": []
+							}
+						}
+					],
+					"pipe": {
+						"in": 55,
+						"out": {
+							"value": 55,
+							"status": ""
+						},
+						"p": {
+							"value": 0.55,
+							"status": ""
+						}
+					},
+					"switch": [
+						{
+							"machine": "40HP1",
+							"status": "auto"
+						},
+						{
+							"machine": "40HP2",
+							"status": "auto"
+						}
+					]
+				}
+			]      
+		}
+	]
+}
